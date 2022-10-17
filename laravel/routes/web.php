@@ -17,15 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-use Illuminate\Support\Facades\Log;
- 
-Route::get('/', function () {
-   Log::info('Loading welcome page');
-   return view('welcome');
-});
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-use App\Http\Controllers\MailController;
-// ...
-Route::get('mail/test', [MailController::class, 'test']);
-// or
-// Route::get('mail/test', 'App\Http\Controllers\MailController@test');
+// require __DIR__.'/auth.php';
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+ 
+require __DIR__.'/auth.php';
