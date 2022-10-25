@@ -6,6 +6,7 @@
            <div class="card">
                <div class="card-header">{{ __('Files') }}</div>
                <div class="card-body">
+                    <img class="img-fluid" src="{{ asset('storage/{$file->filepath}') }}" />
                    <table class="table">
                        <thead>
                            <tr>
