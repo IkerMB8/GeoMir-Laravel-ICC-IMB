@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class FileController extends Controller
 {
@@ -91,6 +93,9 @@ class FileController extends Controller
     public function show(File $file)
     {
         //
+        return view("files.show", [
+            "file" => $file
+        ]);
     }
 
     /**
@@ -102,6 +107,9 @@ class FileController extends Controller
     public function edit(File $file)
     {
         //
+        return view("files.edit", [
+            "file" => $file
+        ]);
     }
 
     /**
@@ -114,6 +122,43 @@ class FileController extends Controller
     public function update(Request $request, File $file)
     {
         //
+        // Validar fitxer
+        $validatedData = $request->validate([
+            'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
+        ]);
+    
+        // Obtenir dades del fitxer
+        $upload = $request->file('upload');
+        $fileName = $upload->getClientOriginalName();
+        $fileSize = $upload->getSize();
+        \Log::debug("Storing file '{$fileName}' ($fileSize)...");
+
+        // Pujar fitxer al disc dur
+        $uploadName = time() . '_' . $fileName;
+        $filePath = $upload->storeAs(
+            'uploads',      // Path
+            $uploadName ,   // Filename
+            'public'        // Disk
+        );
+        if (\Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($file->filepath);
+            \Log::debug("Local storage OK");
+            $fullPath = \Storage::disk('public')->path($filePath);
+            \Log::debug("File saved at {$fullPath}");
+            // Desar dades a BD
+            $file->filepath=$filePath;
+            $file->filesize=$fileSize;
+            $file->save();
+            \Log::debug("DB storage OK");
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route('files.show', $file)
+                ->with('success', 'File successfully updated');
+        } else {
+            \Log::debug("Local storage FAILS");
+            // Patró PRG amb missatge d'error
+            return redirect()->route("files.edit")
+                ->with('error', 'ERROR uploading file');
+        }
     }
 
     /**
@@ -125,5 +170,14 @@ class FileController extends Controller
     public function destroy(File $file)
     {
         //
+        if (\Storage::disk('public')->exists($file->filepath)) {
+            File::destroy($file->id);
+            Storage::disk('public')->delete($file->filepath);
+            return redirect()->route('files.index', ["files" => File::all()])
+            ->with('success', 'File successfully deleted');
+        } else {
+            return redirect()->route('files.show', $file)
+            ->with('error', 'ERROR deleting file');
+        }
     }
 }
