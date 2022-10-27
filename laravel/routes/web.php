@@ -20,10 +20,8 @@ Route::get('/', function (Request $request) {
    $request->session()->flash('info', $message);
    return view('welcome');
 });
-Route::resource('files', FileController::class);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::resource('files', FileController::class)->middleware(['auth', 'role:2,3']);
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
