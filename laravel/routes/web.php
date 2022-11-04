@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::get('/', function (Request $request) {
    return view('welcome');
 });
 Route::resource('files', FileController::class)->middleware(['auth', 'role:2,3']);
-
+Route::resource('posts', PostController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
