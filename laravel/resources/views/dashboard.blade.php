@@ -16,7 +16,7 @@
     </div>
     @section('content')
         <div style="display:grid;justify-content:center;">
-            <h2>{{ __('Resources') }}</h2>
+            <h2 style="text-align:center;">{{ __('Resources') }}</h2>
             <br>
             <div>
                 <a href="{{ url('/files') }}" class="btn btn-secondary">{{ __('Files') }}</a>
