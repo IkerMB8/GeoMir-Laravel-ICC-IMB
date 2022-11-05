@@ -45,7 +45,7 @@
                             </tbody>
                         </table>
                         <button type="submit" class="btn btn-primary">Edit</button>
-                        <a href="/files" class="btn btn-secondary">Volver</a>
+                        <a href="{{ route('files.show',$file) }}" class="btn btn-secondary">Volver</a>
                     </form>
                </div>
            </div>

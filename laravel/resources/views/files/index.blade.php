@@ -29,6 +29,7 @@
                        </tbody>
                    </table>
                    <a class="btn btn-primary" href="{{ route('files.create') }}" role="button">Add new file</a>
+                   <a href="/dashboard" class="btn btn-secondary">Volver</a>
                </div>
            </div>
        </div>

@@ -32,6 +32,7 @@
                         </table>
                         <button type="submit" class="btn btn-primary">Borrar</button>
                         <a href="{{ route('files.edit',$file) }}" class="btn btn-secondary">Edit</a>
+                        <a href="/files" class="btn btn-secondary">Volver</a>
                     </form>
                </div>
            </div>
