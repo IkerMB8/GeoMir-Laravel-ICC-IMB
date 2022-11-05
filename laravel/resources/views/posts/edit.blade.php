@@ -1,55 +1,82 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-   <div class="row justify-content-center">
-       <div class="col-md-8">
-           <div class="card">
-               <div class="card-header">ID {{ $file->id }}</div>
-               <div class="card-body">
-                    <img class="img-fluid" src='{{ asset("storage/{$file->filepath}") }}' />
-                    <form method="post" action="{{ route('files.update',$file) }}" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <table class="table">
-                            <tbody>
+   <div class="row justify-content-center">
+       <div class="col-md-8">
+           <div class="card">
+               <div class="card-header">ID {{ $post->id }}</div>
+               <div class="card-body" style="display: grid;justify-content: center;align-items:center;">
+                    <img class="img-fluid" src='{{ asset("storage/{$file->filepath}") }}' style="display: block;margin: auto;" />
+                    <form method="post" action="{{ route('posts.update',$post) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+    
+                        <table class="table" >
+                            <tbody>
+                                <tr>
+                                        <td>
+                                            <label for="pid">ID</label>
+                                            <input type="text" id="pid" name="pid" value="{{ $post->id }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="pbody">Body</label>
+                                            <input type="text" id="pbody" name="pbody" value="{{ $post->body }}">
+                                        </td>
+                                </tr>
                                 <tr>
-                                        <td>
-                                            <label for="fid">ID</label>
-                                            <input type="text" id="fid" name="fid" value="{{ $file->id }}" readonly>
-                                        </td>
-                                </tr>
-                                <tr>
-                                        <td>
-                                            <label for="upload">File:</label>
-                                            <input type="file" class="form-control" name="upload"/>
-                                        </td>
-                                </tr>
-                                <tr>
-                                        <td>
-                                            <label for="fsize">File Size</label>
-                                            <input type="text" id="fsize" name="fsize" value="{{ $file->filesize }}" readonly>
-                                        </td>
-                                </tr>
-                                <tr>
-                                        <td>
-                                            <label for="fupdated">Updated</label>
-                                            <input type="text" id="fupdated" name="fupdated" value="{{ $file->updated_at }}" readonly>
-                                        </td>
-                                </tr>
-                                <tr>
-                                        <td>
-                                            <label for="fcreated">Created</label>
-                                            <input type="text" id="fcreated" name="fcreated" value="{{ $file->created_at }}" readonly>
-                                        </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <a href="/files" class="btn btn-secondary">Volver</a>
-                    </form>
-               </div>
-           </div>
-       </div>
-   </div>
+                                        <td>
+                                            <label for="upload">File</label>
+                                            <input type="file" id="upload" name="upload" value="{{ $file->filepath }}">
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="platitude">Latitude</label>
+                                            <input type="text" id="platitude" name="platitude" value="{{ $post->latitude }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="plongitude">Longitude</label>
+                                            <input type="text" id="plongitude" name="plongitude" value="{{ $post->longitude }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="pvisid">Visibility</label>
+                                            <input type="text" id="pvisid" name="pvisid" value="{{ $post->visibility_id }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="pautid">Autor</label>
+                                            <input type="text" id="pautid" name="pautid" value="{{ $post->author_id }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="pcreat">Created</label>
+                                            <input type="text" id="pcreat" name="pcreat" value="{{ $post->created_at }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label for="pupd">Last Update</label>
+                                            <input type="text" id="pupd" name="pupd" value="{{ $post->updated_at }}" readonly>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="display: flex;justify-content: center;" >
+                            <button type="submit" class="btn btn-primary" style="margin:5px;">Edit</button>
+                            <a href="{{ route('posts.show',$post) }}" class="btn btn-secondary" style="margin:5px;">Volver</a>
+                        </div>    
+                    </form>
+               </div>
+           </div>
+       </div>
+   </div>
 </div>
 @endsection

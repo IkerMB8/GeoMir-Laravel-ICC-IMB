@@ -12,44 +12,39 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label for="pname">Body</label>
-                                            <input type="text" id="pname" name="pname">
+                                            <label for="pbody">Body</label>
+                                            <input type="text" id="pbody" name="pbody" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pdescription">File</label>
-                                            <input type="text" id="pdescription" name="pdescription">
+                                            <label for="upload">File</label>
+                                            <input type="file" id="upload" name="upload" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pfileid">Latitude</label>
-                                            <input type="text" id="pfileid" name="pfileid">
+                                            <label for="platitude">Latitude</label>
+                                            <input type="text" id="platitude" name="platitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="platitude">Longitude</label>
-                                            <input type="text" id="platitude" name="platitude">
+                                            <label for="plongitude">Longitude</label>
+                                            <input type="text" id="plongitude" name="plongitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="plongitude">Visibility</label>
-                                            <input type="text" id="plongitude" name="plongitude">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="pcatid">Author</label>
-                                            <input type="text" id="pcatid" name="pcatid">
+                                            <label for="pvisid">Visibility</label>
+                                            <input type="text" id="pvisid" name="pvisid" required>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         <button type="submit" class="btn btn-primary">Create</button>
                         <button type="reset" class="btn btn-secondary">Reset</button>
+                        <a href="/posts" class="btn btn-secondary">Volver</a>
                     </form>
                </div>
            </div>
