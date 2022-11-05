@@ -37,7 +37,7 @@
                                     <tr>
                                         <td>
                                             <label for="pvisid">Visibility</label>
-                                            <input type="text" id="pvisid" name="pvisid" required>
+                                            <input type="number" id="pvisid" name="pvisid" value="1" required>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -31,25 +31,25 @@
                                     <tr>
                                         <td>
                                             <label for="platitude">Latitude</label>
-                                            <input type="text" id="platitude" name="platitude" required>
+                                            <input type="number" step="any" id="platitude" name="platitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <label for="plongitude">Longitude</label>
-                                            <input type="text" id="plongitude" name="plongitude" required>
+                                            <input type="number" step="any" id="plongitude" name="plongitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <label for="pcatid">Category</label>
-                                            <input type="text" id="pcatid" name="pcatid" required>
+                                            <input type="number" id="pcatid" name="pcatid" value="1" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <label for="pvisid">Visibility</label>
-                                            <input type="text" id="pvisid" name="pvisid" required>
+                                            <input type="number" id="pvisid" name="pvisid" value="1" required>
                                         </td>
                                     </tr>
                                 </tbody>

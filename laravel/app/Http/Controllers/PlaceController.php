@@ -46,10 +46,10 @@ class PlaceController extends Controller
         $validatedData = $request->validate([
             'pname' => 'required',
             'pdescription' => 'required',
-            'platitude' => 'required',
-            'plongitude' => 'required',
-            'pcatid' => 'required',
-            'pvisid' => 'required',
+            'platitude' => 'required|numeric',
+            'plongitude' => 'required|numeric',
+            'pcatid' => 'required|numeric',
+            'pvisid' => 'required|numeric',
             'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
     

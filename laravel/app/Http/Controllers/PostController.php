@@ -43,9 +43,9 @@ class PostController extends Controller
         // Validar fitxer
         $validatedData = $request->validate([
             'pbody' => 'required',
-            'platitude' => 'required',
-            'plongitude' => 'required',
-            'pvisid' => 'required',
+            'platitude' => 'required|numeric',
+            'plongitude' => 'required|numeric',
+            'pvisid' => 'required|numeric',
             'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
     
