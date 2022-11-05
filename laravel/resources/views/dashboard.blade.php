@@ -15,8 +15,15 @@
         </div>
     </div>
     @section('content')
-        <h2>{{ __('Resources') }}</h2>
-        <a href="{{ url('/files') }}">{{ __('Files') }}</a>
-        <a href="{{ url('/posts') }}">{{ __('Posts') }}</a>
+        <div style="display:grid;justify-content:center;">
+            <h2>{{ __('Resources') }}</h2>
+            <br>
+            <div>
+                <a href="{{ url('/files') }}" class="btn btn-secondary">{{ __('Files') }}</a>
+                <a href="{{ url('/places') }}"class="btn btn-secondary">{{ __('Places') }}</a>
+                <a href="{{ url('/posts') }}"class="btn btn-secondary">{{ __('Posts') }}</a>
+            </div>
+        </div>
     @endsection
+
 </x-app-layout>
