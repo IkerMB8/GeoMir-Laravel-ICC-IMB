@@ -21,7 +21,7 @@
                                     <td scope="col">Longitude</td>
                                     <td scope="col">Category_id</td>
                                     <td scope="col">Visibility_id</td>
-                                    <td scope="col">Author_id</td>
+                                    <td scope="col">Autor</td>
                                     <td scope="col">Created_at</td>
                                     <td scope="col">Updated_at</td>
                                 </tr>
@@ -36,7 +36,7 @@
                                         <td>{{ $place->longitude }}</td>
                                         <td>{{ $place->category_id }}</td>
                                         <td>{{ $place->visibility_id }}</td>
-                                        <td>{{ $place->author_id }}</td>
+                                        <td>{{ $user->name }}</td>
                                         <td>{{ $place->created_at }}</td>
                                         <td>{{ $place->updated_at }}</td>
                                 </tr>

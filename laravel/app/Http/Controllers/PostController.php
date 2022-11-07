@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\File;
 use Illuminate\Http\Request;
 
@@ -101,10 +102,12 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        $user=User::find($post->author_id); 
         $file=File::find($post->file_id);
         return view("posts.show", [
             "post" => $post,
             "file" => $file,
+            "user" => $user,
         ]);
     }
 
@@ -117,10 +120,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        $user=User::find($post->author_id); 
         $file=File::find($post->file_id);
         return view("posts.edit", [
             "post" => $post,
             "file" => $file,
+            "user" => $user,
         ]);
     }
 

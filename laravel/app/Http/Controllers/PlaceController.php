@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -108,10 +109,12 @@ class PlaceController extends Controller
     public function show(Place $place)
     {
         //
+        $user=User::find($place->author_id);
         $file=File::find($place->file_id);
         return view("places.show", [
             "place" => $place,
             "file" => $file,
+            "user" => $user,
         ]);
     }
 
@@ -124,10 +127,12 @@ class PlaceController extends Controller
     public function edit(Place $place)
     {
         //
+        $user=User::find($place->author_id);
         $file=File::find($place->file_id);
         return view("places.edit", [
             "place" => $place,
             "file" => $file,
+            "user" => $user,
         ]);
     }
 
