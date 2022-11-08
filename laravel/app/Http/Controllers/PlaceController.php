@@ -203,13 +203,13 @@ class PlaceController extends Controller
     {
         //
         $file=File::find($place->file_id);    
-        \Storage::disk('public')->delete($file->filepath); 
-        Place::destroy($place->id);
-        File::destroy($file->id);
+        \Storage::disk('public')->delete($file->filepath);
         if (\Storage::disk('public')->exists($file->filepath)) {
             return redirect()->route('places.show', $place)
             ->with('error', 'ERROR deleting file');
-        } else {
+        } else {     
+            Place::destroy($place->id);
+            File::destroy($file->id);
             return redirect()->route('places.index', ["places" => Place::all()])
             ->with('success', 'Place successfully deleted');
         }

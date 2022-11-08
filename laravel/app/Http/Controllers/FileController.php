@@ -175,14 +175,14 @@ class FileController extends Controller
         $post = Post::where('file_id', $file->id)->first();
         $place = Place::where('file_id', $file->id)->first();
         if (is_null($place) && is_null($post)){
+            \Storage::disk('public')->delete($file->filepath);
             if (\Storage::disk('public')->exists($file->filepath)) {
-                File::destroy($file->id);
-                \Storage::disk('public')->delete($file->filepath);
-                return redirect()->route('files.index', ["files" => File::all()])
-                ->with('success', 'File successfully deleted');
-            } else {
                 return redirect()->route('files.show', $file)
                 ->with('error', 'ERROR deleting file');
+            } else {
+                File::destroy($file->id);
+                return redirect()->route('files.index', ["files" => File::all()])
+                ->with('success', 'File successfully deleted');
             }
         }else{
             return redirect()->route('files.show', $file)

@@ -195,12 +195,12 @@ class PostController extends Controller
         //
         $file=File::find($post->file_id);   
         \Storage::disk('public')->delete($file->filepath);  
-        Post::destroy($post->id);
-        File::destroy($file->id);
         if (\Storage::disk('public')->exists($file->filepath)) {
             return redirect()->route('posts.show', $post)
             ->with('error', 'ERROR deleting file');
         } else {
+            Post::destroy($post->id);
+            File::destroy($file->id);
             return redirect()->route('posts.index', ["posts" => Post::all()])
             ->with('success', 'Post successfully deleted');
         }
