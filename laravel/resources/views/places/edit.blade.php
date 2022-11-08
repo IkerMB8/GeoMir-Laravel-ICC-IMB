@@ -64,7 +64,7 @@
                                 <tr>
                                         <td>
                                             <label for="pautid">Autor</label>
-                                            <input type="text" id="pautid" name="pautid" value="{{ $user->name }}" readonly>
+                                            <input type="text" id="pautid" name="pautid" value="{{ $autor->name }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>

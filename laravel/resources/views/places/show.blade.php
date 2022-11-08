@@ -28,17 +28,17 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                        <td>{{ $place->id }}</td>
-                                        <td>{{ $place->name }}</td>
-                                        <td>{{ $place->description }}</td>
-                                        <td>{{ $place->file_id }}</td>
-                                        <td>{{ $place->latitude }}</td>
-                                        <td>{{ $place->longitude }}</td>
-                                        <td>{{ $place->category_id }}</td>
-                                        <td>{{ $place->visibility_id }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $place->created_at }}</td>
-                                        <td>{{ $place->updated_at }}</td>
+                                    <td>{{ $place->id }}</td>
+                                    <td>{{ $place->name }}</td>
+                                    <td>{{ $place->description }}</td>
+                                    <td>{{ $place->file_id }}</td>
+                                    <td>{{ $place->latitude }}</td>
+                                    <td>{{ $place->longitude }}</td>
+                                    <td>{{ $place->category_id }}</td>
+                                    <td>{{ $place->visibility_id }}</td>
+                                    <td>{{ $autor->name }}</td>
+                                    <td>{{ $place->created_at }}</td>
+                                    <td>{{ $place->updated_at }}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -32,7 +32,7 @@
                                         <td>{{ $post->latitude }}</td>
                                         <td>{{ $post->longitude }}</td>
                                         <td>{{ $post->visibility_id }}</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $autor->name }}</td>
                                         <td>{{ $post->created_at }}</td>
                                         <td>{{ $post->updated_at }}</td>
                                 </tr>

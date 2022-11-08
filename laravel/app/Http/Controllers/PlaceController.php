@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use App\Models\File;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -109,12 +108,11 @@ class PlaceController extends Controller
     public function show(Place $place)
     {
         //
-        $user=User::find($place->author_id);
         $file=File::find($place->file_id);
         return view("places.show", [
             "place" => $place,
             "file" => $file,
-            "user" => $user,
+            "autor" => $place->user,
         ]);
     }
 
@@ -127,12 +125,11 @@ class PlaceController extends Controller
     public function edit(Place $place)
     {
         //
-        $user=User::find($place->author_id);
         $file=File::find($place->file_id);
         return view("places.edit", [
             "place" => $place,
             "file" => $file,
-            "user" => $user,
+            "autor" => $place->user,
         ]);
     }
 
@@ -205,16 +202,16 @@ class PlaceController extends Controller
     public function destroy(Place $place)
     {
         //
-        $file=File::find($place->file_id);     
+        $file=File::find($place->file_id);    
+        \Storage::disk('public')->delete($file->filepath); 
+        Place::destroy($place->id);
+        File::destroy($file->id);
         if (\Storage::disk('public')->exists($file->filepath)) {
-            Place::destroy($place->id);
-            File::destroy($file->id);
-            \Storage::disk('public')->delete($file->filepath);
-            return redirect()->route('places.index', ["places" => Place::all()])
-            ->with('success', 'Place successfully deleted');
-        } else {
             return redirect()->route('places.show', $place)
             ->with('error', 'ERROR deleting file');
+        } else {
+            return redirect()->route('places.index', ["places" => Place::all()])
+            ->with('success', 'Place successfully deleted');
         }
         
     }
