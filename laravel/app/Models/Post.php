@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
     protected $fillable = [
         'body',
@@ -23,10 +24,14 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-
     public function file()
     {
         return $this->belongsTo(File::class);
+    }
+
+    public function author()
+    {
+       return $this->belongsTo(User::class);
     }
 
 

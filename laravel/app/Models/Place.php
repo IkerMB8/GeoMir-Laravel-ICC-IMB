@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
     protected $fillable = [
         'name',
@@ -28,6 +29,11 @@ class Place extends Model
     {
         return $this->belongsTo(File::class);
     }
-
+    
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+ 
 
 }
