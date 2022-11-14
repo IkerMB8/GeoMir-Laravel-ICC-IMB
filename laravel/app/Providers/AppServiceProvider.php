@@ -24,5 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->app->bind(
+            // package controller
+            \Backpack\PermissionManager\app\Http\Controllers\UserCrudController::class,
+            // your controller
+            \App\Http\Controllers\Admin\UserCrudController::class
+        );     
     }
 }
