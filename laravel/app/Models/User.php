@@ -15,19 +15,21 @@ use Spatie\Permission\Models\Permission;
 class User extends Authenticatable
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
     use CrudTrait; // <----- this
-    use HasRoles; // <------ and this
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
+    public $guard_name = 'web';
+    
     protected $fillable = [
         'name',
         'email',
         'password',
-        'role_id',
     ];
 
     /**
@@ -56,7 +58,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
-
+    
 
 
 }

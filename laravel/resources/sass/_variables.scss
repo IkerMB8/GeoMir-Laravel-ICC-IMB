@@ -5,10 +5,56 @@ $colormenu: #1A1830;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+$none: none;
 
+
+$theme-colors: (
+  "primary":    $colormenu,
+  "secondary":  $colormenu,
+  "success":    #198754,
+  "info":       #0DCAF0,
+  "warning":    #FFC107,
+  "danger":     #DC3545,
+  "light":      #F8F9FA,
+  "dark":       #212529
+);
 .navbar{
     background-color: $colormenu;
-    color: $body-bg;
 
 }
+.navbar a, .navbar a:hover{
+    color: $body-bg;
+}
 
+.navbar div{
+    background-color: $colormenu;
+}
+
+.item {
+    padding: 10px;
+}
+.item.button {
+    padding: 9px 5px;
+}
+.item:not(.button) a:hover,
+.item a:hover::after {
+    color: #ccc;
+}
+
+.has-submenu i {
+    font-size: 12px;
+}
+.has-submenu > a::after {
+    font-family: "Font Awesome 5 Free";
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 900;
+    content: "\f078";
+    color: white;
+    padding-left: 5px;
+}
+
+.menu,
+.submenu {
+    list-style-type: none;
+}

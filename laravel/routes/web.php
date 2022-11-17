@@ -23,22 +23,15 @@ Route::get('/', function (Request $request) {
    $request->session()->flash('info', $message);
    return view('welcome');
 });
-Route::resource('files', FileController::class)->middleware(['auth', 'role:2,3']);
-Route::get('places', [PlaceController::class, 'index'])->name('places.index');
-Route::get('places/create', [PlaceController::class, 'create'])->name('places.create')->middleware(['auth', 'role:1']);
-Route::post('places', [PlaceController::class, 'store'])->name('places.store')->middleware(['auth', 'role:1']);
-Route::get('places/{place}', [PlaceController::class, 'show'])->name('places.show');
-Route::get('places/{place}/edit', [PlaceController::class, 'edit'])->name('places.edit')->middleware(['auth', 'role:1,2']);
-Route::put('places/{place}', [PlaceController::class, 'update'])->name('places.update')->middleware(['auth', 'role:1,2']);
-Route::delete('places/{place}', [PlaceController::class, 'destroy'])->name('places.destroy');
 
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('posts/create', [PostController::class, 'create'])->name('posts.create')->middleware(['auth', 'role:1']);
-Route::post('posts', [PostController::class, 'store'])->name('posts.store')->middleware(['auth', 'role:1']);
-Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware(['auth', 'role:1,2']);
-Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update')->middleware(['auth', 'role:1,2']);
-Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::resource('files', FileController::class)
+    ->middleware(['auth', 'permission:files']);
+
+Route::resource('places', PlaceController::class)
+    ->middleware(['auth', 'permission:places']);
+
+Route::resource('posts', PostController::class)
+    ->middleware(['auth', 'permission:posts']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

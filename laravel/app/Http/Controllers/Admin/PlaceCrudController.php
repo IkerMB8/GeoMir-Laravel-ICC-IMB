@@ -29,6 +29,9 @@ class PlaceCrudController extends CrudController
         CRUD::setModel(\App\Models\Place::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/place');
         CRUD::setEntityNameStrings('place', 'places');
+        if (!backpack_user()->hasRole('admin')) {
+            CRUD::denyAccess(['list', 'create', 'edit', 'delete','read']);
+        }
     }
 
     /**
