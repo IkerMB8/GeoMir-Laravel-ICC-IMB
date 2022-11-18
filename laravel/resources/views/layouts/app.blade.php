@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <script src="https://kit.fontawesome.com/a79a171ae8.js" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -73,28 +73,12 @@
             <div class="center">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
             <div class="right">
             <div class="collapse navbar-collapse">
-                </div>
-                    <div>
-                        <ul class="menu">
-                            <li class="item has-submenu">
-                                <a tabindex="0"><img style="width:20px; height:20px;" src="/img/spain.png"></a>
-                                <a><img style="width:10px; height:10px;" src="/img/arrow.png"></a>
-                                <ul class="submenu">
-                                    <li class="subitem"><a><img style="width:20px; height:20px;" src="/img/english.png"></a></li>
-                                    <li class="subitem"><a><img style="width:20px; height:20px;" src="/img/france.png"></a></li>
-                                    <li class="subitem"><a><img style="width:20px; height:20px;" src="/img/italy.png"></a></li>
-                                    <li class="subitem"><a><img style="width:20px; height:20px;" src="/img/portugal.png"></a></li>
-                                    <li class="subitem"><a><img style="width:20px; height:20px;" src="/img/germany.png"></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                @include('partials.language-switcher')
                 <ul class="navbar-nav ms-auto">
                     @guest
                         @if (Route::has('login'))
