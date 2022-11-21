@@ -77,9 +77,9 @@
                 </form>
             </div>
             <div class="right">
-            <div class="collapse navbar-collapse">
+                
                 @include('partials.language-switcher')
-                <ul class="navbar-nav ms-auto">
+                <ul style="margin-left:10px;" class="navbar-nav">
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -94,7 +94,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a style="color:white;" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 

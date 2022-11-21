@@ -20,15 +20,15 @@
             <br>
             <div style="justify-content:center; display:flex;">
                 <div style="border: 4px solid black; border-radius: 10px; width:auto;">
-                    <a style="border: 4px solid black; margin: 20px;" href="{{ url('/posts') }}"class="btn btn-secondary">{{ __('Posts') }}</a>
-                    <a style="border: 4px solid black; margin: 20px;" href="{{ url('/places') }}"class="btn btn-secondary">{{ __('Lugares') }}</a>
-                    <a style="border: 4px solid black; margin: 20px;" href="{{ url('/places') }}"class="btn btn-secondary">{{ __('Imágenes') }}</a>
-                    <a style="border: 4px solid black; margin: 20px;" href="{{ url('/places') }}"class="btn btn-secondary">{{ __('Vídeos') }}</a>
-                    <a style="border: 4px solid black; margin: 20px;" href="{{ url('/places') }}"class="btn btn-secondary">{{ __('Ordenar') }}</a>
+                    <a href="{{ url('/posts') }}"class="boton">{{ __('Posts') }}</a>
+                    <a href="{{ url('/places') }}"class="boton">{{ __('Lugares') }}</a>
+                    <a href="#"class="boton">{{ __('Imágenes') }}</a>
+                    <a href="#"class="boton">{{ __('Vídeos') }}</a>
+                    <a href="#"class="boton">{{ __('Ordenar') }}</a>
 
                 </div>
             </div>
-            <div style="border: 4px solid black; margin-top: 50px; margin-left:400px; width: 50%; border-radius: 10px;">
+            <div style="border: 4px solid black; margin-top: 50px; margin-left:25%;margin-right:25%; width: 50%; border-radius: 10px;">
                 <div style="display:flex; align-items:center; margin-left:35px;">
                     <img src="/img/obama.jpg" style="margin-top:5px; width: 70px; height: 70px; border-radius: 160px; border: 1px solid black"><p style="font-weight: bold; margin-left:5px ;margin-top: 20px;">@TuNegritoKLK69</p>
                 </div>
