@@ -1,0 +1,28 @@
+<?php
+ 
+return [
+   'body' => 'Mensaje',
+   'file_id' => 'ID Archivo',
+   'latitude' => 'Latitud',
+   'longitude' => 'Longitud',
+   'visibility_id' => 'ID Visibilidad',
+   'author_id' => 'ID Autor',
+   'name' => 'Nombre',
+   'description' => 'Descripción',
+   'category_id' => 'ID Categoria',
+   'file' => 'Archivo',
+   'create' => 'Crear',
+   'reset' => 'Reiniciar',
+   'goback' => 'Volver',
+   'created' => 'Created',
+   'lastupd' => 'Last Update',
+   'edit' => 'Edit',
+   'author' => 'Author',
+   'delete' => 'Delete',
+   'cfile' => 'Create File',
+   'filesize' => 'File Size',
+   'filepath' => 'File Path',
+   'addplace' => 'Add new place',
+   'addfile' => 'Add new file',
+   'addpost' => 'Add new post',
+];

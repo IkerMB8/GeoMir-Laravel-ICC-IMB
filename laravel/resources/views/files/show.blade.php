@@ -14,10 +14,10 @@
                             <thead>
                                 <tr>
                                     <td scope="col">ID</td>
-                                    <td scope="col">Filepath</td>
-                                    <td scope="col">Filesize</td>
-                                    <td scope="col">Created</td>
-                                    <td scope="col">Updated</td>
+                                    <td scope="col">{{ __('fields.filepath') }}</td>
+                                    <td scope="col">{{ __('fields.filesize') }}</td>
+                                    <td scope="col">{{ __('fields.created') }}</td>
+                                    <td scope="col">{{ __('fields.lastupd') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,9 +30,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary">Borrar</button>
-                        <a href="{{ route('files.edit',$file) }}" class="btn btn-secondary">Edit</a>
-                        <a href="/files" class="btn btn-secondary">Volver</a>
+                        <button type="submit" class="btn btn-primary">{{ __('fields.delete') }}</button>
+                        <a href="{{ route('files.edit',$file) }}" class="btn btn-secondary">{{ __('fields.edit') }}</a>
+                        <a href="/files" class="btn btn-secondary">{{ __('fields.goback') }}</a>
                     </form>
                </div>
            </div>

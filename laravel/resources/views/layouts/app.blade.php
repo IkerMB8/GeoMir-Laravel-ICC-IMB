@@ -114,6 +114,20 @@
                 </ul>   
             </div>
         </nav>
+        <br>
+        <div style="display:grid; justify-content:center; text-align:center;">
+            <h2 style="text-align:center;">{{ __('Resources') }}</h2>
+            <br>
+            <div style="justify-content:center; display:flex;">
+                <div style="border: 4px solid black; border-radius: 10px; width:auto;">
+                    <a href="{{ url('/posts') }}"class="boton">{{ __('Posts') }}</a>
+                    <a href="{{ url('/places') }}"class="boton">{{ __('Lugares') }}</a>
+                    <a href="#"class="boton">{{ __('Imágenes') }}</a>
+                    <a href="#"class="boton">{{ __('Vídeos') }}</a>
+                    <a href="#"class="boton">{{ __('Ordenar') }}</a>
+                </div>
+            </div>
+        </div>
         <main class="py-4">
             @yield('content')
         </main>

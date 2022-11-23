@@ -76,12 +76,12 @@ class FileController extends Controller
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-               ->with('success', __('File successfully saved'));
+               ->with('success', __('fpp.file-successc'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("files.create")
-                ->with('error', __('ERROR uploading file'));
+                ->with('error', __('fpp.errorupl'));
         }
 
     }
@@ -154,12 +154,12 @@ class FileController extends Controller
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-                ->with('success', 'File successfully updated');
+                ->with('success', __('fpp.file-successupd'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("files.edit")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('fpp.errorupl'));
         }
     }
 
@@ -178,15 +178,15 @@ class FileController extends Controller
             \Storage::disk('public')->delete($file->filepath);
             if (\Storage::disk('public')->exists($file->filepath)) {
                 return redirect()->route('files.show', $file)
-                ->with('error', 'ERROR deleting file');
+                ->with('error', __('fpp.file-errordel'));
             } else {
                 File::destroy($file->id);
                 return redirect()->route('files.index', ["files" => File::all()])
-                ->with('success', 'File successfully deleted');
+                ->with('success', __('fpp.file-successdel'));
             }
         }else{
             return redirect()->route('files.show', $file)
-            ->with('error', 'ERROR deleting file, this file is linked to a place or post');
+            ->with('error', __('fpp.file-errordel2'));
         }
     }
 }

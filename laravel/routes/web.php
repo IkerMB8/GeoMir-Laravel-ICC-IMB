@@ -18,12 +18,20 @@ use App\Http\Controllers\LanguageController;
 |
 */
 // ...
-Route::get('/', function (Request $request) {
-   $message = 'Loading welcome page';
-   Log::info($message);
-   $request->session()->flash('info', $message);
-   return view('welcome');
-});
+Route::get('/', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+// Route::get('/', function (Request $request) {
+//    $message = 'Loading welcome page';
+//    Log::info($message);
+//    $request->session()->flash('info', $message);
+//    return view('welcome');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 Route::resource('files', FileController::class)
     ->middleware(['auth', 'permission:files']);
@@ -39,9 +47,8 @@ Route::resource('posts', PostController::class)
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 // require __DIR__.'/auth.php';
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
+
  
 require __DIR__.'/auth.php';
 Auth::routes();

@@ -18,7 +18,8 @@ class PlaceController extends Controller
     {
         //
         return view("places.index", [
-            "places" => Place::all()
+            "places" => Place::all(),
+            "files" => File::all()
         ]);
     }
 
@@ -89,12 +90,12 @@ class PlaceController extends Controller
             ]);
             \Log::debug("DB storage OK");
             return redirect()->route('places.show', $place)
-                ->with('success', 'Place successfully saved');
+                ->with('success', __('fpp.place-successc'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("places.create")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('fpp.errorupl'));
         }
         
     }
@@ -183,12 +184,12 @@ class PlaceController extends Controller
             $place->description=$request->input('pdescription');
             $place->save();
             return redirect()->route('places.show', $place)
-            ->with('success', 'Place successfully updated');
+            ->with('success', __('fpp.successupd'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("places.edit")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('fpp.errorupl'));
         }
         
     }
@@ -206,12 +207,12 @@ class PlaceController extends Controller
         \Storage::disk('public')->delete($file->filepath);
         if (\Storage::disk('public')->exists($file->filepath)) {
             return redirect()->route('places.show', $place)
-            ->with('error', 'ERROR deleting file');
+            ->with('error', __('fpp.place-errordel'));
         } else {     
             Place::destroy($place->id);
             File::destroy($file->id);
             return redirect()->route('places.index', ["places" => Place::all()])
-            ->with('success', 'Place successfully deleted');
+            ->with('success', __('fpp.place-successdel'));
         }
         
     }

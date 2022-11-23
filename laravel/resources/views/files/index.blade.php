@@ -10,10 +10,10 @@
                        <thead>
                            <tr>
                                <td scope="col">ID</td>
-                               <td scope="col">Filepath</td>
-                               <td scope="col">Filesize</td>
-                               <td scope="col">Created</td>
-                               <td scope="col">Updated</td>
+                               <td scope="col">{{ __('fields.filepath') }}</td>
+                               <td scope="col">{{ __('fields.filesize') }}</td>
+                               <td scope="col">{{ __('fields.created') }}</td>
+                               <td scope="col">{{ __('fields.lastupd') }}</td>
                            </tr>
                        </thead>
                        <tbody>
@@ -28,8 +28,8 @@
                            @endforeach
                        </tbody>
                    </table>
-                   <a class="btn btn-primary" href="{{ route('files.create') }}" role="button">Add new file</a>
-                   <a href="/dashboard" class="btn btn-secondary">Volver</a>
+                   <a class="btn btn-primary" href="{{ route('files.create') }}" role="button">{{ __('fields.addfile') }}</a>
+                   <a href="/dashboard" class="btn btn-secondary">{{ __('fields.goback') }}</a>
                </div>
            </div>
        </div>

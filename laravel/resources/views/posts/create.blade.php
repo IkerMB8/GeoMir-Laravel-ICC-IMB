@@ -12,39 +12,39 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label for="pbody">Body</label>
+                                            <label for="pbody">{{ __('fields.body') }}</label>
                                             <input type="text" id="pbody" name="pbody" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="upload">File</label>
+                                            <label for="upload">{{ __('fields.file') }}</label>
                                             <input type="file" id="upload" name="upload" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="platitude">Latitude</label>
+                                            <label for="platitude">{{ __('fields.latitude') }}</label>
                                             <input type="text" id="platitude" name="platitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="plongitude">Longitude</label>
+                                            <label for="plongitude">{{ __('fields.longitude') }}</label>
                                             <input type="text" id="plongitude" name="plongitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pvisid">Visibility</label>
+                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
                                             <input type="number" id="pvisid" name="pvisid" value="1" required>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                        <a href="/posts" class="btn btn-secondary">Volver</a>
+                        <button type="submit" class="btn btn-primary">{{ __('fields.create') }}</button>
+                        <button type="reset" class="btn btn-secondary">{{ __('fields.reset') }}</button>
+                        <a href="/posts" class="btn btn-secondary">{{ __('fields.goback') }}</a>
                     </form>
                </div>
            </div>

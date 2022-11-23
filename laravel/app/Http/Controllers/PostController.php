@@ -17,7 +17,8 @@ class PostController extends Controller
     {
         //
         return view("posts.index", [
-            "posts" => Post::all()
+            "posts" => Post::all(),
+            "files" => File::all()
         ]);
     }
 
@@ -83,12 +84,12 @@ class PostController extends Controller
             ]);
             \Log::debug("DB storage OK");
             return redirect()->route('posts.show', $post)
-                ->with('success', 'Post successfully saved');
+                ->with('success', __('fpp.post-successc'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("posts.create")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('fpp.errorupl'));
         }
     }
 
@@ -175,12 +176,12 @@ class PostController extends Controller
             $post->body=$request->input('pbody');
             $post->save();
             return redirect()->route('posts.show', $post)
-            ->with('success', 'Post successfully updated');
+            ->with('success', __('fpp.post-successupd'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("posts.edit")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('fpp.errorupl'));
         }
     }
 
@@ -197,12 +198,12 @@ class PostController extends Controller
         \Storage::disk('public')->delete($file->filepath);  
         if (\Storage::disk('public')->exists($file->filepath)) {
             return redirect()->route('posts.show', $post)
-            ->with('error', 'ERROR deleting file');
+            ->with('error', __('fpp.post-errordel'));
         } else {
             Post::destroy($post->id);
             File::destroy($file->id);
             return redirect()->route('posts.index', ["posts" => Post::all()])
-            ->with('success', 'Post successfully deleted');
+            ->with('success', __('fpp.post-successdel'));
         }
     }
 }

@@ -21,57 +21,57 @@
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pbody">Body</label>
+                                            <label for="pbody">{{ __('fields.body') }}</label>
                                             <input type="text" id="pbody" name="pbody" value="{{ $post->body }}">
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="upload">File</label>
+                                            <label for="upload">{{ __('fields.file') }}</label>
                                             <input type="file" id="upload" name="upload" value="{{ $file->filepath }}">
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="platitude">Latitude</label>
+                                            <label for="platitude">{{ __('fields.latitude') }}</label>
                                             <input type="text" id="platitude" name="platitude" value="{{ $post->latitude }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="plongitude">Longitude</label>
+                                            <label for="plongitude">{{ __('fields.longitude') }}</label>
                                             <input type="text" id="plongitude" name="plongitude" value="{{ $post->longitude }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pvisid">Visibility</label>
+                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
                                             <input type="text" id="pvisid" name="pvisid" value="{{ $post->visibility_id }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pautid">Autor</label>
+                                            <label for="pautid">{{ __('fields.autor') }}</label>
                                             <input type="text" id="pautid" name="pautid" value="{{ $autor->name }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pcreat">Created</label>
+                                            <label for="pcreat">{{ __('fields.created') }}</label>
                                             <input type="text" id="pcreat" name="pcreat" value="{{ $post->created_at }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pupd">Last Update</label>
+                                            <label for="pupd">{{ __('fields.lastupd') }}</label>
                                             <input type="text" id="pupd" name="pupd" value="{{ $post->updated_at }}" readonly>
                                         </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div style="display: flex;justify-content: center;" >
-                            <button type="submit" class="btn btn-primary" style="margin:5px;">Edit</button>
-                            <a href="{{ route('posts.show',$post) }}" class="btn btn-secondary" style="margin:5px;">Volver</a>
+                            <button type="submit" class="btn btn-primary" style="margin:5px;">{{ __('fields.edit') }}</button>
+                            <a href="{{ route('posts.show',$post) }}" class="btn btn-secondary" style="margin:5px;">{{ __('fields.goback') }}</a>
                         </div>    
                     </form>
                </div>

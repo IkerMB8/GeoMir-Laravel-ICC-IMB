@@ -14,16 +14,16 @@
                             <thead>
                                 <tr>
                                     <td scope="col">ID</td>
-                                    <td scope="col">Name</td>
-                                    <td scope="col">Description</td>
-                                    <td scope="col">File_id</td>
-                                    <td scope="col">Latitude</td>
-                                    <td scope="col">Longitude</td>
-                                    <td scope="col">Category_id</td>
-                                    <td scope="col">Visibility_id</td>
-                                    <td scope="col">Autor</td>
-                                    <td scope="col">Created_at</td>
-                                    <td scope="col">Updated_at</td>
+                                    <td scope="col">{{ __('fields.name') }}</td>
+                                    <td scope="col">{{ __('fields.description') }}</td>
+                                    <td scope="col">{{ __('fields.file_id') }}</td>
+                                    <td scope="col">{{ __('fields.latitude') }}</td>
+                                    <td scope="col">{{ __('fields.longitude') }}</td>
+                                    <td scope="col">{{ __('fields.category_id') }}</td>
+                                    <td scope="col">{{ __('fields.visibility_id') }}</td>
+                                    <td scope="col">{{ __('fields.author') }}</td>
+                                    <td scope="col">{{ __('fields.created') }}</td>
+                                    <td scope="col">{{ __('fields.updated') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,9 +42,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary">Borrar</button>
+                        <button type="submit" class="btn btn-primary">{{ __('fields.delete') }}</button>
                         <a href="{{ route('places.edit',$place) }}" class="btn btn-secondary">Edit</a>
-                        <a href="/places" class="btn btn-secondary">Atrás</a>
+                        <a href="/places" class="btn btn-secondary">{{ __('fields.goback') }}</a>
                     </form>
                </div>
            </div>

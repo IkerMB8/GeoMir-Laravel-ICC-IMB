@@ -1,0 +1,28 @@
+<?php
+ 
+return [
+   'body' => 'Missatge',
+   'file_id' => 'ID Arxiu',
+   'latitude' => 'Latitud',
+   'longitude' => 'Longitud',
+   'visibility_id' => 'ID Visibilitat',
+   'author_id' => 'ID Autor',
+   'name' => 'Nom',
+   'description' => 'Descripció',
+   'category_id' => 'ID Categoria',
+   'file' => 'Arxiu',
+   'create' => 'Crear',
+   'reset' => 'Reiniciar',
+   'goback' => 'Tornar',
+   'created' => 'Creat',
+   'lastupd' => 'Última actualització',
+   'edit' => 'Editar',
+   'author' => 'Autor',
+   'delete' => 'Eliminar',
+   'cfile' => 'Crear Arxiu',
+   'filesize' => 'Tamany arxiu',
+   'filepath' => 'Ruta arxiu',
+   'addplace' => 'Add new place',
+   'addfile' => 'Add new file',
+   'addpost' => 'Add new post',
+];

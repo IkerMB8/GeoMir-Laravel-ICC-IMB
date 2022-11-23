@@ -83,3 +83,23 @@ $theme-colors: (
 .boton:hover{
     color: white;
 }
+.imgpubl{
+    border: 1px solid black; 
+    width:90%; 
+    margin-bottom:30px;
+}
+.publ{
+    border: 4px solid black; 
+    margin-top: 50px; 
+    width: 50%; 
+    border-radius: 10px;
+}
+.profile{
+    display:flex;    
+    align-items:center; 
+    margin-left:35px;
+}
+.ubic{
+    float:left; 
+    margin-left:35px;
+}

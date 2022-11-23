@@ -12,51 +12,51 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label for="pname">Nom</label>
+                                            <label for="pname">{{ __('fields.name') }}</label>
                                             <input type="text" id="pname" name="pname" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pdescription">Descripció</label>
+                                            <label for="pdescription">{{ __('fields.description') }}</label>
                                             <input type="text" id="pdescription" name="pdescription" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="upload">File</label>
+                                            <label for="upload">{{ __('fields.file') }}</label>
                                             <input type="file" id="upload" name="upload" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="platitude">Latitude</label>
+                                            <label for="platitude">{{ __('fields.latitude') }}</label>
                                             <input type="number" step="any" id="platitude" name="platitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="plongitude">Longitude</label>
+                                            <label for="plongitude">{{ __('fields.longitude') }}</label>
                                             <input type="number" step="any" id="plongitude" name="plongitude" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pcatid">Category</label>
+                                            <label for="pcatid">{{ __('fields.category_id') }}</label>
                                             <input type="number" id="pcatid" name="pcatid" value="1" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pvisid">Visibility</label>
+                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
                                             <input type="number" id="pvisid" name="pvisid" value="1" required>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                        <a href="/places" class="btn btn-secondary">Volver</a>
+                        <button type="submit" class="btn btn-primary">{{ __('fields.create') }}</button>
+                        <button type="reset" class="btn btn-secondary">{{ __('fields.reset') }}</button>
+                        <a href="/places" class="btn btn-secondary">{{ __('fields.goback') }}</a>
                     </form>
                </div>
            </div>
