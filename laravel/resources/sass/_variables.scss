@@ -2,6 +2,7 @@
 $body-bg: #ffffff;
 $colormenu: #1A1830;
 $hover: #9D4EDD;
+$colorLog: #0080ff;
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
@@ -25,7 +26,7 @@ $theme-colors: (
 }
 .navbar a{
     color: $body-bg;
-    background-color: $colormenu;
+    // background-color: $colormenu;
 }
 .navbar a:hover{
     color: $hover;
@@ -68,8 +69,8 @@ $theme-colors: (
     background-color: $colormenu;
 }
 .boton {
-    background-color: #1A1830;
-    color: white;
+    background-color: #ffffff;
+    color: black;
     padding: 8px 25px;
     text-align: center;
     text-decoration: none;
@@ -81,5 +82,67 @@ $theme-colors: (
     cursor: pointer;
 }
 .boton:hover{
+    color: black;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.botonLog{
+    display: block;
+    padding: 5px;
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: var(--bs-nav-link-color);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    background-color: $colorLog;
+    border: 1px royalblue solid;
+    margin: 2px;
+
+}
+
+.botonSign{
+    display: block;
+    padding: 5px;
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: var(--bs-nav-link-color);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    border: 1px royalblue solid;
+    margin: 2px;
+}
+
+.me-2{
+    margin-left: 0.5rem !important;
+}
+
+.fa-solid{
     color: white;
+    font-weight: 900;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+.heart{
+    color: #1A1830;
+}
+.msg{
+    color: white;
+}
+
+.comment{
+    color: #1A1830;
+    font-weight: 300;
+    margin-left: 0px;
+}
+
+i{
+    margin-right: 5px;
+}
+
+.modal-content{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }

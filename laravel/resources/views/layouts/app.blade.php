@@ -72,9 +72,34 @@
             </div>
             <div class="center">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
+                <i class="fa-regular msg fa-2x fa-message"></i>
+                
+                <!-- Button trigger modal
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="fa-solid fa-2x fa-plus"></i>
+                </button> -->
+
+                <!-- Modal -->
+                <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                    </div>
+                </div>
+                </div> -->
             </div>
             <div class="right">
                 
@@ -83,13 +108,13 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="botonLog" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="botonSign" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
@@ -114,6 +139,21 @@
                 </ul>   
             </div>
         </nav>
+        <br>
+        <div style="display:grid; justify-content:center; text-align:center;">
+            <h2 style="text-align:center;">{{ __('Resources') }}</h2>
+            <br>
+            <div style="justify-content:center; display:flex;">
+                <div style="border: 4px solid black; border-radius: 10px; width:auto;">
+                    <button href="{{ url('/posts') }}" class="boton" id="cambiaColor1">{{ __('Posts') }}</button>
+                    <button href="{{ url('/places') }}" class="boton" id="cambiaColor2">{{ __('Lugares') }}</button>
+                    <button type="submit" id="cambiaColor3" class="boton">Imágenes</button>
+                    <button type="submit" id="cambiaColor4" class="boton">{{ __('Vídeos') }}</button>
+                    <button type="submit" id="cambiaColor5" class="boton">{{ __('Ordenar') }}</button>
+
+                </div>
+            </div>
+        </div>
         <main class="py-4">
             @yield('content')
         </main>
