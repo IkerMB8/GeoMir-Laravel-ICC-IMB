@@ -50,9 +50,9 @@
                                     <div style="height: 620px; display: flex; flex-direction: column; justify-content: space-between;">
                                         <div style="height:300px"></div>
                                             <div class="modal-footer" style="margin-left:10px; border: 2px solid black;background-color: white;border-radius: 25px; display:flex; justify-content: space-between; ">
-                                                <div style="float:left;">
+                                                <div style="float:left; width:80%;">
                                                     <form>
-                                                        <input style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
+                                                        <input style="border:0; float:left; width:80%;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
                                                     </form>
                                                 </div>
                                                 <div style="float:right;">

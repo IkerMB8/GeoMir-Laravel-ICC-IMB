@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use App\Models\File;
+use App\Models\Visibility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,7 +32,9 @@ class PlaceController extends Controller
     public function create()
     {
         //
-       return view("places.create");
+        return view("places.create", [
+            "visibilities" => Visibility::all(),
+        ]);
     }
 
     /**
@@ -131,6 +134,7 @@ class PlaceController extends Controller
             "place" => $place,
             "file" => $file,
             "autor" => $place->user,
+            "visibilities" => Visibility::all(),
         ]);
     }
 
@@ -145,6 +149,8 @@ class PlaceController extends Controller
     {
         // Validar fitxer
         $validatedData = $request->validate([
+            'pcatid' => 'numeric',
+            'pvisid' => 'numeric',
             'upload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
         $file=File::find($place->file_id);  
@@ -182,9 +188,10 @@ class PlaceController extends Controller
             }
             $place->name=$request->input('pname');
             $place->description=$request->input('pdescription');
+            $place->visibility_id=$request->input('pvisid');
             $place->save();
             return redirect()->route('places.show', $place)
-            ->with('success', __('fpp.successupd'));
+            ->with('success', __('fpp.place-successupd'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error

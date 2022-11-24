@@ -44,10 +44,18 @@
                                         </td>
                                 </tr>
                                 <tr>
-                                        <td>
-                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
-                                            <input type="text" id="pvisid" name="pvisid" value="{{ $post->visibility_id }}" readonly>
-                                        </td>
+                                        <td>
+                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
+                                            <select name="pvisid" id="pvisid">
+                                                @foreach ($visibilities as $visibility)
+                                                    @if($visibility->id == $post->visibility_id)
+                                                        <option selected  value="{{ $visibility->id }}">{{ $visibility->name }}</option>
+                                                    @else
+                                                        <option value="{{ $visibility->id }}">{{ $visibility->name }}</option>
+                                                    @endif        
+                                                @endforeach  
+                                            </select>
+                                        </td>
                                 </tr>
                                 <tr>
                                         <td>

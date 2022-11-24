@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\File;
+use App\Models\Visibility;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -30,7 +31,9 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view("posts.create");
+        return view("posts.create", [
+            "visibilities" => Visibility::all(),
+        ]);
     }
 
     /**
@@ -124,6 +127,7 @@ class PostController extends Controller
             "post" => $post,
             "file" => $file,
             "autor" => $post->user,
+            "visibilities" => Visibility::all(),
         ]);
     }
 
@@ -138,6 +142,8 @@ class PostController extends Controller
     {
         // Validar fitxer
         $validatedData = $request->validate([
+            'pcatid' => 'numeric',
+            'pvisid' => 'numeric',
             'upload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
         $file=File::find($post->file_id);  
@@ -174,6 +180,7 @@ class PostController extends Controller
                 \Log::debug("DB storage OK");
             }
             $post->body=$request->input('pbody');
+            $post->visibility_id=$request->input('pvisid');
             $post->save();
             return redirect()->route('posts.show', $post)
             ->with('success', __('fpp.post-successupd'));

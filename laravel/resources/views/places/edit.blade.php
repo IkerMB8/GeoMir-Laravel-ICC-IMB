@@ -56,12 +56,17 @@
                                         </td>
                                 </tr>
                                 <tr>
+                                        
                                         <td>
                                             <label for="pvisid">{{ __('fields.visibility_id') }}</label>
                                             <select name="pvisid" id="pvisid">
-                                                <option value="1">Public</option>
-                                                <option value="2">Contacts</option>
-                                                <option value="3">Private</option>
+                                                @foreach ($visibilities as $visibility)
+                                                    @if($visibility->id == $place->visibility_id)
+                                                        <option selected  value="{{ $visibility->id }}">{{ $visibility->name }}</option>
+                                                    @else
+                                                        <option value="{{ $visibility->id }}">{{ $visibility->name }}</option>
+                                                    @endif        
+                                                @endforeach  
                                             </select>
                                         </td>
                                 </tr>

@@ -49,7 +49,11 @@
                                     <tr>
                                         <td>
                                             <label for="pvisid">{{ __('fields.visibility_id') }}</label>
-                                            <input type="number" id="pvisid" name="pvisid" value="1" required>
+                                            <select name="pvisid" id="pvisid">
+                                                @foreach ($visibilities as $visibility)
+                                                    <option value="{{ $visibility->id }}">{{ $visibility->name }}</option>
+                                                @endforeach  
+                                            </select>
                                         </td>
                                     </tr>
                                 </tbody>

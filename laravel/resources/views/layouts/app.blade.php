@@ -14,60 +14,15 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    <style>
-        .navegador{
-            width: 100%;
-            height: 79px;
-            background-color: white;
-            top: 0;
-            margin: 0;
-            position: sticky;
-            display: flex;
-            background-color:#1A1830;
-        }
-        body.dark .navegador{
-            background-color: #1E1E21;
-        }
-        .left{
-            float: left;
-            width: 30%;
-            height: 100%;
-            display:flex;
-            justify-content:left;
-            align-items:center;
-        }
-        .center{
-            width: 40%;
-            height: 100%;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }	
-        .right{
-            float: right;
-            width: 30%;
-            height: 100%;
-            display:flex;
-            justify-content:right;
-            align-items:center;
-            color: white;
-            margin-right: 20px;
-        }
-        @media (max-width: 767px) {
-            .navegador .center{
-                display: none;
-            }
-        }
-    </style>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @include('flash')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm navegador">
+        <nav class="navegador">
             <div class="left">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img style="width:130px;margin-left:20%;" src="/img/LogoGeoMir.PNG" />
+                    <img class="logoGM" src="/img/LogoGeoMir.PNG" />
                 </a>
             </div>
             <div class="center">
@@ -76,47 +31,108 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
                 <i class="fa-regular msg fa-2x fa-message"></i>
-                
-                <!-- Button trigger modal
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <i class="fa-solid fa-2x fa-plus"></i>
-                </button> -->
-
-                <!-- Modal -->
-                <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
-                    </div>
-                    </div>
-                </div>
-                </div> -->
             </div>
             <div class="right">
                 
                 @include('partials.language-switcher')
-                <ul style="margin-left:10px;" class="navbar-nav">
+                <ul class="navbar-nav">
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="botonLog" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
+                        <div class="logreg">
+                            @if (Route::has('login'))
+                                <div class="contenedor">
+                                    <article>
+                                        <li >
+                                            <button id="btn-abrir-popup" class="botonLog" href="{{ route('login') }}">{{ __('Login') }}</button>
+                                        </li>
+                                    </article>
+                                </div>
+                                <div class="overlay" id="overlay">
+                                    <div class="popup" id="popup">
+                                        <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup btn-close"></a>
+                                        <h3>Iniciar Sesión</h3>
+                                        <div style="display:flex; margin-top:45px; align-items:top; justify-content:space-around;">
+                                            <div>
+                                                <img class="logoinicio" src="/img/geomir.png">
+                                            </div>
+                                            <div style="display:flex; justify-content:center;">
+                                                <!-- <form action="POST" style="display:flex; justify-content:center; flex-direction:column;">
+                                                        <label class="lbl">Email<br><input type="text"></label>
+                                                        <label class="lbl">Contraseña<br><input type="password"></label>
+                                                    <input type="submit" class="btn-submit" value="Suscribirse">
+                                                </form> -->
+                                                <form class="logform" method="POST" action="{{ route('login') }}">
+                                                @csrf
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="botonSign" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
+                                                <div class="row mb-3 divlbl">
+                                                    <label style="text-align:left !important;" for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+                                                    <div class="col-md-6 ">
+                                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                                        @error('email')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3 divlbl">
+                                                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                                    <div class="col-md-6">
+                                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                                        @error('password')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6 offset-md-4 remember">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                                            <label class="form-check-label" for="remember">
+                                                                {{ __('Remember Me') }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-0"  style="justify-content:center;">
+                                                    <div class="col-md-8 offset-md-4"  style="margin:0;">
+                                                        <button type="submit" class="boton">
+                                                            {{ __('Login') }}
+                                                        </button>
+
+                                                        @if (Route::has('password.request'))
+                                                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                                {{ __('Forgot Your Password?') }}
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                        @if (Route::has('register'))
+                                            <p class="else">¿No tienes una cuenta? <a href="{{ route('register') }}"><span>{{ __('Register') }}</span></a></p>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <div class="contenedor">
+                                    <li class="nav-item">
+                                        <a class="botonSign" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                </div>
+                            @endif
+                        </div>
                     @else
                         <li class="nav-item dropdown">
                             <a style="color:white;" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -140,20 +156,16 @@
             </div>
         </nav>
         <br>
-        <div style="display:grid; justify-content:center; text-align:center;">
-            <h2 style="text-align:center;">{{ __('Resources') }}</h2>
-            <br>
-            <div style="justify-content:center; display:flex;">
-                <div style="border: 4px solid black; border-radius: 10px; width:auto;">
-                    <button href="{{ url('/posts') }}" class="boton" id="cambiaColor1">{{ __('Posts') }}</button>
-                    <button href="{{ url('/places') }}" class="boton" id="cambiaColor2">{{ __('Lugares') }}</button>
-                    <button type="submit" id="cambiaColor3" class="boton">Imágenes</button>
-                    <button type="submit" id="cambiaColor4" class="boton">{{ __('Vídeos') }}</button>
-                    <button type="submit" id="cambiaColor5" class="boton">{{ __('Ordenar') }}</button>
-                </div>
+        <div class="navfiltros">
+            <div>
+                <a href="{{ url('/posts') }}"><button class="boton" id="cambiaColor1">{{ __('Posts') }}</button></a>
+                <a href="{{ url('/places') }}"><button  class="boton" id="cambiaColor2">{{ __('Lugares') }}</button></a>
+                <button type="submit" id="cambiaColor3" class="boton">{{ __('Imágenes') }}</button>
+                <button type="submit" id="cambiaColor4" class="boton">{{ __('Vídeos') }}</button>
+                <button type="submit" id="cambiaColor5" class="boton">{{ __('Ordenar') }}</button>
             </div>
         </div>
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
