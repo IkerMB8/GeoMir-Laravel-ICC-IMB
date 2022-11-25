@@ -10,16 +10,16 @@
                         @csrf
                         @vite('resources/js/files/create.js')
                         <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label for="upload">{{ __('fields.file') }}:</label>
-                                            <input type="file" class="form-control" name="upload"/>
-                                            <div id="error" class="alert alert-danger alert-dismissible fade"></div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="upload">{{ __('fields.file') }}:</label>
+                                        <input type="file" class="form-control" name="upload"/>
+                                        <div id="error" class="alert alert-danger alert-dismissible fade"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <button type="submit" class="btn btn-primary">{{ __('fields.create') }}</button>
                         <button type="reset" class="btn btn-secondary">{{ __('fields.reset') }}</button>
                         <a href="/files" class="btn btn-secondary">{{ __('fields.goback') }}</a>

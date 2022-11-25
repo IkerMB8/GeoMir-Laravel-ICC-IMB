@@ -6,42 +6,48 @@
            <div class="card">
                <div class="card-header">Crear Post</div>
                <div class="card-body">
-                    <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+                    <form method="post" id="create" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                         @csrf
+                        @vite('resources/js/posts/create-post.js')
                         <table class="table">
                                 <tbody>
                                     <tr>
                                         <td>
                                             <label for="pbody">{{ __('fields.body') }}</label>
-                                            <input type="text" id="pbody" name="pbody" required>
+                                            <input type="text" id="pbody" name="pbody">
+                                            <div class="error alert alert-danger alert-dismissible fade"></div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="upload">{{ __('fields.file') }}</label>
-                                            <input type="file" id="upload" name="upload" required>
+                                            <label for="pupload">{{ __('fields.file') }}</label>
+                                            <input type="file" id="pupload" name="pupload">
+                                            <div class="error alert alert-danger alert-dismissible fade"></div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <label for="platitude">{{ __('fields.latitude') }}</label>
-                                            <input type="text" id="platitude" name="platitude" required>
+                                            <input type="text" id="platitude" name="platitude">
+                                            <div class="error alert alert-danger alert-dismissible fade"></div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <label for="plongitude">{{ __('fields.longitude') }}</label>
-                                            <input type="text" id="plongitude" name="plongitude" required>
+                                            <input type="text" id="plongitude" name="plongitude">
+                                            <div class="error alert alert-danger alert-dismissible fade"></div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
-                                            <select name="pvisid" id="pvisid">
+                                            <label for="pvisibility_id">{{ __('fields.visibility_id') }}</label>
+                                            <select name="pvisibility_id" id="pvisibility_id">
                                                 @foreach ($visibilities as $visibility)
                                                     <option value="{{ $visibility->id }}">{{ $visibility->name }}</option>
                                                 @endforeach  
                                             </select>
+                                            <div class="error alert alert-danger alert-dismissible fade"></div>
                                         </td>
                                     </tr>
                                 </tbody>

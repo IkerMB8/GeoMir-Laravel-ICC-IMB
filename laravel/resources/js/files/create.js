@@ -29,15 +29,7 @@ form.addEventListener("submit", function( event ) {
     document.getElementById('error').classList.add('show');
     for(let inputName in errors) {
         // ...
-        if (currentLocale == 'ca'){
-            document.getElementById('error').innerHTML =  'El camp '+inputName+' es obligatori';
-        }
-        if (currentLocale == 'es'){
-            document.getElementById('error').innerHTML =  'El campo '+inputName+' es obligatorio';
-        }
-        if (currentLocale == 'en'){
-            document.getElementById('error').innerHTML =  'The '+inputName+' field is required';
-        }
+        document.getElementById('error').innerHTML =  errors[inputName];
     }
     // Avoid submit
     event.preventDefault()

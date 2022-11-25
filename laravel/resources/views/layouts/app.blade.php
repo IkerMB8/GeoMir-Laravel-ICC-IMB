@@ -31,10 +31,26 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
                 <i class="fa-regular msg fa-2x fa-message"></i>
-                <i class="fa-solid fa-2x fa-plus"></i>
+                <div class="logreg">
+                    @if (Route::has('login'))
+                        <div class="contenedor max">
+                            <button id="open-add" class="botonadd"><i class="fa-solid fa-plus fa-2x"></i></button>
+                        </div>
+                        <div class="overlay" id="overlayadd">
+                            <div class="popup" id="popupadd">
+                                <a href="#" id="close-add" class="btn-cerrar-popup btn-close"></a>
+                                <div style="display:flex; margin-top:45px; align-items:top; justify-content:space-around;">
+                                    
+                                    <div style="display:flex; justify-content:center;">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="right">
-                
                 @include('partials.language-switcher')
                 <ul class="navbar-nav">
                     @guest
@@ -51,19 +67,13 @@
                                     <div class="popup" id="popup">
                                         <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup btn-close"></a>
                                         <h3>Iniciar Sesión</h3>
-                                        <div style="display:flex; margin-top:45px; align-items:top; justify-content:space-around;">
+                                        <div class="popupss">
                                             <div>
                                                 <img class="logoinicio" src="/img/geomir.png">
                                             </div>
                                             <div style="display:flex; justify-content:center;">
-                                                <!-- <form action="POST" style="display:flex; justify-content:center; flex-direction:column;">
-                                                        <label class="lbl">Email<br><input type="text"></label>
-                                                        <label class="lbl">Contraseña<br><input type="password"></label>
-                                                    <input type="submit" class="btn-submit" value="Suscribirse">
-                                                </form> -->
                                                 <form class="logform" method="POST" action="{{ route('login') }}">
                                                 @csrf
-
                                                 <div class="row mb-3 divlbl">
                                                     <label style="text-align:left !important;" for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
                                                     <div class="col-md-6 ">
@@ -119,17 +129,83 @@
                                             </div>
                                         </div>
                                         @if (Route::has('register'))
-                                            <p class="else">¿No tienes una cuenta? <a href="{{ route('register') }}"><span>{{ __('Register') }}</span></a></p>
+                                            <p class="else">¿No tienes una cuenta? <button id="btn-abrir-popup2" class="registerb" href="{{ route('register') }}"><span>{{ __('Register') }}</span></button></p>
                                         @endif
                                     </div>
                                 </div>
                             @endif
-
                             @if (Route::has('register'))
-                                <div class="contenedor">
-                                    <li class="nav-item">
-                                        <a class="botonSign" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
+                                <div class="overlay" id="overlay2">
+                                    <div class="popup" id="popup2">
+                                        <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup btn-close"></a>
+                                        <h3>Registrarse</h3>
+                                        <div class="popupss">
+                                            <div>
+                                                <img class="logoinicio" src="/img/geomir.png">
+                                            </div>
+                                            <div class="regpop">
+                                                <form method="POST" action="{{ route('register') }}">
+                                                    @csrf
+                                                    <div class="row mb-3">
+                                                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                                            @error('name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                                            @error('email')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                                            @error('password')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                                                        <div class="col-md-6">
+                                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-0">
+                                                        <div class="col-md-6 offset-md-4">
+                                                            <button type="submit" class="boton">
+                                                                {{ __('Register') }}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>              
+                                    </div>
                                 </div>
                             @endif
                         </div>

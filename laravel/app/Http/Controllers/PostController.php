@@ -49,12 +49,12 @@ class PostController extends Controller
             'pbody' => 'required',
             'platitude' => 'required|numeric',
             'plongitude' => 'required|numeric',
-            'pvisid' => 'required|numeric',
-            'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
+            'pvisibility_id' => 'required|numeric',
+            'pupload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
     
         // Obtenir dades del fitxer
-        $upload = $request->file('upload');
+        $upload = $request->file('pupload');
         $fileName = $upload->getClientOriginalName();
         $fileSize = $upload->getSize();
         \Log::debug("Storing file '{$fileName}' ($fileSize)...");
@@ -82,7 +82,7 @@ class PostController extends Controller
                 'file_id' =>$file->id,
                 'latitude' =>$request->input('platitude'),
                 'longitude' =>$request->input('plongitude'),
-                'visibility_id' =>$request->input('pvisid'),
+                'visibility_id' =>$request->input('pvisibility_id'),
                 'author_id' =>auth()->user()->id,
             ]);
             \Log::debug("DB storage OK");
@@ -143,12 +143,12 @@ class PostController extends Controller
         // Validar fitxer
         $validatedData = $request->validate([
             'pcatid' => 'numeric',
-            'pvisid' => 'numeric',
-            'upload' => 'mimes:gif,jpeg,jpg,png|max:1024'
+            'pvisibility_id' => 'numeric',
+            'pupload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
         $file=File::find($post->file_id);  
         // Obtenir dades del fitxer
-        $upload = $request->file('upload');
+        $upload = $request->file('pupload');
         $controlNull= FALSE;
         if (! is_null($upload)){
             $fileName = $upload->getClientOriginalName();
@@ -179,8 +179,12 @@ class PostController extends Controller
                 // Desar dades a BD
                 \Log::debug("DB storage OK");
             }
-            $post->body=$request->input('pbody');
-            $post->visibility_id=$request->input('pvisid');
+            if ($request->input('pbody') != NULL){
+                $post->body=$request->input('pbody');
+            }
+            if ($request->input('pvisibility_id') != NULL){
+                $post->visibility_id=$request->input('pvisibility_id');
+            }
             $post->save();
             return redirect()->route('posts.show', $post)
             ->with('success', __('fpp.post-successupd'));

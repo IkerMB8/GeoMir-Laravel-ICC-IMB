@@ -52,13 +52,13 @@ class PlaceController extends Controller
             'pdescription' => 'required',
             'platitude' => 'required|numeric',
             'plongitude' => 'required|numeric',
-            'pcatid' => 'required|numeric',
-            'pvisid' => 'required|numeric',
-            'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
+            'pcategory_id' => 'required|numeric',
+            'pvisibility_id' => 'required|numeric',
+            'pupload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
     
         // Obtenir dades del fitxer
-        $upload = $request->file('upload');
+        $upload = $request->file('pupload');
         $fileName = $upload->getClientOriginalName();
         $fileSize = $upload->getSize();
         \Log::debug("Storing file '{$fileName}' ($fileSize)...");
@@ -87,8 +87,8 @@ class PlaceController extends Controller
                 'file_id' =>$file->id,
                 'latitude' =>$request->input('platitude'),
                 'longitude' =>$request->input('plongitude'),
-                'category_id' =>$request->input('pcatid'),
-                'visibility_id' =>$request->input('pvisid'),
+                'category_id' =>$request->input('pcategory_id'),
+                'visibility_id' =>$request->input('pvisibility_id'),
                 'author_id' =>auth()->user()->id,
             ]);
             \Log::debug("DB storage OK");
@@ -149,13 +149,13 @@ class PlaceController extends Controller
     {
         // Validar fitxer
         $validatedData = $request->validate([
-            'pcatid' => 'numeric',
-            'pvisid' => 'numeric',
-            'upload' => 'mimes:gif,jpeg,jpg,png|max:1024'
+            'pcategory_id' => 'numeric',
+            'pvisibility_id' => 'numeric',
+            'pupload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
         $file=File::find($place->file_id);  
         // Obtenir dades del fitxer
-        $upload = $request->file('upload');
+        $upload = $request->file('pupload');
         $controlNull= FALSE;
         if (! is_null($upload)){
             $fileName = $upload->getClientOriginalName();
@@ -186,9 +186,16 @@ class PlaceController extends Controller
                 // Desar dades a BD
                 \Log::debug("DB storage OK");
             }
-            $place->name=$request->input('pname');
-            $place->description=$request->input('pdescription');
-            $place->visibility_id=$request->input('pvisid');
+            
+            if ($request->input('pname') != NULL){
+                $place->name=$request->input('pname');
+            }
+            if ($request->input('pdescription') != NULL){
+                $place->description=$request->input('pdescription');
+            }
+            if ($request->input('pvisibility_id') != NULL){
+                $place->visibility_id=$request->input('pvisibility_id');
+            }
             $place->save();
             return redirect()->route('places.show', $place)
             ->with('success', __('fpp.place-successupd'));

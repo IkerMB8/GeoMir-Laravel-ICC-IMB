@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/dashboard', function (){
+    return redirect('/');
+});
+
 // Route::get('/', function (Request $request) {
 //    $message = 'Loading welcome page';
 //    Log::info($message);
