@@ -251,12 +251,6 @@ body.dark .navegador{
 .funct{
     overflow: hidden;
 }
-.funct div:first-of-type{
-    float: left;
-}
-.funct div:nth-child(2){
-    float: right;
-}
 .review{
     border-radius: 25px; 
     border: 2px solid #1a1830;
@@ -520,4 +514,33 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
 .registerb{
     background-color: transparent;
     border: 0;
+}
+
+.modalcntnt{
+    display:flex !important; 
+    flex-direction:row !important; 
+    background-color: #1a1830 !important; 
+    padding: 15px !important;
+}
+
+.commentizq{
+    margin-right:0 !important; 
+    padding-left:5px !important; 
+    padding-top:5px !important;
+}
+.commentizq div{
+    padding: 0 !important;
+}
+.commentimg{
+    border:2px solid black; 
+    border-radius: 25px;
+    width: 800px;
+    height: 700px;
+}
+.modal{
+    --bs-modal-width:100% !important;
+}
+.commentder{
+    width: 100%; 
+    margin-right: 10px;
 }

@@ -24,12 +24,12 @@
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered logreg">
-                            <div class="modal-content" style="display:flex; flex-direction:row; background-color: #1a1830; padding: 15px;">
-                                <div name="izquierda" style="margin-right:0; padding-left:5px; padding-top:5px;">
-                                    <div class="modal-body" style="padding:0px">
+                            <div class="modal-content modalcntnt">
+                                <div class="commentizq">
+                                    <div class="modal-body">
                                         @foreach ($files as $file)
                                             @if($file->id == $post->file_id)
-                                                <img src='{{ asset("storage/{$file->filepath}") }}' width="800px" height="700px" style="border:2px solid black; border-radius: 25px;"></img>
+                                                <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}'></img>
                                             @endif
                                         @endforeach  
                                     </div>
