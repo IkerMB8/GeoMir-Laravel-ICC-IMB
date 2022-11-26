@@ -220,7 +220,6 @@ btnCerrarPopup2.addEventListener('click', function(e){
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
 });
-
 const $archivo = document.querySelector("#pupload"),
       $imgprev = document.querySelector("#imgprev");
 

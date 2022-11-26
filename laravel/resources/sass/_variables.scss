@@ -246,7 +246,7 @@ body.dark .navegador{
 .topp{
     height: auto;
     display: grid;
-    justify-content: left;
+    // justify-content: left;
 }
 .funct{
     overflow: hidden;
@@ -543,6 +543,46 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
 .commentder{
     width: 100%; 
     margin-right: 10px;
+}
+
+//3 PUNTOS
+
+
+.modal3p{
+    width: 40%;
+    border-radius: 25px !important;
+    font-family: 'Montserrat', sans-serif;
+    justify-content:center;
+    text-align:center;
+    padding:0;
+    overflow: hidden;
+}
+
+.modal3p::backdrop {
+    background: rgb(0, 0, 0, 0.55);
+}
+
+.btnIND{
+    width:100%;
+    padding:20px;
+    margin:0;
+    border: 1px solid #dbdbdb;
+}
+
+.spanDelete{
+    color: red;
+    font-weight: 700;
+}
+
+.cerrar3p{
+    border:0;
+    background-color:white;
+}
+
+.cajatopp{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 .commentprofimg{
     width: 50px;
