@@ -544,3 +544,46 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
     width: 100%; 
     margin-right: 10px;
 }
+.commentprofimg{
+    width: 50px;
+    height: 50px;
+    border-radius: 190px;
+    border: 1px solid white;
+}
+.commentprofname{
+    color: white !important; 
+    margin-left:5px !important;
+}
+.buttonclose{
+    background-color: white !important;
+    opacity: 100% !important;
+}
+.commenthr{
+    width: 100%; 
+    height: 5px; 
+    background-color: black; 
+    margin:0;
+}
+.derechader{
+    height: 590px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    padding-left: 10px;
+}
+
+.addpopup{
+    height: auto !important;
+    width: 60% !important;
+}
+.aceptar{
+  background-color:#7000FF;  
+}
+iframe{
+    width: 100%;
+    height: 60vh;
+}
+.table .alert-danger{
+    padding: 0 !important;
+    margin: 0 !important;
+}

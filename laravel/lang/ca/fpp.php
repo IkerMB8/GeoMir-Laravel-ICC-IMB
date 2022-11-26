@@ -13,7 +13,7 @@ return [
    'place-errordel' => 'ERROR en suprimir el lloc',
    'post-successc' => "La publicació s'ha desat correctament",
    'post-successupd' => 'Publicació actualitzada correctament',
-   'post-sucessdel' => "La publicació s'ha suprimit correctament",
+   'post-successdel' => "La publicació s'ha suprimit correctament",
    'post-errordel' => 'ERROR en suprimir la publicació',
    'place-notpropertydel' => 'ERROR, no pots eliminar un lloc que no és teu',
    'place-notproperty' => 'ERROR, no pots editar un lloc que no és teu',
