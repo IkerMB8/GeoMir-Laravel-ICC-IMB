@@ -6,8 +6,10 @@ const form = document.getElementById("create");
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
    // ...
-   document.querySelector('.error').innerHTML = "";
-   document.querySelector('.error').classList.remove('show');
+   var a=document.getElementsByClassName('error');
+   for (var i=0; i<a.length; i++) a[i].innerHTML = "";
+   for (var i=0; i<a.length; i++) a[i].classList.add('noshow');
+   for (var i=0; i<a.length; i++) a[i].classList.remove('show');
    // Create validation
    let data = {
         "name": document.getElementsByName("pname")[0].value,

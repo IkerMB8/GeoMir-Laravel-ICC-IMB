@@ -15,4 +15,8 @@ return [
    'post-successupd' => 'Post successfully updated',
    'post-sucessdel' => 'Post successfully deleted',
    'post-errordel' => 'ERROR deleting post',
+   'place-notpropertydel' => 'ERROR, you cannot delete a place that is not yours',
+   'place-notproperty' => 'ERROR, you cannot edit a place that is not yours',
+   'place-notpropertydel' => 'ERROR, you cannot delete a post that is not yours',
+   'place-notproperty' => 'ERROR, you cannot edit a post that is not yours',
 ];

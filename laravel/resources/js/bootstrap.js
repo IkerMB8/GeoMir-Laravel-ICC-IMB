@@ -85,38 +85,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // }
 // document.addEventListener("click", closeSubmenu, false);
 
-
-// let boton = document.getElementById("cambiaColor");
-//   boton.addEventListener("click", cambia);
-  
-//   let contador = 0;
-  
-//   function cambia() {
-//     if (contador % 2 ==0) {
-//         boton.style.backgroundColor= "#EFCEFF";
-//     } else {
-//         boton.style.backgroundColor = "white";
-//     }
-//     contador += 1;
-//   }
-
-// (function() {
-
-//   let boton = document.getElementById("cambiaColor");
-//   boton.addEventListener("click", cambia);
-  
-//   let contador = 0;
-  
-//   function cambia() {
-//     if (contador % 2 ==0) {
-//         boton.style.backgroundColor= "#EFCEFF";
-//     } else {
-//         boton.style.backgroundColor = "white";
-//     }
-//     contador += 1;
-//   }
-// })();
-
 (function() {
 
   let boton = document.getElementById("cambiaColor1");
@@ -202,23 +170,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   }
 })();
 
-// POPUP LOGIN
-var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
-    overlay = document.getElementById('overlay'),
-    popup = document.getElementById('popup'),
-    btnCerrarPopup = document.getElementById('btn-cerrar-popup');
-
-btnAbrirPopup.addEventListener('click', function(){
-    overlay.classList.add('active');
-    popup.classList.add('active');
-});
-
-btnCerrarPopup.addEventListener('click', function(e){
-    e.preventDefault();
-    overlay.classList.remove('active');
-    popup.classList.remove('active');
-});
-
 // POPUP BOTÓN AÑADIR
 var btnPopupAddO = document.getElementById('open-add'),
     overlayadd = document.getElementById('overlayadd'),
@@ -234,6 +185,23 @@ btnPopupAddC.addEventListener('click', function(e){
     e.preventDefault();
     overlayadd.classList.remove('active');
     popupadd.classList.remove('active');
+});
+
+// POPUP LOGIN
+var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
+    overlay = document.getElementById('overlay'),
+    popup = document.getElementById('popup'),
+    btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+
+btnAbrirPopup.addEventListener('click', function(){
+    overlay.classList.add('active');
+    popup.classList.add('active');
+});
+
+btnCerrarPopup.addEventListener('click', function(e){
+    e.preventDefault();
+    overlay.classList.remove('active');
+    popup.classList.remove('active');
 });
 
 // POPUP REGISTER

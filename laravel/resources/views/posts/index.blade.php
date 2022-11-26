@@ -18,12 +18,12 @@
                 <div class="funct">
                     <div style="float: left;">
                         <i class="fa-regular fa-2x heart fa-heart"></i>
-                        <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $post->id }}">
                             <i class="fa-regular fa-comment"></i>
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" style="display:flex; justify-content: center;">
+                        <div class="modal fade" id="staticBackdrop{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered logreg">
                             <div class="modal-content" style="display:flex; flex-direction:row; background-color: #1a1830; padding: 15px;">
                                 <div name="izquierda" style="margin-right:0; padding-left:5px; padding-top:5px;">
                                     <div class="modal-body" style="padding:0px">

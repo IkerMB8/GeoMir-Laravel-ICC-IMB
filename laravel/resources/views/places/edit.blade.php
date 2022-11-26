@@ -51,15 +51,15 @@
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pcatid">{{ __('fields.category_id') }}</label>
-                                            <input type="text" id="pcatid" name="pcatid" value="{{ $place->category_id }}" readonly>
+                                            <label for="pcategory_id">{{ __('fields.category_id') }}</label>
+                                            <input type="text" id="pcategory_id" name="pcategory_id" value="{{ $place->category_id }}" readonly>
                                         </td>
                                 </tr>
                                 <tr>
                                         
                                         <td>
-                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
-                                            <select name="pvisid" id="pvisid">
+                                            <label for="pvisibility_id">{{ __('fields.visibility_id') }}</label>
+                                            <select name="pvisibility_id" id="pvisibility_id">
                                                 @foreach ($visibilities as $visibility)
                                                     @if($visibility->id == $place->visibility_id)
                                                         <option selected  value="{{ $visibility->id }}">{{ $visibility->name }}</option>

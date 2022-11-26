@@ -122,13 +122,18 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
-        $file=File::find($post->file_id);
-        return view("posts.edit", [
-            "post" => $post,
-            "file" => $file,
-            "autor" => $post->user,
-            "visibilities" => Visibility::all(),
-        ]);
+        if ($post->user->id == auth()->user()->id){
+            $file=File::find($post->file_id);
+            return view("posts.edit", [
+                "post" => $post,
+                "file" => $file,
+                "autor" => $post->user,
+                "visibilities" => Visibility::all(),
+            ]); 
+        }else{
+            return redirect()->route('posts.show', $post)
+            ->with('error', __('fpp.post-notproperty'));
+        }
     }
 
     /**
@@ -146,53 +151,59 @@ class PostController extends Controller
             'pvisibility_id' => 'numeric',
             'pupload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
-        $file=File::find($post->file_id);  
-        // Obtenir dades del fitxer
-        $upload = $request->file('pupload');
-        $controlNull= FALSE;
-        if (! is_null($upload)){
-            $fileName = $upload->getClientOriginalName();
-            $fileSize = $upload->getSize();
-            \Log::debug("Storing file '{$fileName}' ($fileSize)...");
-            // Pujar fitxer al disc dur
-            $uploadName = time() . '_' . $fileName;
-            $filePath = $upload->storeAs(
-                'uploads',      // Path
-                $uploadName ,   // Filename
-                'public'        // Disk
-            );
-        }else{
-            $filePath=$file->filepath;
-            $fileSize=$file->filesize;
-            $controlNull= TRUE;
-        }
         
-        if (\Storage::disk('public')->exists($filePath)) {
-            if ($controlNull == FALSE){
-                \Storage::disk('public')->delete($file->filepath);
-                \Log::debug("Local storage OK");
-                $fullPath = \Storage::disk('public')->path($filePath);
-                \Log::debug("File saved at {$fullPath}");
-                $file->filepath=$filePath;
-                $file->filesize=$fileSize;
-                $file->save();
-                // Desar dades a BD
-                \Log::debug("DB storage OK");
+        if ($post->user->id == auth()->user()->id){
+            $file=File::find($post->file_id);  
+            // Obtenir dades del fitxer
+            $upload = $request->file('pupload');
+            $controlNull= FALSE;
+            if (! is_null($upload)){
+                $fileName = $upload->getClientOriginalName();
+                $fileSize = $upload->getSize();
+                \Log::debug("Storing file '{$fileName}' ($fileSize)...");
+                // Pujar fitxer al disc dur
+                $uploadName = time() . '_' . $fileName;
+                $filePath = $upload->storeAs(
+                    'uploads',      // Path
+                    $uploadName ,   // Filename
+                    'public'        // Disk
+                );
+            }else{
+                $filePath=$file->filepath;
+                $fileSize=$file->filesize;
+                $controlNull= TRUE;
             }
-            if ($request->input('pbody') != NULL){
-                $post->body=$request->input('pbody');
+            
+            if (\Storage::disk('public')->exists($filePath)) {
+                if ($controlNull == FALSE){
+                    \Storage::disk('public')->delete($file->filepath);
+                    \Log::debug("Local storage OK");
+                    $fullPath = \Storage::disk('public')->path($filePath);
+                    \Log::debug("File saved at {$fullPath}");
+                    $file->filepath=$filePath;
+                    $file->filesize=$fileSize;
+                    $file->save();
+                    // Desar dades a BD
+                    \Log::debug("DB storage OK");
+                }
+                if ($request->input('pbody') != NULL){
+                    $post->body=$request->input('pbody');
+                }
+                if ($request->input('pvisibility_id') != NULL){
+                    $post->visibility_id=$request->input('pvisibility_id');
+                }
+                $post->save();
+                return redirect()->route('posts.show', $post)
+                ->with('success', __('fpp.post-successupd'));
+            } else {
+                \Log::debug("Local storage FAILS");
+                // Patró PRG amb missatge d'error
+                return redirect()->route("posts.edit")
+                    ->with('error', __('fpp.errorupl'));
             }
-            if ($request->input('pvisibility_id') != NULL){
-                $post->visibility_id=$request->input('pvisibility_id');
-            }
-            $post->save();
+        }else{
             return redirect()->route('posts.show', $post)
-            ->with('success', __('fpp.post-successupd'));
-        } else {
-            \Log::debug("Local storage FAILS");
-            // Patró PRG amb missatge d'error
-            return redirect()->route("posts.edit")
-                ->with('error', __('fpp.errorupl'));
+            ->with('error', __('fpp.post-notproperty'));
         }
     }
 
@@ -205,16 +216,21 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
-        $file=File::find($post->file_id);   
-        \Storage::disk('public')->delete($file->filepath);  
-        if (\Storage::disk('public')->exists($file->filepath)) {
+        if ($post->user->id == auth()->user()->id){
+            $file=File::find($post->file_id);   
+            \Storage::disk('public')->delete($file->filepath);  
+            if (\Storage::disk('public')->exists($file->filepath)) {
+                return redirect()->route('posts.show', $post)
+                ->with('error', __('fpp.post-errordel'));
+            } else {
+                Post::destroy($post->id);
+                File::destroy($file->id);
+                return redirect()->route('posts.index', ["posts" => Post::all()])
+                ->with('success', __('fpp.post-successdel'));
+            }
+        }else{
             return redirect()->route('posts.show', $post)
-            ->with('error', __('fpp.post-errordel'));
-        } else {
-            Post::destroy($post->id);
-            File::destroy($file->id);
-            return redirect()->route('posts.index', ["posts" => Post::all()])
-            ->with('success', __('fpp.post-successdel'));
+            ->with('error', __('fpp.post-notpropertydel'));
         }
     }
 }

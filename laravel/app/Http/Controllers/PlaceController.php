@@ -129,13 +129,18 @@ class PlaceController extends Controller
     public function edit(Place $place)
     {
         //
-        $file=File::find($place->file_id);
-        return view("places.edit", [
-            "place" => $place,
-            "file" => $file,
-            "autor" => $place->user,
-            "visibilities" => Visibility::all(),
-        ]);
+        if ($place->user->id == auth()->user()->id){
+            $file=File::find($place->file_id);
+            return view("places.edit", [
+                "place" => $place,
+                "file" => $file,
+                "autor" => $place->user,
+                "visibilities" => Visibility::all(),
+            ]);
+        }else{
+            return redirect()->route('places.show', $place)
+            ->with('error', __('fpp.place-notproperty'));
+        }
     }
 
     /**
@@ -153,57 +158,62 @@ class PlaceController extends Controller
             'pvisibility_id' => 'numeric',
             'pupload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
-        $file=File::find($place->file_id);  
-        // Obtenir dades del fitxer
-        $upload = $request->file('pupload');
-        $controlNull= FALSE;
-        if (! is_null($upload)){
-            $fileName = $upload->getClientOriginalName();
-            $fileSize = $upload->getSize();
-            \Log::debug("Storing file '{$fileName}' ($fileSize)...");
-            // Pujar fitxer al disc dur
-            $uploadName = time() . '_' . $fileName;
-            $filePath = $upload->storeAs(
-                'uploads',      // Path
-                $uploadName ,   // Filename
-                'public'        // Disk
-            );
-        }else{
-            $filePath=$file->filepath;
-            $fileSize=$file->filesize;
-            $controlNull= TRUE;
-        }
-        
-        if (\Storage::disk('public')->exists($filePath)) {
-            if ($controlNull == FALSE){
-                Storage::disk('public')->delete($file->filepath);
-                \Log::debug("Local storage OK");
-                $fullPath = \Storage::disk('public')->path($filePath);
-                \Log::debug("File saved at {$fullPath}");
-                $file->filepath=$filePath;
-                $file->filesize=$fileSize;
-                $file->save();
-                // Desar dades a BD
-                \Log::debug("DB storage OK");
+        if ($place->user->id == auth()->user()->id){
+            $file=File::find($place->file_id);  
+            // Obtenir dades del fitxer
+            $upload = $request->file('pupload');
+            $controlNull= FALSE;
+            if (! is_null($upload)){
+                $fileName = $upload->getClientOriginalName();
+                $fileSize = $upload->getSize();
+                \Log::debug("Storing file '{$fileName}' ($fileSize)...");
+                // Pujar fitxer al disc dur
+                $uploadName = time() . '_' . $fileName;
+                $filePath = $upload->storeAs(
+                    'uploads',      // Path
+                    $uploadName ,   // Filename
+                    'public'        // Disk
+                );
+            }else{
+                $filePath=$file->filepath;
+                $fileSize=$file->filesize;
+                $controlNull= TRUE;
             }
             
-            if ($request->input('pname') != NULL){
-                $place->name=$request->input('pname');
+            if (\Storage::disk('public')->exists($filePath)) {
+                if ($controlNull == FALSE){
+                    Storage::disk('public')->delete($file->filepath);
+                    \Log::debug("Local storage OK");
+                    $fullPath = \Storage::disk('public')->path($filePath);
+                    \Log::debug("File saved at {$fullPath}");
+                    $file->filepath=$filePath;
+                    $file->filesize=$fileSize;
+                    $file->save();
+                    // Desar dades a BD
+                    \Log::debug("DB storage OK");
+                }
+                
+                if ($request->input('pname') != NULL){
+                    $place->name=$request->input('pname');
+                }
+                if ($request->input('pdescription') != NULL){
+                    $place->description=$request->input('pdescription');
+                }
+                if ($request->input('pvisibility_id') != NULL){
+                    $place->visibility_id=$request->input('pvisibility_id');
+                }
+                $place->save();
+                return redirect()->route('places.show', $place)
+                ->with('success', __('fpp.place-successupd'));
+            } else {
+                \Log::debug("Local storage FAILS");
+                // Patró PRG amb missatge d'error
+                return redirect()->route("places.edit")
+                    ->with('error', __('fpp.errorupl'));
             }
-            if ($request->input('pdescription') != NULL){
-                $place->description=$request->input('pdescription');
-            }
-            if ($request->input('pvisibility_id') != NULL){
-                $place->visibility_id=$request->input('pvisibility_id');
-            }
-            $place->save();
+        }else{
             return redirect()->route('places.show', $place)
-            ->with('success', __('fpp.place-successupd'));
-        } else {
-            \Log::debug("Local storage FAILS");
-            // Patró PRG amb missatge d'error
-            return redirect()->route("places.edit")
-                ->with('error', __('fpp.errorupl'));
+            ->with('error', __('fpp.place-notproperty'));
         }
         
     }
@@ -217,17 +227,21 @@ class PlaceController extends Controller
     public function destroy(Place $place)
     {
         //
-        $file=File::find($place->file_id);    
-        \Storage::disk('public')->delete($file->filepath);
-        if (\Storage::disk('public')->exists($file->filepath)) {
+        if ($place->user->id == auth()->user()->id){
+            $file=File::find($place->file_id);    
+            \Storage::disk('public')->delete($file->filepath);
+            if (\Storage::disk('public')->exists($file->filepath)) {
+                return redirect()->route('places.show', $place)
+                ->with('error', __('fpp.place-errordel'));
+            } else {     
+                Place::destroy($place->id);
+                File::destroy($file->id);
+                return redirect()->route('places.index', ["places" => Place::all()])
+                ->with('success', __('fpp.place-successdel'));
+            }
+        }else{
             return redirect()->route('places.show', $place)
-            ->with('error', __('fpp.place-errordel'));
-        } else {     
-            Place::destroy($place->id);
-            File::destroy($file->id);
-            return redirect()->route('places.index', ["places" => Place::all()])
-            ->with('success', __('fpp.place-successdel'));
+            ->with('error', __('fpp.place-notpropertydel'));
         }
-        
     }
 }

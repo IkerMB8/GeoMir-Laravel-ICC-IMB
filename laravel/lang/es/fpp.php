@@ -15,4 +15,8 @@ return [
    'post-successupd' => 'Publicación actualizada con éxito',
    'post-sucessdel' => 'Publicación eliminada con éxito',
    'post-errordel' => 'ERROR al eliminar la publicación',
+   'place-notpropertydel' => 'ERROR, no puedes eliminar un lugar que no es tuyo',
+   'place-notproperty' => 'ERROR, no puedes editar un lugar que no es tuyo',
+   'place-notpropertydel' => 'ERROR, no puedes eliminar una publicación que no es tuya',
+   'place-notproperty' => 'ERROR, no puedes editar una publicación que no es tuya',
 ];

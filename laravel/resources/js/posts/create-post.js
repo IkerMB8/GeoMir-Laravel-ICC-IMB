@@ -6,11 +6,13 @@ const form = document.getElementById("create");
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
    // ...
-   document.querySelector('.error').innerHTML = "";
-   document.querySelector('.error').classList.remove('show');
+   var a=document.getElementsByClassName('error');
+   for (var i=0; i<a.length; i++) a[i].innerHTML = "";
+   for (var i=0; i<a.length; i++) a[i].classList.add('noshow');
+   for (var i=0; i<a.length; i++) a[i].classList.remove('show');
    // Create validation
    let data = {
-        "body": document.getElementsByName("pnbody")[0].value,
+        "body": document.getElementsByName("pbody")[0].value,
         "upload": document.getElementsByName("pupload")[0].value,
         "latitude": document.getElementsByName("platitude")[0].value,
         "longitude": document.getElementsByName("plongitude")[0].value,

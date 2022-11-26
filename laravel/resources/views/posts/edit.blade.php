@@ -45,8 +45,8 @@
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pvisid">{{ __('fields.visibility_id') }}</label>
-                                            <select name="pvisid" id="pvisid">
+                                            <label for="pvisibility_id">{{ __('fields.visibility_id') }}</label>
+                                            <select name="pvisibility_id" id="pvisibility_id">
                                                 @foreach ($visibilities as $visibility)
                                                     @if($visibility->id == $post->visibility_id)
                                                         <option selected  value="{{ $visibility->id }}">{{ $visibility->name }}</option>
