@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="overlay active" id="overlayadd">
+<div class="overlayprop">
     <div class="popup addpopup active" id="popupadd" style="display: grid;justify-content: center;align-items: center;">   
         <div style="width:800px;">
             <img style="max-width: 800px;max-height: 400px;border-radius: 30px;"src="/img/grandcanyon.jpeg" id="imgprev"/>
