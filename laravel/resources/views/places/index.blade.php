@@ -5,7 +5,7 @@
             <div class="post">
                 <div class="topp">
                     <div class="perf">
-                        <img src="/img/obama.jpg"><p>@ {{ $place->user->name }}</p>
+                        <img src="/img/defaultuser.jpg"><p>@ {{ $place->user->name }}</p>
                     </div>
                     <div>
                         <h5>{{ $place->name }}</h5>
@@ -39,7 +39,7 @@
                                 </div>
                                 <div name="derecha" style="width: 100%; margin-right: 10px;">
                                     <div class="modal-header">
-                                        <img src="/img/obama.jpg" width="50px" height="50px" style="border-radius: 190px; border: 1px solid white;"></img>
+                                        <img src="/img/defaultuser.jpg" width="50px" height="50px" style="border-radius: 190px; border: 1px solid white;"></img>
                                         <h5 class="modal-title" id="staticBackdropLabel" style="color: white; margin-left:5px">@ {{ $place->user->name }}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white; opacity:100%;"></button>
                                     </div>

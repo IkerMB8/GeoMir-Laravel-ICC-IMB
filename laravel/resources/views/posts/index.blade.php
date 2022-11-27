@@ -27,7 +27,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 <div>
                     @foreach ($files as $file)
                         @if($file->id == $post->file_id)
@@ -43,26 +42,26 @@
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered logreg">
-                            <div class="modal-content modalcntnt">
-                                <div class="commentizq">
-                                    <div class="modal-body">
-                                        @foreach ($files as $file)
-                                            @if($file->id == $post->file_id)
-                                                <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}'></img>
-                                            @endif
-                                        @endforeach  
+                            <div class="modal-dialog modal-dialog-centered logreg">
+                                <div class="modal-content modalcntnt">
+                                    <div class="commentizq">
+                                        <div class="modal-body">
+                                            @foreach ($files as $file)
+                                                @if($file->id == $post->file_id)
+                                                    <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}'></img>
+                                                @endif
+                                            @endforeach  
+                                        </div>
                                     </div>
-                                </div>
-                                <div name="derecha" style="width: 100%; margin-right: 10px;">
-                                    <div class="modal-header">
-                                        <img src="/img/obama.jpg" width="50px" height="50px" style="border-radius: 190px; border: 1px solid white;"></img>
-                                        <h5 class="modal-title" id="staticBackdropLabel" style="color: white; margin-left:5px">@ {{ $post->user->name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white; opacity:100%;"></button>
-                                    </div>
-                                    <hr style="width: 100%; height: 5px; background-color: black; margin:0;">
-                                    <div style="height: 620px; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <div style="height:300px"></div>
+                                    <div name="derecha" style="width: 100%;">
+                                        <div class="modal-header">
+                                            <img src="/img/defaultuser.jpg" class="commentprofimg"></img>
+                                            <h5 class="modal-title commentprofname" id="staticBackdropLabel">@ {{ $post->user->name }}</h5>
+                                            <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <hr>
+                                        <div class="derechader">
+                                            <div></div>
                                             <div class="modal-footer" style="margin-left:10px; border: 2px solid black;background-color: white;border-radius: 25px; display:flex; justify-content: space-between; ">
                                                 <div style="float:left;">
                                                     <form>
@@ -71,8 +70,7 @@
                                                 </div>
                                                 <div style="float:right;">
                                                     <button type="button" style="padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
-                                                </div>
-            
+                                                </div>         
                                             </div>
                                         </div>
                                     </div>

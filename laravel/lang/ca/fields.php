@@ -22,7 +22,7 @@ return [
    'cfile' => 'Crear Arxiu',
    'filesize' => 'Tamany arxiu',
    'filepath' => 'Ruta arxiu',
-   'addplace' => 'Add new place',
-   'addfile' => 'Add new file',
-   'addpost' => 'Add new post',
+   'addplace' => 'Afegir nou lloc',
+   'addfile' => 'Afegir nou arxiu',
+   'addpost' => 'Afegir nova publicació',
 ];

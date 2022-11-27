@@ -33,20 +33,7 @@
                 <i class="fa-regular msg fa-2x fa-message"></i>
                 <div class="logreg">
                     @if (Route::has('login'))
-                        <div class="contenedor max">
-                            <button id="open-add" class="botonadd"><i class="fa-solid fa-plus fa-2x"></i></button>
-                        </div>
-                        <div class="overlay" id="overlayadd">
-                            <div class="popup" id="popupadd">
-                                <a href="#" id="close-add" class="btn-cerrar-popup btn-close"></a>
-                                <div style="display:flex; margin-top:45px; align-items:top; justify-content:space-around;">
-                                    
-                                    <div style="display:flex; justify-content:center;">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <a href="/posts/create"><i class="fa-solid fa-plus fa-2x"></i></a>
                     @endif
                 </div>
             </div>
