@@ -4,8 +4,28 @@
         @foreach ($places as $place)
             <div class="post">
                 <div class="topp">
-                    <div class="perf">
-                        <img src="/img/defaultuser.jpg"><p>@ {{ $place->user->name }}</p>
+                    <div class="cajatopp">
+                        <div class="perf">
+                            <img src="/img/defaultuser.jpg"><p>@ {{ $place->user->name }}</p>
+                        </div>
+                        <!-- 3 PUNTOS -->
+                        <button type="button" class="cerrar3p" data-bs-toggle="modal" data-bs-target="#options{{ $place->id }}">
+                            <div style="height: 24px; width: 24px;"><svg aria-label="Más opciones" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg></div>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" style="--bs-modal-width:40% !important;" id="options{{ $place->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered logreg">
+                                <div class="modal3p modal-content">
+                                    <form method="post" action="{{ route('places.destroy',$place) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div><button class="btnIND"><span class="spanDelete">Eliminar</span></button></div>
+                                    </form>
+                                    <div><a href="{{ route('places.edit',$place) }}"><button class="btnIND">Editar</button></a></div>
+                                    <div><button type="button" class="btnIND" data-bs-dismiss="modal" aria-label="Close">Cancelar</button></div>
+                                </div>    
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <h5>{{ $place->name }}</h5>

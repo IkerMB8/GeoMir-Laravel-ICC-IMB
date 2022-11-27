@@ -30,12 +30,14 @@
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
+                @hasanyrole('admin|author')
                 <i class="fa-regular msg fa-2x fa-message"></i>
                 <div class="logreg">
                     @if (Route::has('login'))
                     <a href="/posts/create"><i class="fa-solid fa-plus fa-2x"></i></a>
                     @endif
                 </div>
+                @endhasanyrole
             </div>
             <div class="right">
                 @include('partials.language-switcher')

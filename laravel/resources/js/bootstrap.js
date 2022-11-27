@@ -170,22 +170,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   }
 })();
 
-// POPUP BOTÓN AÑADIR
-var btnPopupAddO = document.getElementById('open-add'),
-    overlayadd = document.getElementById('overlayadd'),
-    popupadd = document.getElementById('popupadd'),
-    btnPopupAddC = document.getElementById('close-add');
+// // POPUP BOTÓN AÑADIR
+// var btnPopupAddO = document.getElementById('open-add'),
+//     overlayadd = document.getElementById('overlayadd'),
+//     popupadd = document.getElementById('popupadd'),
+//     btnPopupAddC = document.getElementById('close-add');
 
-btnPopupAddO.addEventListener('click', function(){
-    overlayadd.classList.add('active');
-    popupadd.classList.add('active');
-});
+// btnPopupAddO.addEventListener('click', function(){
+//     overlayadd.classList.add('active');
+//     popupadd.classList.add('active');
+// });
 
-btnPopupAddC.addEventListener('click', function(e){
-    e.preventDefault();
-    overlayadd.classList.remove('active');
-    popupadd.classList.remove('active');
-});
+// btnPopupAddC.addEventListener('click', function(e){
+//     e.preventDefault();
+//     overlayadd.classList.remove('active');
+//     popupadd.classList.remove('active');
+// });
 
 // POPUP LOGIN
 var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
@@ -219,23 +219,4 @@ btnCerrarPopup2.addEventListener('click', function(e){
     e.preventDefault();
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
-});
-const $archivo = document.querySelector("#pupload"),
-      $imgprev = document.querySelector("#imgprev");
-
-// Escuchar cuando cambie
-$archivo.addEventListener("change", () => {
-  // Los archivos seleccionados, pueden ser muchos o uno
-  const archivos = $archivo.files;
-  // Si no hay archivos salimos de la función y quitamos la imagen
-  if (!archivos || !archivos.length) {
-    $imgprev.src = "";
-    return;
-  }
-  // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-  const primerArchivo = archivos[0];
-  // Lo convertimos a un objeto de tipo objectURL
-  const objectURL = URL.createObjectURL(primerArchivo);
-  // Y a la fuente de la imagen le ponemos el objectURL
-  $imgprev.src = objectURL;
 });
