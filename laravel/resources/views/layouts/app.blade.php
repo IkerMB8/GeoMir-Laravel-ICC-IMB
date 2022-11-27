@@ -60,7 +60,7 @@
                                             <div>
                                                 <img class="logoinicio" src="/img/geomir.png">
                                             </div>
-                                            <div style="display:flex; justify-content:center;">
+                                            <div style="margin-left:10px;display:flex; justify-content:center;">
                                                 <form class="logform" method="POST" action="{{ route('login') }}">
                                                 @csrf
                                                 <div class="row mb-3 divlbl">
@@ -223,13 +223,37 @@
         <br>
         <div class="navfiltros">
             <div>
-                <a href="{{ url('/posts') }}"><button class="boton" id="cambiaColor1">{{ __('Posts') }}</button></a>
-                <a href="{{ url('/places') }}"><button  class="boton" id="cambiaColor2">{{ __('Lugares') }}</button></a>
-                <button type="submit" id="cambiaColor3" class="boton">{{ __('Imágenes') }}</button>
-                <button type="submit" id="cambiaColor4" class="boton">{{ __('Vídeos') }}</button>
-                <button type="submit" id="cambiaColor5" class="boton">{{ __('Ordenar') }}</button>
+                <a href="{{ url('/posts') }}"><button class="boton" id="cambiaColor1">{{ __('fpp.posts') }}</button></a>
+                <a href="{{ url('/places') }}"><button  class="boton" id="cambiaColor2">{{ __('fpp.places') }}</button></a>
+                <button type="submit" id="cambiaColor3" class="boton">{{ __('fpp.images') }}</button>
+                <button type="submit" id="cambiaColor4" class="boton">{{ __('fpp.video') }}</button>
+                <button type="submit" id="cambiaColor5" class="boton">{{ __('fpp.organize') }}</button>
             </div>
         </div>
+        <div id="web-accessibility-menu-button" class="web-accessibility-menu-button">
+            <i class="fas fa-wheelchair silla"></i>
+            <span class="accessibility-text">Accessibility</span>
+        </div>
+        <ul id="list-web-accessibility" class="list-group list-web-accessibility" style="display: flex;">
+            <li class="list-group-item web-accessibility-item ">
+                <div class="d-inline mr-3">Tt </div>
+                <div class="d-inline web-accessibility-item-font font-size-16 ml-2" data-type="font-size" data-value="16">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-18 ml-1" data-type="font-size" data-value="18">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-20 ml-1" data-type="font-size" data-value="20">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-22 ml-1" data-type="font-size" data-value="22">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-24 ml-1" data-type="font-size" data-value="24">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-26 ml-1" data-type="font-size" data-value="26">A</div>
+            </li>
+
+            <li class="list-group-item web-accessibility-item web-accessibility-item  web-accessibility-item-direct " data-type="close">
+                <div class="d-inline mr-3"><i class="fas fa-times"></i></div>
+                <div class="d-inline ml-2">Close</div>
+            </li>
+            <li class="list-group-item web-accessibility-item  web-accessibility-item-direct" data-type="reset">
+                <div class="d-inline mr-3"><i class="fas fa-undo"></i></div>
+                <div class="d-inline  ml-2">Reset</div>
+            </li>
+        </ul>
         <main>
             @yield('content')
         </main>

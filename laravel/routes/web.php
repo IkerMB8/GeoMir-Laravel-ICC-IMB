@@ -19,7 +19,7 @@ use App\Http\Controllers\LanguageController;
 */
 // ...
 Route::get('/', function () {
-    return view('dashboard');
+    return redirect('/posts');
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/dashboard', function (){
@@ -60,3 +60,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);
+
+Route::post('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'favourite'])->name('places.favourite');
+Route::delete('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'unfavourite'])->name('places.unfavourite');
+
+
+Route::post('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
+Route::delete('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'unlike'])->name('posts.unlike');

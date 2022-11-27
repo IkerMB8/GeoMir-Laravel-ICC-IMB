@@ -19,4 +19,9 @@ return [
    'place-notproperty' => 'ERROR, no pots editar un lloc que no és teu',
    'post-notpropertydel' => 'ERROR, no pots eliminar una publicació que no és teva',
    'post-notproperty' => 'ERROR, no pots editar una publicació que no és teva',
+   'posts' => 'Publicacións',
+   'places' => 'Llocs',
+   'images' => 'Imatges',
+   'video' => 'Vídeos',
+   'organize' => 'Ordenar',
 ];

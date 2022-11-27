@@ -34,7 +34,7 @@
                 <div>
                     @foreach ($files as $file)
                         @if($file->id == $place->file_id)
-                            <img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}'/>
+                            <a href="{{ route('places.show',$place) }}"><img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}'/></a>
                         @endif
                     @endforeach   
                 </div>
@@ -91,10 +91,11 @@
                 </div>
                 <div>
                     <p>0 likes</p>
+                    <p>{{ $place->description }}</p>
                 </div>
                 <div class="review">
                     <div>
-                        <input class="prueba" type="textarea" maxlength="140" placeholder="Añade tu reseña"/>
+                        <p></p>
                     </div>
                     <div>
                         <i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i>

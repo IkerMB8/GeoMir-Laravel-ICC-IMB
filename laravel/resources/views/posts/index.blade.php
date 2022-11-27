@@ -31,7 +31,7 @@
             <div>
                 @foreach ($files as $file)
                     @if($file->id == $post->file_id)
-                        <img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}'/>
+                        <a href="{{ route('posts.show',$post) }}"><img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/></a>
                     @endif
                 @endforeach   
             </div>
@@ -49,7 +49,7 @@
                                     <div class="modal-body">
                                         @foreach ($files as $file)
                                             @if($file->id == $post->file_id)
-                                                <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}'></img>
+                                                <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>
                                             @endif
                                         @endforeach  
                                     </div>

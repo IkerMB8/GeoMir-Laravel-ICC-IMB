@@ -75,13 +75,25 @@
                         </div>
                         <i class="fa-solid fa-2x comment fa-share-from-square"></i>
                     </div>
-                    <div style="float: right; margin-top:10px;">
-                        <i class="fa-regular fa-2x fa-star"></i>
+                    <div style="float: right; margin-top:10px;display:flex;">
+                        @if($control == true)
+                            <form method="post" action="{{ route('places.unfavourite',$place) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-sharp fa-solid fa-star fa-2x" style="color:yellow;"></i></button>
+                            </form>  
+                        @else 
+                            <form method="post" action="{{ route('places.favourite',$place) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-regular fa-2x fa-star"></i></button>
+                            </form>   
+                        @endif    
                         <i class="fa-regular fa-2x fa-flag"></i>                    
                     </div>
                 </div>
                 <div>
                     <p>0 likes</p>
+                    <p>{{ $place->description }}</p>
                 </div>
                 <div>
                     <table class="table">
@@ -91,7 +103,7 @@
                                     <td scope="col">{{ __('fields.longitude') }}</td>
                                     <td scope="col">{{ __('fields.visibility_id') }}</td>
                                     <td scope="col">{{ __('fields.created') }}</td>
-                                    <td scope="col">{{ __('fields.updated') }}</td>
+                                    <td scope="col">{{ __('fields.lastupd') }}</td>
                                 </tr>
                             </thead>
                             <tbody>

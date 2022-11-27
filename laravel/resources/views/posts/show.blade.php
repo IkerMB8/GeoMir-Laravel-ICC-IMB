@@ -34,8 +34,20 @@
                             <img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}'/>
                 </div>
                 <div class="funct">
-                    <div style="float: left;">
-                        <i class="fa-regular fa-2x heart fa-heart"></i>
+                    <div style="float: left;display: flex;align-items: center;">
+                        
+                        @if($control == true)
+                            <form method="post" action="{{ route('posts.unlike',$post) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-sharp fa-solid fa-heart fa-2x" style="color:red;"></i></button>
+                            </form>  
+                        @else 
+                            <form method="post" action="{{ route('posts.like',$post) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-regular fa-2x heart fa-heart"></i></button>
+                            </form>   
+                        @endif 
                         <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $post->id }}">
                             <i class="fa-regular fa-comment"></i>
                         </button>
@@ -81,7 +93,7 @@
                     </div>
                 </div>
                 <div>
-                    <p>0 likes</p>
+                    <p>{{ $likes }} likes</p>
                 </div>
                 <div>
                     <table class="table">
@@ -91,7 +103,7 @@
                                     <td scope="col">{{ __('fields.longitude') }}</td>
                                     <td scope="col">{{ __('fields.visibility_id') }}</td>
                                     <td scope="col">{{ __('fields.created') }}</td>
-                                    <td scope="col">{{ __('fields.updated') }}</td>
+                                    <td scope="col">{{ __('fields.lastupd') }}</td>
                                 </tr>
                             </thead>
                             <tbody>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\File;
+use App\Models\Like;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
 
@@ -106,10 +107,21 @@ class PostController extends Controller
     {
         //
         $file=File::find($post->file_id);
+        $contlikes = Like::where('post_id', '=', $post->id)->count();
+        $control = false;
+        try {
+            if (Like::where('user_id', '=', auth()->user()->id)->where('post_id','=', $post->id)->exists()) {
+                $control = true;
+            }
+        } catch (Exception $e) {
+            $control = false;
+        }
         return view("posts.show", [
             "post" => $post,
             "file" => $file,
             "autor" => $post->user,
+            "control" => $control,
+            "likes" => $contlikes,
         ]);
     }
 
@@ -232,5 +244,19 @@ class PostController extends Controller
             return redirect()->route('posts.show', $post)
             ->with('error', __('fpp.post-notpropertydel'));
         }
+    }
+
+    public function like(Post $post){
+        $like = Like::create([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+        ]);
+        return redirect()->route('posts.show', $post);
+    }
+
+    public function unlike(post $post){
+        Like::where('user_id',auth()->user()->id)
+                 ->where('post_id', $post->id )->delete();
+        return redirect()->route('posts.show', $post);
     }
 }

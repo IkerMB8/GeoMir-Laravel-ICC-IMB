@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Place;
+use App\Models\Favourite;
 use App\Models\File;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
@@ -113,10 +114,19 @@ class PlaceController extends Controller
     {
         //
         $file=File::find($place->file_id);
+        $control = false;
+        try {
+            if (Favourite::where('user_id', '=', auth()->user()->id)->where('place_id','=', $place->id)->exists()) {
+                $control = true;
+            }
+        } catch (Exception $e) {
+            $control = false;
+        }
         return view("places.show", [
             "place" => $place,
             "file" => $file,
             "autor" => $place->user,
+            "control" => $control,
         ]);
     }
 
@@ -243,5 +253,19 @@ class PlaceController extends Controller
             return redirect()->route('places.show', $place)
             ->with('error', __('fpp.place-notpropertydel'));
         }
+    }
+
+    public function favourite(Place $place){
+        $favourite = Favourite::create([
+            'user_id' => auth()->user()->id,
+            'place_id' => $place->id,
+        ]);
+        return redirect()->route('places.show', $place);
+    }
+
+    public function unfavourite(Place $place){
+        Favourite::where('user_id',auth()->user()->id)
+                 ->where('place_id', $place->id )->delete();
+        return redirect()->route('places.show', $place);
     }
 }

@@ -19,4 +19,9 @@ return [
    'place-notproperty' => 'ERROR, you cannot edit a place that is not yours',
    'post-notpropertydel' => 'ERROR, you cannot delete a post that is not yours',
    'post-notproperty' => 'ERROR, you cannot edit a post that is not yours',
+   'posts' => 'Posts',
+   'places' => 'Places',
+   'images' => 'Pictures',
+   'video' => 'Videos',
+   'organize' => 'Order',
 ];
