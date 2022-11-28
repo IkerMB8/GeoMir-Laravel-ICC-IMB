@@ -230,24 +230,19 @@
                 <button type="submit" id="cambiaColor5" class="boton">{{ __('fpp.organize') }}</button>
             </div>
         </div>
-        <div id="web-accessibility-menu-button" class="web-accessibility-menu-button">
+        <div id="access" class="web-accessibility-menu-button">
             <i class="fas fa-wheelchair silla"></i>
             <span class="accessibility-text">Accessibility</span>
         </div>
-        <ul id="list-web-accessibility" class="list-group list-web-accessibility" style="display: flex;">
+        <ul id="list-access" class="list-group list-web-accessibility activeAccess" style="display: flex;">
             <li class="list-group-item web-accessibility-item ">
                 <div class="d-inline mr-3">Tt </div>
-                <div class="d-inline web-accessibility-item-font font-size-16 ml-2" data-type="font-size" data-value="16">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-16 ml-2" data-type="font-size" data-value="16"><button onclick="cambiarclase()">A</button></div>
                 <div class="d-inline web-accessibility-item-font font-size-18 ml-1" data-type="font-size" data-value="18">A</div>
                 <div class="d-inline web-accessibility-item-font font-size-20 ml-1" data-type="font-size" data-value="20">A</div>
                 <div class="d-inline web-accessibility-item-font font-size-22 ml-1" data-type="font-size" data-value="22">A</div>
                 <div class="d-inline web-accessibility-item-font font-size-24 ml-1" data-type="font-size" data-value="24">A</div>
                 <div class="d-inline web-accessibility-item-font font-size-26 ml-1" data-type="font-size" data-value="26">A</div>
-            </li>
-
-            <li class="list-group-item web-accessibility-item web-accessibility-item  web-accessibility-item-direct " data-type="close">
-                <div class="d-inline mr-3"><i class="fas fa-times"></i></div>
-                <div class="d-inline ml-2">Close</div>
             </li>
             <li class="list-group-item web-accessibility-item  web-accessibility-item-direct" data-type="reset">
                 <div class="d-inline mr-3"><i class="fas fa-undo"></i></div>
@@ -257,6 +252,31 @@
         <main>
             @yield('content')
         </main>
+        <footer>
+            <div class="footer">
+                <a href="{{ url('/') }}"><i class="fa-solid fa-2x fa-house"></i></a>
+                <form class="d-flex" role="search">
+                    <i class="fa-solid fa-2x fa-magnifying-glass"></i>
+                </form>
+                @hasanyrole('admin|author')
+                <div class="logreg">
+                    @if (Route::has('login'))
+                    <a href="/posts/create"><i class="fa-solid fa-plus fa-2x"></i></a>
+                    @endif
+                </div>
+                <i class="fa-regular msg fa-2x fa-message"></i>
+                <i class="fa-solid fa-sliders fa-2x"></i>
+                @endhasanyrole
+            </div>
+        </footer>
     </div>
 </body>
+<script>
+    const cambiarClase = document.querySelector('#access'),
+        menu = document.querySelector('#list-access');
+
+    cambiarClase.addEventListener('click', (e) => {
+        menu.classList.toggle('activeAccess');
+    });
+</script>
 </html>
