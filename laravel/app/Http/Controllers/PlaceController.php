@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use App\Models\Favourite;
+use App\Models\LikeP;
 use App\Models\File;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
@@ -115,6 +116,16 @@ class PlaceController extends Controller
         //
         $file=File::find($place->file_id);
         $control = false;
+        $contlikes = LikeP::where('place_id', '=', $place->id)->count();
+        $contfav = Favourite::where('place_id', '=', $place->id)->count();
+        $controllikes = false;
+        try {
+            if (LikeP::where('user_id', '=', auth()->user()->id)->where('place_id','=', $place->id)->exists()) {
+                $controllikes = true;
+            }
+        } catch (Exception $e) {
+            $controllikes = false;
+        }
         try {
             if (Favourite::where('user_id', '=', auth()->user()->id)->where('place_id','=', $place->id)->exists()) {
                 $control = true;
@@ -127,6 +138,9 @@ class PlaceController extends Controller
             "file" => $file,
             "autor" => $place->user,
             "control" => $control,
+            "controllikes" => $controllikes,
+            "likes" => $contlikes,
+            "favourites" => $contfav,
         ]);
     }
 
@@ -265,6 +279,20 @@ class PlaceController extends Controller
 
     public function unfavourite(Place $place){
         Favourite::where('user_id',auth()->user()->id)
+                 ->where('place_id', $place->id )->delete();
+        return redirect()->route('places.show', $place);
+    }
+
+    public function like(Place $place){
+        $like = LikeP::create([
+            'user_id' => auth()->user()->id,
+            'place_id' => $place->id,
+        ]);
+        return redirect()->route('places.show', $place);
+    }
+
+    public function unlike(Place $place){
+        LikeP::where('user_id',auth()->user()->id)
                  ->where('place_id', $place->id )->delete();
         return redirect()->route('places.show', $place);
     }

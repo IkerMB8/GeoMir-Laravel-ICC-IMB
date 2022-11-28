@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\File;
 use App\Models\Like;
+use App\Models\FavouriteP;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
 
@@ -108,6 +109,7 @@ class PostController extends Controller
         //
         $file=File::find($post->file_id);
         $contlikes = Like::where('post_id', '=', $post->id)->count();
+        $contfav = FavouriteP::where('post_id', '=', $post->id)->count();
         $control = false;
         try {
             if (Like::where('user_id', '=', auth()->user()->id)->where('post_id','=', $post->id)->exists()) {
@@ -116,12 +118,22 @@ class PostController extends Controller
         } catch (Exception $e) {
             $control = false;
         }
+        $controlfav = false;
+        try {
+            if (FavouriteP::where('user_id', '=', auth()->user()->id)->where('post_id','=', $post->id)->exists()) {
+                $controlfav = true;
+            }
+        } catch (Exception $e) {
+            $controlfav = false;
+        }
         return view("posts.show", [
             "post" => $post,
             "file" => $file,
             "autor" => $post->user,
             "control" => $control,
             "likes" => $contlikes,
+            "controlfav" => $controlfav,
+            "favourites" => $contfav,
         ]);
     }
 
@@ -256,6 +268,20 @@ class PostController extends Controller
 
     public function unlike(post $post){
         Like::where('user_id',auth()->user()->id)
+                 ->where('post_id', $post->id )->delete();
+        return redirect()->route('posts.show', $post);
+    }
+
+    public function favourite(Post $post){
+        $favourite = FavouriteP::create([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+        ]);
+        return redirect()->route('posts.show', $post);
+    }
+
+    public function unfavourite(Post $post){
+        FavouriteP::where('user_id',auth()->user()->id)
                  ->where('post_id', $post->id )->delete();
         return redirect()->route('posts.show', $post);
     }

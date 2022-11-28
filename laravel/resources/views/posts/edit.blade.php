@@ -58,7 +58,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="pautid">{{ __('fields.autor') }}</label>
+                                        <label for="pautid">{{ __('fields.author') }}</label>
                                         <input type="text" id="pautid" name="pautid" value="{{ $autor->name }}" readonly>
                                     </td>
                                 </tr>

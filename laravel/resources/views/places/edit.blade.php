@@ -5,7 +5,7 @@
        <div class="col-md-8">
            <div class="card">
                <div class="card-header">ID {{ $place->id }}</div>
-               <div class="card-body" style="display: grid;justify-content: center;align-items:center;">
+               <div class="card-body navfiltros">
                     <img class="img-fluid" src='{{ asset("storage/{$file->filepath}") }}' style="display: block;margin: auto;" />
                     <form method="post" action="{{ route('places.update',$place) }}" enctype="multipart/form-data">
                         @csrf

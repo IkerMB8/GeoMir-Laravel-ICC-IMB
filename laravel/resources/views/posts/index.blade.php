@@ -54,7 +54,7 @@
                                         @endforeach  
                                     </div>
                                 </div>
-                                <div name="derecha" style="width: 100%;">
+                                <div class="derecha">
                                     <div class="modal-header">
                                         <img src="/img/defaultuser.jpg" class="commentprofimg"></img>
                                         <h5 class="modal-title commentprofname" id="staticBackdropLabel">@ {{ $post->user->name }}</h5>
@@ -63,14 +63,14 @@
                                     <hr>
                                     <div class="derechader">
                                         <div></div>
-                                        <div class="modal-footer" style="margin-left:10px; border: 2px solid black;background-color: white;border-radius: 25px; display:flex; justify-content: space-between; ">
+                                        <div class="modal-footer comentario">
                                             <div style="float:left;">
                                                 <form>
                                                     <input style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
                                                 </form>
                                             </div>
                                             <div style="float:right;">
-                                                <button type="button" style="padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
+                                                <button type="button" class="botonpub">Publicar</button>
                                             </div>         
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div>
-                <p>0 likes</p>
+                <!-- <p>0 likes</p> -->
             </div>
             <div>
                 <p>{{ $post->body }}</p>

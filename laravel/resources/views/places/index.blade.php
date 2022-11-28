@@ -34,48 +34,47 @@
                 <div>
                     @foreach ($files as $file)
                         @if($file->id == $place->file_id)
-                            <a href="{{ route('places.show',$place) }}"><img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}'/></a>
+                            <a href="{{ route('places.show',$place) }}"><img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/></a>
                         @endif
                     @endforeach   
                 </div>
                 <div class="funct">
                     <div style="float: left;">
                         <i class="fa-regular fa-2x heart fa-heart"></i>
-                        <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $place->id }}">
+                        <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#place{{ $place->id }}">
                             <i class="fa-regular fa-comment"></i>
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop{{ $place->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" style="display:flex; justify-content: center;">
-                            <div class="modal-content" style="display:flex; flex-direction:row; background-color: #1a1830; padding: 15px;">
-                                <div name="izquierda" style="margin-right:0; padding-left:5px; padding-top:5px;">
-                                    <div class="modal-body" style="padding:0px">
-                                        @foreach ($files as $file)
-                                            @if($file->id == $place->file_id)
-                                                <img src='{{ asset("storage/{$file->filepath}") }}' width="800px" height="700px" style="border:2px solid black; border-radius: 25px;"></img>
-                                            @endif
-                                        @endforeach  
+                        <div class="modal fade" id="place{{ $place->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered logreg">
+                                <div class="modal-content modalcntnt">
+                                    <div class="commentizq">
+                                        <div class="modal-body">
+                                            @foreach ($files as $file)
+                                                @if($file->id == $place->file_id)
+                                                    <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>
+                                                @endif
+                                            @endforeach  
+                                        </div>
                                     </div>
-                                </div>
-                                <div name="derecha" style="width: 100%; margin-right: 10px;">
-                                    <div class="modal-header">
-                                        <img src="/img/defaultuser.jpg" width="50px" height="50px" style="border-radius: 190px; border: 1px solid white;"></img>
-                                        <h5 class="modal-title" id="staticBackdropLabel" style="color: white; margin-left:5px">@ {{ $place->user->name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white; opacity:100%;"></button>
-                                    </div>
-                                    <hr style="width: 100%; height: 5px; background-color: black; margin:0;">
-                                    <div style="height: 620px; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <div style="height:300px"></div>
-                                            <div class="modal-footer" style="margin-left:10px; border: 2px solid black;background-color: white;border-radius: 25px; display:flex; justify-content: space-between; ">
+                                    <div class="derecha">
+                                        <div class="modal-header">
+                                            <img src="/img/defaultuser.jpg" class="commentprofimg"></img>
+                                            <h5 class="modal-title commentprofname" id="staticBackdropLabel">@ {{ $place->user->name }}</h5>
+                                            <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <hr>
+                                        <div class="derechader">
+                                            <div></div>
+                                            <div class="modal-footer comentario">
                                                 <div style="float:left;">
                                                     <form>
                                                         <input style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
                                                     </form>
                                                 </div>
                                                 <div style="float:right;">
-                                                    <button type="button" style="padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
-                                                </div>
-            
+                                                    <button type="button" class="botonpub">Publicar</button>
+                                                </div>         
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +89,7 @@
                     </div>
                 </div>
                 <div>
-                    <p>0 likes</p>
+                    <!-- <p>0 likes</p> -->
                     <p>{{ $place->description }}</p>
                 </div>
                 <div class="review">
