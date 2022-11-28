@@ -741,10 +741,6 @@ body.font-size-16{
     transform: translate(-600px);
 }
 
-.inactiveAccess{
-    transform: translate(-600px);
-}
-
 @media (max-width: 768px) {
     .navfiltros{
         display: none;
@@ -841,4 +837,15 @@ body.font-size-16{
 }
 .funct a, .funct a:hover{
     color: black;
+}
+
+.divSlider{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: #1A1830;
+    position: fixed;
+    bottom: 80px;
+    width: 30%;
+    right: 0px;
 }

@@ -268,7 +268,21 @@
                     @endif
                 </div>
                 <i class="fa-regular msg fa-2x fa-message"></i>
-                <i class="fa-solid fa-sliders fa-2x"></i>
+                
+                <i class="fa-solid fa-sliders fa-2x" id="slider"></i>
+                
+                <ul id="list-slider" class="list-group list-web-accessibility activeAccess" style="display: flex;">
+                <div class="divSlider">
+                    <a href="{{ url('/posts') }}"><button class="boton">{{ __('fpp.posts') }}</button></a>
+                    <a href="{{ url('/places') }}"><button style="width: 86%;" class="boton">{{ __('fpp.places') }}</button></a>
+                    <button type="submit" class="boton">{{ __('fpp.images') }}</button>
+                    <button type="submit" class="boton">{{ __('fpp.video') }}</button>
+                    <button type="submit" class="boton">{{ __('fpp.organize') }}</button>
+                    @hasanyrole('admin|editor')
+                        <a href="{{ url('/files ') }}"><button  class="boton" >{{ __('Files') }}</button></a>
+                    @endhasanyrole
+                </div>
+                </ul>
                 @endhasanyrole
             </div>
         </footer>
@@ -280,6 +294,13 @@
 
     cambiarClase.addEventListener('click', (e) => {
         menu.classList.toggle('activeAccess');
+    });
+
+    const cambiarClase2 = document.querySelector('#slider'),
+        menu2 = document.querySelector('#list-slider');
+
+    cambiarClase2.addEventListener('click', (e) => {
+        menu2.classList.toggle('activeAccess');
     });
 </script>
 </html>
