@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div>
-                        <h5>{{ $post->name }}</h5>
+                        <h5>{{ $post->body }}</h5>
                     </div>
                 </div>
                 <div>
@@ -128,7 +128,7 @@
                                 <tr>
                                     <td>{{ $post->latitude }}</td>
                                     <td>{{ $post->longitude }}</td>
-                                    <td>{{ $post->visibility_id }}</td>
+                                    <td>{{ $visibility->name }}</td>
                                     <td>{{ $post->created_at }}</td>
                                     <td>{{ $post->updated_at }}</td>
                                 </tr>

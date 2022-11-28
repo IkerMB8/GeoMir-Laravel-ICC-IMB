@@ -27,6 +27,10 @@
                         </div>
                     </div>
                 </div>
+                
+                <div>
+                    <h5>{{ $post->body }}</h5>
+                </div>
             </div>
             <div>
                 @foreach ($files as $file)
@@ -88,10 +92,9 @@
             <div>
                 <!-- <p>0 likes</p> -->
             </div>
-            <div>
-                <p>{{ $post->body }}</p>
-            </div>
         </div>
+        
+        <br><br><br>
     @endforeach
 </div>
     @vite('resources/js/bootstrap.js')

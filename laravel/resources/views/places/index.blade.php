@@ -101,6 +101,8 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <br>
         @endforeach
     </div>
         @vite('resources/js/bootstrap.js')

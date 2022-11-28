@@ -1,28 +1,24 @@
 @extends('layouts.app')
 @section('content')
-    <div class="posts">
-            <div class="post">
-                <div class="topp">
-                    <div class="cajatopp">
-                        <div class="perf">
-                            <img src="/img/defaultuser.jpg"><p>@ {{ $place->user->name }}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h5>{{ $place->name }}</h5>
-                    </div>
-                </div>
-                <div>
-                    <img id="imgprev" class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/>
-                </div>
-                
-                <div>
+<div class="container">
+   <div class="row justify-content-center">
+       <div class="col-md-8">
+           <div class="card">
+               <div class="card-header">ID {{ $place->id }}</div>
+               <div class="card-body navfiltros">
+                    <img class="img-fluid" src='{{ asset("storage/{$file->filepath}") }}' style="display: block;margin: auto;" />
                     <form method="post" action="{{ route('places.update',$place) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
     
                         <table class="table" >
                             <tbody>
+                                <tr>
+                                        <td>
+                                            <label for="pid">ID</label>
+                                            <input type="text" id="pid" name="pid" value="{{ $place->id }}" readonly>
+                                        </td>
+                                </tr>
                                 <tr>
                                         <td>
                                             <label for="pname">{{ __('fields.name') }}</label>
@@ -37,8 +33,8 @@
                                 </tr>
                                 <tr>
                                         <td>
-                                            <label for="pupload">{{ __('fields.file') }}</label>
-                                            <input type="file" id="pupload" name="pupload" value="{{ $file->filepath }}">
+                                            <label for="upload">{{ __('fields.file') }}</label>
+                                            <input type="file" id="upload" name="upload" value="{{ $file->filepath }}">
                                         </td>
                                 </tr>
                                 <tr>
@@ -76,6 +72,12 @@
                                 </tr>
                                 <tr>
                                         <td>
+                                            <label for="pautid">{{ __('fields.author_id') }}</label>
+                                            <input type="text" id="pautid" name="pautid" value="{{ $autor->name }}" readonly>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
                                             <label for="pcreat">{{ __('fields.created') }}</label>
                                             <input type="text" id="pcreat" name="pcreat" value="{{ $place->created_at }}" readonly>
                                         </td>
@@ -93,24 +95,9 @@
                             <a href="{{ route('places.show',$place) }}" class="btn btn-secondary" style="margin:5px;">{{ __('fields.goback') }}</a>
                         </div>    
                     </form>
-                </div>
-            </div>
-    </div>
-    <script>
-        const $archivo = document.querySelector("#pupload");
-        const $imgprev = document.querySelector("#imgprev");
-        $archivo.addEventListener("change", () => {
-        const archivos = $archivo.files;
-        if (!archivos || !archivos.length) {
-            $imgprev.src = "";
-            return;
-        }
-        const primerArchivo = archivos[0];
-        const objectURL = URL.createObjectURL(primerArchivo);
-        $imgprev.src = objectURL;
-        });
-    </script>
-    
-    @vite('resources/js/bootstrap.js')
-
-    @endsection
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+@endsection

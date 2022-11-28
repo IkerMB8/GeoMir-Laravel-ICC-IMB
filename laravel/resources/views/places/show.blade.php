@@ -129,7 +129,7 @@
                                 <tr>
                                     <td>{{ $place->latitude }}</td>
                                     <td>{{ $place->longitude }}</td>
-                                    <td>{{ $place->visibility_id }}</td>
+                                    <td>{{ $visibility->name }}</td>
                                     <td>{{ $place->created_at }}</td>
                                     <td>{{ $place->updated_at }}</td>
                                 </tr>

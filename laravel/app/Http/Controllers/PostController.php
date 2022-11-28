@@ -107,6 +107,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        $visibility=Visibility::find($post->visibility_id);
         $file=File::find($post->file_id);
         $contlikes = Like::where('post_id', '=', $post->id)->count();
         $contfav = FavouriteP::where('post_id', '=', $post->id)->count();
@@ -134,6 +135,7 @@ class PostController extends Controller
             "likes" => $contlikes,
             "controlfav" => $controlfav,
             "favourites" => $contfav,
+            "visibility" => $visibility,
         ]);
     }
 

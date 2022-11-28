@@ -114,6 +114,7 @@ class PlaceController extends Controller
     public function show(Place $place)
     {
         //
+        $visibility=Visibility::find($place->visibility_id);
         $file=File::find($place->file_id);
         $control = false;
         $contlikes = LikeP::where('place_id', '=', $place->id)->count();
@@ -141,6 +142,7 @@ class PlaceController extends Controller
             "controllikes" => $controllikes,
             "likes" => $contlikes,
             "favourites" => $contfav,
+            "visibility" => $visibility,
         ]);
     }
 
