@@ -87,6 +87,7 @@
                 </div>
             </div>
         </div>
+        
         @vite('resources/js/bootstrap.js')
 
     @endsection
