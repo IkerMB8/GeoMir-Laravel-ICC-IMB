@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div>
-                    <img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}'/>
+                    <img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/>
                 </div>
                 <div class="funct">
                     <div class="functizq">
@@ -108,7 +108,7 @@
                         <p>{{ $likes }} likes</p>
                     @endif
                     @if($favourites == 1)
-                        <p>{{ $favourites }} favs</p>
+                        <p>{{ $favourites }} fav</p>
                     @else
                         <p>{{ $favourites }} favs</p>
                     @endif
@@ -117,18 +117,24 @@
                     <table class="table">
                             <thead>
                                 <tr>
-                                    <td scope="col">{{ __('fields.latitude') }}</td>
-                                    <td scope="col">{{ __('fields.longitude') }}</td>
-                                    <td scope="col">{{ __('fields.visibility_id') }}</td>
+                                    <td scope="col">{{ __('fields.visibility') }}:</td>
+                                    <td>{{ $visibility->name }}</td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">{{ __('fields.latitude') }}:</td>
+                                    <td>{{ $post->latitude }}</td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">{{ __('fields.longitude') }}:</td>
+                                    <td>{{ $post->longitude }}</td>
+                                </tr>
+                                <tr>
                                     <td scope="col">{{ __('fields.created') }}</td>
                                     <td scope="col">{{ __('fields.lastupd') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ $post->latitude }}</td>
-                                    <td>{{ $post->longitude }}</td>
-                                    <td>{{ $visibility->name }}</td>
                                     <td>{{ $post->created_at }}</td>
                                     <td>{{ $post->updated_at }}</td>
                                 </tr>

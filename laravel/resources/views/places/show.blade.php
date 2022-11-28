@@ -108,7 +108,7 @@
                         <p>{{ $likes }} likes</p>
                     @endif
                     @if($favourites == 1)
-                        <p>{{ $favourites }} favs</p>
+                        <p>{{ $favourites }} fav</p>
                     @else
                         <p>{{ $favourites }} favs</p>
                     @endif
@@ -116,24 +116,25 @@
                 </div>
                 <div>
                     <table class="table">
-                            <thead>
                                 <tr>
-                                    <td scope="col">{{ __('fields.latitude') }}</td>
-                                    <td scope="col">{{ __('fields.longitude') }}</td>
-                                    <td scope="col">{{ __('fields.visibility_id') }}</td>
-                                    <td scope="col">{{ __('fields.created') }}</td>
-                                    <td scope="col">{{ __('fields.lastupd') }}</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $place->latitude }}</td>
-                                    <td>{{ $place->longitude }}</td>
+                                    <td scope="col">{{ __('fields.visibility') }}:</td>
                                     <td>{{ $visibility->name }}</td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">{{ __('fields.latitude') }}:</td>
+                                    <td>{{ $place->latitude }}</td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">{{ __('fields.longitude') }}:</td>
+                                    <td>{{ $place->longitude }}</td>
+                                </tr>
+                                    <td scope="col">{{ __('fields.created') }}:</td>
                                     <td>{{ $place->created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">{{ __('fields.lastupd') }}:</td>
                                     <td>{{ $place->updated_at }}</td>
                                 </tr>
-                            </tbody>
                         </table>
                     <div class="navfiltros">
                         <a href="/places" class="btn btn-secondary">{{ __('fields.goback') }}</a>

@@ -38,13 +38,13 @@ Route::get('/dashboard', function (){
 // })->middleware(['auth'])->name('dashboard');
 
 Route::resource('files', FileController::class)
-    ->middleware(['auth', 'permission:files']);
+    ->middleware(['auth']);
 
 Route::resource('places', PlaceController::class)
-    ->middleware(['auth', 'permission:places']);
+    ->middleware(['auth']);
 
 Route::resource('posts', PostController::class)
-    ->middleware(['auth', 'permission:posts']);
+    ->middleware(['auth']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

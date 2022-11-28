@@ -40,7 +40,7 @@
                 </div>
                 <div class="funct">
                     <div style="float: left;">
-                        <i class="fa-regular fa-2x heart fa-heart"></i>
+                        <a href="{{ route('places.show',$place) }}"><i class="fa-regular fa-2x heart fa-heart"></i></a>
                         <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#place{{ $place->id }}">
                             <i class="fa-regular fa-comment"></i>
                         </button>
@@ -84,7 +84,7 @@
                         <i class="fa-solid fa-2x comment fa-share-from-square"></i>
                     </div>
                     <div style="float: right; margin-top:10px;">
-                        <i class="fa-regular fa-2x fa-star"></i>
+                        <a href="{{ route('places.show',$place) }}"><i class="fa-regular fa-2x fa-star"></i></a>
                         <i class="fa-regular fa-2x fa-flag"></i>                    
                     </div>
                 </div>

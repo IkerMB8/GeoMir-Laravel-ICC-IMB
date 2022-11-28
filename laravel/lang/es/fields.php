@@ -6,6 +6,7 @@ return [
    'latitude' => 'Latitud',
    'longitude' => 'Longitud',
    'visibility_id' => 'ID Visibilidad',
+   'visibility' => 'Visibilidad',
    'author_id' => 'ID Autor',
    'name' => 'Nombre',
    'description' => 'Descripción',

@@ -228,6 +228,9 @@
                 <button type="submit" id="cambiaColor3" class="boton">{{ __('fpp.images') }}</button>
                 <button type="submit" id="cambiaColor4" class="boton">{{ __('fpp.video') }}</button>
                 <button type="submit" id="cambiaColor5" class="boton">{{ __('fpp.organize') }}</button>
+                @hasanyrole('admin|editor')
+                    <a href="{{ url('/files ') }}"><button  class="boton" >{{ __('Files') }}</button></a>
+                @endhasanyrole
             </div>
         </div>
         <div id="access" class="web-accessibility-menu-button">
