@@ -787,8 +787,17 @@ body.font-size-16{
 }
 .functizq{
     float: left;
-    display: flex;
     align-items: center;
+    display: flex;
+}
+.functder{
+    float: right;
+    align-items: center;
+    display: flex;
+    margin-top:10px;
+}
+.fa-comment{
+    margin-right:10px !important;
 }
 .botonfun{
     border: none !important;

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use App\Models\Favourite;
-use App\Models\LikeP;
 use App\Models\File;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
@@ -29,9 +28,9 @@ class PlaceController extends Controller
     public function index()
     {
         //
+        $places = Place::withCount('favourites')->get();
         return view("places.index", [
-            "places" => Place::all(),
-            "files" => File::all()
+            "places" => $places,
         ]);
     }
 
@@ -123,34 +122,12 @@ class PlaceController extends Controller
     public function show(Place $place)
     {
         //
+        $place->loadCount('favourites');
         $visibility=Visibility::find($place->visibility_id);
-        $file=File::find($place->file_id);
-        $control = false;
-        $contlikes = LikeP::where('place_id', '=', $place->id)->count();
-        $contfav = Favourite::where('place_id', '=', $place->id)->count();
-        $controllikes = false;
-        try {
-            if (LikeP::where('user_id', '=', auth()->user()->id)->where('place_id','=', $place->id)->exists()) {
-                $controllikes = true;
-            }
-        } catch (Exception $e) {
-            $controllikes = false;
-        }
-        try {
-            if (Favourite::where('user_id', '=', auth()->user()->id)->where('place_id','=', $place->id)->exists()) {
-                $control = true;
-            }
-        } catch (Exception $e) {
-            $control = false;
-        }
         return view("places.show", [
             "place" => $place,
-            "file" => $file,
             "autor" => $place->user,
-            "control" => $control,
-            "controllikes" => $controllikes,
-            "likes" => $contlikes,
-            "favourites" => $contfav,
+            "favourites" => $place->favourites_count,
             "visibility" => $visibility,
         ]);
     }
@@ -165,10 +142,9 @@ class PlaceController extends Controller
     {
         //
         if ($place->user->id == auth()->user()->id){
-            $file=File::find($place->file_id);
+
             return view("places.edit", [
                 "place" => $place,
-                "file" => $file,
                 "autor" => $place->user,
                 "visibilities" => Visibility::all(),
             ]);
@@ -194,7 +170,7 @@ class PlaceController extends Controller
             'pupload' => 'mimes:gif,jpeg,jpg,png|max:1024'
         ]);
         if ($place->user->id == auth()->user()->id){
-            $file=File::find($place->file_id);  
+            $file=$place->file;  
             // Obtenir dades del fitxer
             $upload = $request->file('pupload');
             $controlNull= FALSE;
@@ -262,8 +238,8 @@ class PlaceController extends Controller
     public function destroy(Place $place)
     {
         //
-        if ($place->user->id == auth()->user()->id){
-            $file=File::find($place->file_id);    
+        if ($place->user->id == auth()->user()->id || auth()->user()->hasRole(['admin'])){
+            $file = $place->file;
             \Storage::disk('public')->delete($file->filepath);
             if (\Storage::disk('public')->exists($file->filepath)) {
                 return redirect()->route('places.show', $place)
@@ -285,25 +261,11 @@ class PlaceController extends Controller
             'user_id' => auth()->user()->id,
             'place_id' => $place->id,
         ]);
-        return redirect()->route('places.show', $place);
+        return redirect()->back();
     }
 
     public function unfavourite(Place $place){
         Favourite::where('user_id',auth()->user()->id)
-                 ->where('place_id', $place->id )->delete();
-        return redirect()->route('places.show', $place);
-    }
-
-    public function like(Place $place){
-        $like = LikeP::create([
-            'user_id' => auth()->user()->id,
-            'place_id' => $place->id,
-        ]);
-        return redirect()->route('places.show', $place);
-    }
-
-    public function unlike(Place $place){
-        LikeP::where('user_id',auth()->user()->id)
                  ->where('place_id', $place->id )->delete();
         return redirect()->route('places.show', $place);
     }

@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div>
-                    <img id="imgprev" class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/>
+                    <img id="imgprev" class="imgpub" src='{{ asset("storage/{$post->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/>
                 </div>
                 
                 <div>
@@ -31,7 +31,7 @@
                             <tr>
                                 <td>
                                     <label for="pupload">{{ __('fields.file') }}</label>
-                                    <input type="file" id="pupload" name="pupload" value="{{ $file->filepath }}">
+                                    <input type="file" id="pupload" name="pupload" value="{{ $post->file->filepath }}">
                                 </td>
                             </tr>
                             <tr>

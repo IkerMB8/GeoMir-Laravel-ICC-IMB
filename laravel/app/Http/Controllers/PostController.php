@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\File;
 use App\Models\Like;
-use App\Models\FavouriteP;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
 
@@ -28,9 +27,9 @@ class PostController extends Controller
     public function index()
     {
         //
+        $posts = Post::withCount('likes')->get();
         return view("posts.index", [
-            "posts" => Post::all(),
-            "files" => File::all()
+            "posts" => $posts,
         ]);
     }
 
@@ -57,11 +56,11 @@ class PostController extends Controller
     {
         // Validar fitxer
         $validatedData = $request->validate([
-            'pbody' => 'required',
-            'platitude' => 'required|numeric',
-            'plongitude' => 'required|numeric',
+            'pbody'          => 'required',
+            'platitude'      => 'required|numeric',
+            'plongitude'     => 'required|numeric',
             'pvisibility_id' => 'required|numeric',
-            'pupload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
+            'pupload'        => 'required|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
     
         // Obtenir dades del fitxer
@@ -117,33 +116,13 @@ class PostController extends Controller
     {
         //
         $visibility=Visibility::find($post->visibility_id);
-        $file=File::find($post->file_id);
-        $contlikes = Like::where('post_id', '=', $post->id)->count();
-        $contfav = FavouriteP::where('post_id', '=', $post->id)->count();
-        $control = false;
-        try {
-            if (Like::where('user_id', '=', auth()->user()->id)->where('post_id','=', $post->id)->exists()) {
-                $control = true;
-            }
-        } catch (Exception $e) {
-            $control = false;
-        }
-        $controlfav = false;
-        try {
-            if (FavouriteP::where('user_id', '=', auth()->user()->id)->where('post_id','=', $post->id)->exists()) {
-                $controlfav = true;
-            }
-        } catch (Exception $e) {
-            $controlfav = false;
-        }
+        $post->loadCount('likes');
+
         return view("posts.show", [
             "post" => $post,
-            "file" => $file,
+            "file" => $post->file,
             "autor" => $post->user,
-            "control" => $control,
-            "likes" => $contlikes,
-            "controlfav" => $controlfav,
-            "favourites" => $contfav,
+            "likes" => $post->likes_count,
             "visibility" => $visibility,
         ]);
     }
@@ -251,7 +230,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
-        if ($post->user->id == auth()->user()->id){
+        if ($post->user->id == auth()->user()->id || auth()->user()->hasRole(['admin'])){
             $file=File::find($post->file_id);   
             \Storage::disk('public')->delete($file->filepath);  
             if (\Storage::disk('public')->exists($file->filepath)) {
@@ -274,26 +253,12 @@ class PostController extends Controller
             'user_id' => auth()->user()->id,
             'post_id' => $post->id,
         ]);
-        return redirect()->route('posts.show', $post);
+        return redirect()->back();
     }
 
     public function unlike(post $post){
         Like::where('user_id',auth()->user()->id)
-                 ->where('post_id', $post->id )->delete();
-        return redirect()->route('posts.show', $post);
-    }
-
-    public function favourite(Post $post){
-        $favourite = FavouriteP::create([
-            'user_id' => auth()->user()->id,
-            'post_id' => $post->id,
-        ]);
-        return redirect()->route('posts.show', $post);
-    }
-
-    public function unfavourite(Post $post){
-        FavouriteP::where('user_id',auth()->user()->id)
-                 ->where('post_id', $post->id )->delete();
-        return redirect()->route('posts.show', $post);
+            ->where('post_id', $post->id )->delete();
+        return redirect()->back();
     }
 }

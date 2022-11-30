@@ -33,15 +33,11 @@
                 </div>
             </div>
             <div>
-                @foreach ($files as $file)
-                    @if($file->id == $post->file_id)
-                        <a href="{{ route('posts.show',$post) }}"><img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/></a>
-                    @endif
-                @endforeach   
+                <a href="{{ route('posts.show',$post) }}"><img class="imgpub" src='{{ asset("storage/{$post->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/></a>
             </div>
             <div class="funct">
-                <div style="float: left;">
-                    <a href="{{ route('posts.show',$post) }}"><i class="fa-regular fa-2x heart fa-heart"></i></a>
+                <div class="functizq">
+                    @include('partials.buttons-likes')
                     <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#post{{ $post->id }}">
                         <i class="fa-regular fa-comment"></i>
                     </button>
@@ -51,11 +47,7 @@
                             <div class="modal-content modalcntnt">
                                 <div class="commentizq">
                                     <div class="modal-body">
-                                        @foreach ($files as $file)
-                                            @if($file->id == $post->file_id)
-                                                <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>
-                                            @endif
-                                        @endforeach  
+                                        <img class="commentimg" src='{{ asset("storage/{$post->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>
                                     </div>
                                 </div>
                                 <div class="derecha">
@@ -85,12 +77,15 @@
                     <i class="fa-solid fa-2x comment fa-share-from-square"></i>
                 </div>
                 <div style="float: right; margin-top:10px;">
-                    <a href="{{ route('posts.show',$post) }}"><i class="fa-regular fa-2x fa-star"></i></a>
                     <i class="fa-regular fa-2x fa-flag"></i>                    
                 </div>
             </div>
             <div>
-                <!-- <p>0 likes</p> -->
+                @if($post->likes_count == 1)
+                    <p>{{ $post->likes_count }} like</p>
+                @else
+                    <p>{{ $post->likes_count }} likes</p>
+                @endif
             </div>
         </div>
         

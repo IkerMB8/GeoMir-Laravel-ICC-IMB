@@ -34,12 +34,32 @@ class Place extends Model
     {
         return $this->belongsTo(User::class);
     } 
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
     
     public function favorited()
     {
         return $this->belongsToMany(User::class, 'favorites');
     }
     
- 
+    public function favoritedByUser(User $user)
+    {
+        $count = Favourite::where([
+            ['user_id',  '=', auth()->user()->id],
+            ['place_id', '=', $this->id],
+        ])->count();
+
+        return $count > 0;
+    }
+
+    public function favoritedByAuthUser()
+    {
+        $user = auth()->user();
+        return $this->favoritedByUser($user);
+    }
+    
 
 }

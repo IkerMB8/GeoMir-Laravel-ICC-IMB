@@ -31,22 +31,11 @@
                     </div>
                 </div>
                 <div>
-                    <img class="imgpub" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/>
+                    <img class="imgpub" src='{{ asset("storage/{$place->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/>
                 </div>
                 <div class="funct">
-                    <div style="float: left;display: flex;align-items: center;">
-                        @if($controllikes == true)
-                            <form method="post" action="{{ route('places.unlike',$place) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-sharp fa-solid fa-heart fa-2x like"></i></button>
-                            </form>  
-                        @else 
-                            <form method="post" action="{{ route('places.like',$place) }}" enctype="multipart/form-data">
-                                @csrf
-                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-regular fa-2x heart fa-heart"></i></button>
-                            </form>   
-                        @endif 
+                    <div class="functizq">
+                        @include('partials.buttons-favourites')
                         <button type="button" class="comments" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $place->id }}">
                             <i class="fa-regular fa-comment"></i>
                         </button>
@@ -56,7 +45,7 @@
                                 <div class="modal-content modalcntnt">
                                     <div class="commentizq">
                                         <div class="modal-body">
-                                            <img class="commentimg" src='{{ asset("storage/{$file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>  
+                                            <img class="commentimg" src='{{ asset("storage/{$place->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>  
                                         </div>
                                     </div>
                                     <div class="derecha">
@@ -85,28 +74,11 @@
                         </div>
                         <i class="fa-solid fa-2x comment fa-share-from-square"></i>
                     </div>
-                    <div style="float: right; margin-top:10px;display:flex;">
-                        @if($control == true)
-                            <form method="post" action="{{ route('places.unfavourite',$place) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-sharp fa-solid fa-star fa-2x fav"></i></button>
-                            </form>  
-                        @else 
-                            <form method="post" action="{{ route('places.favourite',$place) }}" enctype="multipart/form-data">
-                                @csrf
-                                <button type="submit" style="border: none;background-color: transparent;"><i class="fa-regular fa-2x fa-star"></i></button>
-                            </form>   
-                        @endif    
+                    <div class="functder">   
                         <i class="fa-regular fa-2x fa-flag"></i>                    
                     </div>
                 </div>
                 <div>
-                    @if($likes == 1)
-                        <p>{{ $likes }} like</p>
-                    @else
-                        <p>{{ $likes }} likes</p>
-                    @endif
                     @if($favourites == 1)
                         <p>{{ $favourites }} fav</p>
                     @else
