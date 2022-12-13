@@ -30,15 +30,17 @@
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
-                <a href="/sobrenosotros"><i class="fa-regular fa-address-card"></i></a>
-                @hasanyrole('admin|author')
-                <i class="fa-regular msg fa-2x fa-message"></i>
-                <div class="logreg">
-                    @if (Route::has('login'))
-                    <a href="/posts/create"><i class="fa-solid fa-plus fa-2x"></i></a>
-                    @endif
+                <div class="botonera">
+                    <a href="/sobrenosotros"><i class="fa-regular fa-2x fa-address-card"></i></a>
+                    @hasanyrole('admin|author')
+                    <i class="fa-regular msg fa-2x fa-message"></i>
+                    <div class="logreg">
+                        @if (Route::has('login'))
+                        <a href="/posts/create"><i class="fa-solid fa-plus fa-2x"></i></a>
+                        @endif
+                    </div>
+                    @endhasanyrole
                 </div>
-                @endhasanyrole
             </div>
             <div class="right">
                 @include('partials.language-switcher')
