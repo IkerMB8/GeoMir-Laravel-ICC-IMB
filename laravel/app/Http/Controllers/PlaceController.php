@@ -19,11 +19,10 @@ class PlaceController extends Controller
     
     public function __construct()
     {
-        $this->middleware('permission:places.list')->only('index');
-        $this->middleware('permission:places.create')->only(['create','store']);
-        $this->middleware('permission:places.read')->only('show');
-        $this->middleware('permission:places.update')->only(['edit','update']);
-        $this->middleware('permission:places.delete')->only('destroy');
+        $this->middleware(['auth','permission:places.create'])->only(['create','store']);
+        $this->middleware(['auth','permission:places.read'])->only('show');
+        $this->middleware(['auth','permission:places.update'])->only(['edit','update']);
+        $this->middleware(['auth','permission:places.delete'])->only('destroy');
     }
     public function index()
     {

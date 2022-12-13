@@ -30,6 +30,7 @@
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
+                <a href="/sobrenosotros"><i class="fa-regular fa-address-card"></i></a>
                 @hasanyrole('admin|author')
                 <i class="fa-regular msg fa-2x fa-message"></i>
                 <div class="logreg">

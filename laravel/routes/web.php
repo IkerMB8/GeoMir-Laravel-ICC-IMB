@@ -20,7 +20,7 @@ use App\Http\Controllers\LanguageController;
 // ...
 Route::get('/', function () {
     return redirect('/posts');
-})->middleware(['auth'])->name('dashboard');
+})->name('dashboard');
 
 Route::get('/dashboard', function (){
     return redirect('/');
@@ -40,11 +40,9 @@ Route::get('/dashboard', function (){
 Route::resource('files', FileController::class)
     ->middleware(['auth']);
 
-Route::resource('places', PlaceController::class)
-    ->middleware(['auth']);
+Route::resource('places', PlaceController::class);
 
-Route::resource('posts', PostController::class)
-    ->middleware(['auth']);
+Route::resource('posts', PostController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -72,3 +70,7 @@ Route::delete('/posts/{post}/like', [App\Http\Controllers\PostController::class,
 
 Route::post('/places/{place}/like', [App\Http\Controllers\PlaceController::class, 'like'])->name('places.like');
 Route::delete('/places/{place}/like', [App\Http\Controllers\PlaceController::class, 'unlike'])->name('places.unlike');
+
+Route::get('/sobrenosotros', function () {
+    return view('sobrenosotros');
+});

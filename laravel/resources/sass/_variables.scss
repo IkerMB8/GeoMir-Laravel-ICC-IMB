@@ -858,3 +858,66 @@ body.font-size-16{
     width: 30%;
     right: 0px;
 }
+.contenidoSN{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.h1SN{
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    animation: entradaTitulo .8s ease .5s forwards; 
+}
+
+.h4SN{
+    font-weight: 900 !important;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 1.2em;
+    margin-bottom: 0 !important;
+}
+
+.imgSN{
+    width: 200px;
+    height: 350px;
+}
+
+.pSN{
+    opacity: 0.6;
+    margin: 0 !important;
+}
+
+.psN:hover{
+    content: "ASDASDASD";
+}
+
+.abajo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.cambiar big {
+    color:#CC0000;font-family:verdana;font-size:12pt;font-weight:normal;
+    text-decoration:none;display:inline;
+}
+.cambiar a {
+    color:#00CCCC; font-family:verdana;font-size:12pt;font-weight:normal;
+    text-decoration:none;display:inline;
+}
+.cambiar a span {
+    display:none;text-decoration:none;
+}
+.cambiar a:hover span {
+    color: #0000CC;display:block;text-decoration:none;
+    background-color:transparent;display:inline;
+}
+.cambiar  a:hover big {
+    display:none;text-decoration:none;
+}
