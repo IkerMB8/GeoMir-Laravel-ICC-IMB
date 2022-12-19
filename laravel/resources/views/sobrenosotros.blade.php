@@ -83,9 +83,29 @@
                     <br>
 
                     <br>
-                    <video id="myVideo" width="320px" height="176px">
-                        <source src="/img/iniesta.mp4" type="video/mp4">
-                    </video>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <video width="320px" height="176px" autoplay>
+                                    <source src="/img/iniesta.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="carousel-item">
+                                <video id="myVideo" width="320px" height="176px">
+                                    <source src="/img/cocinero.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    
                 </div>
                 </div>
             </div>
@@ -118,9 +138,29 @@
                     <button onclick="playVid2()" class="btoVID" type="button">Play Video</button>
                     <button onclick="pauseVid2()" class="btoVID" type="button">Pause Video</button><br> 
                     <br>
-                    <video id="myVideo2" width="320px" height="176px">
-                        <source src="/img/cocinero.mp4" type="video/mp4">
-                    </video>
+                    <div id="carouselExampleControls2" class="carousel" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <video width="320px" height="176px" autoplay>
+                                    <source src="/img/rajoy.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="carousel-item">
+                                <video id="myVideo2" width="320px" height="176px">
+                                    <source src="/img/españoles.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    
                 </div>
                 </div>
             </div>
