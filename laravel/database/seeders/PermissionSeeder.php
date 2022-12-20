@@ -52,7 +52,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.delete']);
 
 
-        $adminRole->givePermissionTo([ 'files.*', 'places.*', 'posts.*','u  sers.*' ]);
+        $adminRole->givePermissionTo([ 'files.*', 'places.*', 'posts.*','users.*' ]);
 
         $editorRole->givePermissionTo([ 'files.list', 'files.read', 'places.list', 'places.read', 'posts.list', 'posts.read' ]);
 
