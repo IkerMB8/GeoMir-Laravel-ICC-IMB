@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <style>
+    .botoneraVid{
+        width:100%;
+        display:flex;
+        justify-content:center;
+    }
     video{
         width: 100%;
         height: 100%;
@@ -15,6 +20,7 @@
         display: flex;
         justify-content:center;
         flex-direction: column;
+        width:10%;
     }
 
     .imgSNF{
@@ -76,22 +82,32 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="modalBody">
-                        <button onclick="playVid()" class="btoVID" type="button">Play Video</button>
-                        <button onclick="pauseVid()" class="btoVID" type="button">Pause Video</button>
-                    </div>
-                    <br>
-
                     <br>
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <video width="320px" height="176px" autoplay>
+                                <div class="botoneraVid">
+                                    <div class="modalBody">
+                                        <button onclick="playVid1()" class="btoVID" type="button">Play Video</button>
+                                        <br>
+                                        <button onclick="pauseVid1()" class="btoVID" type="button">Pause Video</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <video id="myVideo1" width="320px" height="176px">
                                     <source src="/img/iniesta.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="carousel-item">
-                                <video id="myVideo" width="320px" height="176px">
+                                <div class="botoneraVid">
+                                    <div class="modalBody">
+                                        <button onclick="playVid2()" class="btoVID" type="button">Play Video</button>
+                                        <br>
+                                        <button onclick="pauseVid2()" class="btoVID" type="button">Pause Video</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <video id="myVideo2" width="320px" height="176px">
                                     <source src="/img/cocinero.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -135,18 +151,32 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <button onclick="playVid2()" class="btoVID" type="button">Play Video</button>
-                    <button onclick="pauseVid2()" class="btoVID" type="button">Pause Video</button><br> 
-                    <br>
+                    <br> 
                     <div id="carouselExampleControls2" class="carousel" data-bs-ride="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <video width="320px" height="176px" autoplay>
+                                <div class="botoneraVid">
+                                    <div class="modalBody">
+                                        <button onclick="playVid3()" class="btoVID" type="button">Play Video</button>
+                                        <br>
+                                        <button onclick="pauseVid3()" class="btoVID" type="button">Pause Video</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <video id="myVideo3" width="320px" height="176px">
                                     <source src="/img/rajoy.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="carousel-item">
-                                <video id="myVideo2" width="320px" height="176px">
+                                <div class="botoneraVid">
+                                    <div class="modalBody">
+                                        <button onclick="playVid4()" class="btoVID" type="button">Play Video</button>
+                                        <br>
+                                        <button onclick="pauseVid4()" class="btoVID" type="button">Pause Video</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <video id="myVideo4" width="320px" height="176px">
                                     <source src="/img/españoles.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -243,17 +273,15 @@
     }
 
 
+    var vid = document.getElementById("myVideo1"); 
 
-    var vid = document.getElementById("myVideo"); 
-
-    function playVid() { 
+    function playVid1() { 
         vid.play(); 
     } 
 
-    function pauseVid() { 
+    function pauseVid1() { 
         vid.pause(); 
     }
-
 
     var vid2 = document.getElementById("myVideo2"); 
 
@@ -263,6 +291,29 @@
 
     function pauseVid2() { 
         vid2.pause(); 
+    }
+
+
+    var vid3 = document.getElementById("myVideo3"); 
+
+    function playVid3() { 
+        vid3.play(); 
+    } 
+
+    function pauseVid3() { 
+        vid3.pause(); 
+    }
+
+
+
+    var vid4 = document.getElementById("myVideo4"); 
+
+    function playVid4() { 
+        vid4.play(); 
+    } 
+
+    function pauseVid4() { 
+        vid4.pause(); 
     } 
 </script>
 @vite('resources/js/bootstrap.js')
