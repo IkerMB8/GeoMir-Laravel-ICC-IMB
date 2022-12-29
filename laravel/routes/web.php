@@ -26,6 +26,10 @@ Route::get('/dashboard', function (){
     return redirect('/');
 });
 
+Route::get('/sobrenosotros', function () {
+    return view('sobrenosotros');
+});
+
 // Route::get('/', function (Request $request) {
 //    $message = 'Loading welcome page';
 //    Log::info($message);

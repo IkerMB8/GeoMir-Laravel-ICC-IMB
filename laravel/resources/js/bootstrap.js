@@ -220,3 +220,4 @@ btnCerrarPopup2.addEventListener('click', function(e){
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
 });
+

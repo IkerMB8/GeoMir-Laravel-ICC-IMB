@@ -141,7 +141,7 @@ i{
 }
 
 .modal-content{
-    width: 80%;
+    width: 80% !important;
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -857,4 +857,70 @@ body.font-size-16{
     bottom: 80px;
     width: 30%;
     right: 0px;
+}
+.contenidoSN{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.h1SN{
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    animation: entradaTitulo .8s ease .5s forwards; 
+}
+
+.h4SN{
+    font-weight: 900 !important;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 1.2em;
+    margin-bottom: 0 !important;
+}
+
+.imgSN{
+    width: 200px;
+    height: 350px;
+}
+
+.pSN{
+    opacity: 0.6;
+    margin: 0 !important;
+}
+
+.abajo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.fotosSN{
+    
+    width: 200px;
+    height: 300px;
+}
+
+
+.fotosSN big {
+    color:#CC0000;font-family:verdana;font-size:12pt;font-weight:normal;
+    text-decoration:none;display:inline;
+}
+.fotosSN a {
+    color:#00CCCC; font-family:verdana;font-size:12pt;font-weight:normal;
+    text-decoration:none;display:inline;
+}
+.fotosSN a span {
+    display:none;text-decoration:none;
+}
+.fotosSN a:hover span {
+    color: #0000CC;display:block;text-decoration:none;
+    background-color:transparent;display:inline;
+}
+.fotosSN  a:hover big {
+    display:none;text-decoration:none;
 }
