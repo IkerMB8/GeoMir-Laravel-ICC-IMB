@@ -234,6 +234,8 @@
     }
 
     
+
+    
     var imagen2=document.getElementById('imagen2');
     window.addEventListener('load', iniciar2, false);
     window.addEventListener('load', parar2, false);
@@ -264,6 +266,7 @@
         document.getElementById('NS2').classList.remove('noshow');
     }
 
+
     var vid = document.getElementById("myVideo1"); 
 
     function playVid1() { 
@@ -284,6 +287,7 @@
         vid2.pause(); 
     }
 
+
     var vid3 = document.getElementById("myVideo3"); 
 
     function playVid3() { 
@@ -293,6 +297,8 @@
     function pauseVid3() { 
         vid3.pause(); 
     }
+
+
 
     var vid4 = document.getElementById("myVideo4"); 
 
