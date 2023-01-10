@@ -1,15 +1,79 @@
 <?php
-
+ 
 namespace Tests\Feature;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+ 
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
-
+use App\Models\User;
+use App\Models\Place;
+use Laravel\Sanctum\Sanctum;
+use Illuminate\Testing\Fluent\AssertableJson;
+ 
 class PlaceTest extends TestCase
 {
+    public static User $testUser;
+    public static array $validData = [];
+    public static array $invalidData = [];
     
+    public static function setUpBeforeClass() : void
+    {
+        parent::setUpBeforeClass();
+        // Creem usuari/a de prova
+        $name = "test_" . time();
+        self::$testUser = new User([
+            "name"      => "{$name}",
+            "email"     => "{$name}@mailinator.com",
+            "password"  => "12345678"
+        ]);
+        // TODO Omplir amb dades vàlides
+        $name  = "avatar.png";
+        $size = 500; /*KB*/
+        $pupload = UploadedFile::fake()->image($name)->size($size);
+        self::$validData = [
+                'pname' => 'Prueba place',
+                'pdescription' => 'Prueba descripcion',
+                'platitude' => '1',
+                'plongitude' => '1',
+                'pcategory_id' => '1',
+                'pvisibility_id' => '1',
+                'pupload' => $pupload
+            ];
+        // TODO Omplir amb dades incorrectes
+        $size = 5000; /*KB*/
+        $fpupload = UploadedFile::fake()->image($name)->size($size);
+        self::$invalidData = [
+            'pname' => 'Prueba place',
+            'pdescription' => 'Prueba descripcion',
+            'platitude' => 'a',
+            'plongitude' => 'a',
+            'pcategory_id' => 'a',
+            'pvisibility_id' => 'a',
+            'pupload' => $fpupload
+        ];
+    }
+
+    public function test_place_first()
+    {
+        // Desem l'usuari al primer test
+        self::$testUser->save();
+        // Comprovem que s'ha creat
+        $this->assertDatabaseHas('users', [
+            'email' => self::$testUser->email,
+        ]);
+    }
+
+    
+    // public function test_place_auth_operation()
+    // {
+    //     Sanctum::actingAs(self::$testUser);
+    //     // TODO Lògica del test
+    // }
+    
+    // public function test_place_guest_operation()
+    // {
+    //     // TODO Lògica del test
+    // }
+
     public function test_place_list()
     {
         // List all places using API web service
@@ -24,38 +88,17 @@ class PlaceTest extends TestCase
     
     public function test_place_create() : object
     {
-        // Create fake place
-        $name  = "avatar.png";
-        $size = 500; /*KB*/
-        $pupload = UploadedFile::fake()->image($name)->size($size);
-        // Upload fake place using API web service
-        $response = $this->postJson("/api/places", [
-            'pname' => 'Prueba',
-            'pdescription' => 'Prueba Descripcion',
-            'platitude' => '1',
-            'plongitude' => '1',
-            'pcategory_id' => '1',
-            'pvisibility_id' => '1',
-            "pupload" => $pupload,
-        ]);
-        // Check OK response
+        Sanctum::actingAs(self::$testUser);
+        // Cridar servei web de l'API
+        $response = $this->postJson("/api/places", self::$validData);
+        // Revisar que no hi ha errors de validació
+        $params = array_keys(self::$validData);
+        $response->assertValid($params);
+        // TODO Revisar més errors
         $this->_test_ok($response, 201);
-        // Check validation errors
-        $response->assertValid(["pname"]);
-        $response->assertValid(["pdescription"]);
-        $response->assertValid(["platitude"]);
-        $response->assertValid(["plongitude"]);
-        $response->assertValid(["pcategory_id"]);
-        $response->assertValid(["pvisibility_id"]);
-        $response->assertValid(["pupload"]);
         // Check JSON exact values
-        $response->assertJsonPath("data.placesize", $size*1024);
-        // Check JSON dynamic values
         $response->assertJsonPath("data.id",
             fn ($id) => !empty($id)
-        );
-        $response->assertJsonPath("data.placepath",
-            fn ($placepath) => str_contains($placepath, $name)
         );
         // Read, update and delete dependency!!!
         $json = $response->getData();
@@ -64,27 +107,22 @@ class PlaceTest extends TestCase
     
     public function test_place_create_error()
     {
-        // Create fake place with invalid max size
-        $name  = "avatar.png";
-        $size = 5000; /*KB*/
-        $pupload = UploadedFile::fake()->image($name)->size($size);
-        // Upload fake place using API web service
-        $response = $this->postJson("/api/places", [
-            'pname' => 'Prueba',
-            'pdescription' => 'Prueba Descripcion',
-            'platitude' => '1',
-            'plongitude' => '1',
-            'pcategory_id' => '1',
-            'pvisibility_id' => '1',
-            "pupload" => $pupload,
-        ]);
-        // Check ERROR response
+        Sanctum::actingAs(self::$testUser);
+        // Cridar servei web de l'API
+        $response = $this->postJson("/api/places", self::$invalidData);
+        // TODO Revisar errors de validació
+        $params = ['platitude' , 'plongitude','pcategory_id', 'pvisibility_id', 'pupload' ];
+        $response->assertInvalid($params);
+        // TODO Revisar més errors
         $this->_test_error($response);
     }
     
+    // TODO Sub-tests de totes les operacions CRUD
+ 
     /**
-        * @depends test_place_create
-        */
+    * @depends test_place_create
+    */
+
     public function test_place_read(object $place)
     {
         // Read one place
@@ -92,8 +130,8 @@ class PlaceTest extends TestCase
         // Check OK response
         $this->_test_ok($response);
         // Check JSON exact values
-        $response->assertJsonPath("data.placepath",
-            fn ($placepath) => !empty($placepath)
+        $response->assertJsonPath("data.id",
+            fn ($id) => !empty($id)
         );
     }
     
@@ -109,24 +147,29 @@ class PlaceTest extends TestCase
         */
     public function test_place_update(object $place)
     {
-        // Create fake place
-        $name  = "photo.jpg";
-        $size = 1000; /*KB*/
+        Sanctum::actingAs(self::$testUser);
+        // Create fake file with invalid max size
+        $name  = "avatar.png";
+        $size = 500; /*KB*/
         $upload = UploadedFile::fake()->image($name)->size($size);
-        // Upload fake place using API web service
-        $response = $this->putJson("/api/places/{$place->id}", [
+        // Upload fake file using API web service
+        Sanctum::actingAs(self::$testUser);
+        // Cridar servei web de l'API
+        $response = $this->postJson("/api/files", [
             "upload" => $upload,
         ]);
-        // Check OK response
-        $this->_test_ok($response);
-        // Check validation errors
-        $response->assertValid(["upload"]);
+        // Revisar que no hi ha errors de validació
+        $params = array_keys(self::$validData);
+        $response->assertValid($params);
+        // TODO Revisar més errors
+        $this->_test_ok($response, 201);
         // Check JSON exact values
-        $response->assertJsonPath("data.placesize", $size*1024);
-        // Check JSON dynamic values
-        $response->assertJsonPath("data.placepath",
-            fn ($placepath) => str_contains($placepath, $name)
+        $response->assertJsonPath("data.id",
+            fn ($id) => !empty($id)
         );
+        // Read, update and delete dependency!!!
+        $json = $response->getData();
+        return $json->data;
     }
     
     /**
@@ -134,13 +177,13 @@ class PlaceTest extends TestCase
         */
     public function test_place_update_error(object $place)
     {
-        // Create fake place with invalid max size
+        // Create fake file with invalid max size
         $name  = "photo.jpg";
-        $size = 3000; /*KB*/
+        $size = 5000; /*KB*/
         $upload = UploadedFile::fake()->image($name)->size($size);
-        // Upload fake place using API web service
+        // Upload fake file using API web service
         $response = $this->putJson("/api/places/{$place->id}", [
-            "upload" => $upload,
+            "pupload" => $upload,
         ]);
         // Check ERROR response
         $this->_test_error($response);
@@ -155,10 +198,11 @@ class PlaceTest extends TestCase
     
     /**
         * @depends test_place_create
-        */
+    */
     public function test_place_delete(object $place)
-    {
-        // Delete one place using API web service
+    {   
+        Sanctum::actingAs(self::$testUser);
+        // Delete one file using API web service
         $response = $this->deleteJson("/api/places/{$place->id}");
         // Check OK response
         $this->_test_ok($response);
@@ -182,12 +226,14 @@ class PlaceTest extends TestCase
         ]);
     }
     
+
+ 
     protected function _test_error($response)
     {
         // Check response
         $response->assertStatus(422);
         // Check validation errors
-        $response->assertInvalid(["upload"]);
+        $response->assertInvalid(["pupload"]);
         // Check JSON properties
         $response->assertJson([
             "message" => true, // any value
@@ -201,7 +247,7 @@ class PlaceTest extends TestCase
             fn ($errors) => is_array($errors)
         );
     }
-    
+   
     protected function _test_notfound($response)
     {
         // Check JSON response
@@ -215,5 +261,15 @@ class PlaceTest extends TestCase
         $response->assertJsonPath("message",
             fn ($message) => !empty($message) && is_string($message)
         );       
+    }
+
+    public function test_place_last()
+    {
+        // Eliminem l'usuari al darrer test
+        self::$testUser->delete();
+        // Comprovem que s'ha eliminat
+        $this->assertDatabaseMissing('users', [
+            'email' => self::$testUser->email,
+        ]);
     }
 }

@@ -81,13 +81,14 @@ class PlaceController extends Controller
                 'author_id' =>auth()->user()->id,
             ]);
             \Log::debug("DB storage OK");
+            // Patró PRG amb missatge d'èxit
             return response()->json([
                 'success' => true,
                 'data'    => $place
             ], 201);
         } else {
             \Log::debug("Local storage FAILS");
-            // Patró PRG amb missatge d'error
+            // Patró PRG amb missatge d'error 
             return response()->json([
                 'success'  => false,
                 'errors' => ['Error uploading file']
