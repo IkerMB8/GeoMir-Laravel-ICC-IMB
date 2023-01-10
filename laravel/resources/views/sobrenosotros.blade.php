@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <style>
     .botoneraVid{
         width:100%;
@@ -308,7 +309,15 @@
 
     function pauseVid4() { 
         vid4.pause(); 
-    } 
+    }
+
+    const drag = document.querySelector(".abajo");
+
+        Sortable.create(drag, {
+            animation: 350,
+            dragClass: "drag"
+        }
+    );
 </script>
 @vite('resources/js/bootstrap.js')
 
