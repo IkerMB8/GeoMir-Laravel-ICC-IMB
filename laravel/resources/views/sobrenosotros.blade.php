@@ -56,6 +56,40 @@
         -webkit-animation-direction: reverse;
         animation-direction: reverse;
     }
+
+    .imagenIC{
+        background: url(/img/collage.png) -14px -11px !important;  
+        filter: grayscale(100%);
+        height: 458px !important;
+        width: 100% !important;
+        
+    }
+
+    .imagenIC2{
+        background: url(/img/collage.png) -14px 450px !important;  
+        filter: contrast(150%);
+        height: 458px !important;
+        width: 100% !important;
+        
+    }
+
+    .imagenIM{
+        background: url(/img/collage.png) -375px -11px !important;  
+        filter: contrast(150%);
+        height: 458px !important;
+        width: 100% !important;
+        
+    }
+
+    .imagenIM2{
+        background: url(/img/collage.png) -375px -485px !important;  
+        filter: grayscale(100%);
+        height: 458px !important;
+        width: 100% !important;
+        
+    }
+
+
     .cardgiratorio{
         height: 508px;
     }
@@ -179,7 +213,7 @@
     <div class="abajo">
         <div class="card " style="width: 18rem;">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <img class="card-img-top cardgiratorio" id="imagen" src="img/iker.png" alt="Card image cap">
+                <div class="card-img-top cardgiratorio imagenIC" id="imagen" alt="Card image cap"></div>
             </button>
             <div class="card-body">
                 <h5 class="card-title">Iker Castellano</h5>
@@ -189,7 +223,7 @@
         </div>
         <div class="card " style="width: 18rem;">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#Modal">
-                <img class="card-img-top cardgiratorio" id="imagen2" src="img/luispadrique.jpg" alt="Card image cap">
+                <div class="card-img-top cardgiratorio imagenIM2" id="imagen2" alt="Card image cap"></div>
             </button>
             <div class="card-body">
                 <h5 class="card-title">Iker Martinez</h5>
@@ -217,7 +251,9 @@
     }
 
     function pararF(){
-        document.getElementById('imagen').src="/img/iker.png";
+        // document.getElementById('imagenIC').src="/img/collage.png";
+        imagen.classList.add('imagenIC');
+        imagen.classList.remove('imagenIC2');
         aud.pause();
         imagen.classList.add('imgSNF');
         imagen.classList.remove('imgSNC');
@@ -226,7 +262,9 @@
     }
 
     function iniciarF(){
-        document.getElementById('imagen').src="/img/image0.jpg";
+        // document.querySelectorAll('.imagenIC2').src="/img/collage.png";
+        imagen.classList.remove('imagenIC');
+        imagen.classList.add('imagenIC2');
         aud.play();
         imagen.classList.remove('imgSNF');
         imagen.classList.add('imgSNC');
@@ -250,7 +288,8 @@
     }
 
     function parar2F(){
-        document.getElementById('imagen2').src="/img/luispadrique.jpg";
+        imagen2.classList.add('imagenIM2');
+        imagen2.classList.remove('imagenIM');
         bar.pause();
         imagen2.classList.add('imgSNF');
         imagen2.classList.remove('imgSNC');
@@ -259,7 +298,8 @@
     }
 
     function iniciar2F(){
-        document.getElementById('imagen2').src="/img/luispadrique.jpg";
+        imagen2.classList.remove('imagenIM2');
+        imagen2.classList.add('imagenIM');
         bar.play();
         imagen2.classList.remove('imgSNF');
         imagen2.classList.add('imgSNC');
