@@ -22,6 +22,6 @@ Route::post('logout', [TokenController::class, 'logout'])->middleware(['auth:san
 Route::post('login', [TokenController::class, 'login']);
 Route::post('register', [TokenController::class, 'register']);
 
-Route::apiResource('files', FileController::class);
+Route::apiResource('files', FileController::class)->middleware(['auth:sanctum']);
 Route::apiResource('places', PlaceController::class);
 Route::apiResource('posts', PostController::class);

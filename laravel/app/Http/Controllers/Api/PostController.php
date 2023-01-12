@@ -16,6 +16,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth:sanctum')->only('store');
+        $this->middleware('auth:sanctum')->only('update');
+        $this->middleware('auth:sanctum')->only('destroy');
+    }
+    
     public function index()
     {
         //
