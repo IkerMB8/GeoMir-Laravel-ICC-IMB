@@ -5,11 +5,11 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use App\Models\User;
-use App\Models\post;
+use App\Models\Post;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Testing\Fluent\AssertableJson;
  
-class postTest extends TestCase
+class PostTest extends TestCase
 {
     public static User $testUser;
     public static array $validData = [];

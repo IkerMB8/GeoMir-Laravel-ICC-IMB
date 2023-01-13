@@ -153,7 +153,6 @@ class PlaceTest extends TestCase
         $size = 500; /*KB*/
         $upload = UploadedFile::fake()->image($name)->size($size);
         // Upload fake file using API web service
-        Sanctum::actingAs(self::$testUser);
         // Cridar servei web de l'API
         $response = $this->postJson("/api/files", [
             "upload" => $upload,
@@ -177,6 +176,7 @@ class PlaceTest extends TestCase
         */
     public function test_place_update_error(object $place)
     {
+        Sanctum::actingAs(self::$testUser);
         // Create fake file with invalid max size
         $name  = "photo.jpg";
         $size = 5000; /*KB*/
@@ -191,11 +191,40 @@ class PlaceTest extends TestCase
     
     public function test_place_update_notfound()
     {
+        Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
         $response = $this->putJson("/api/places/{$id}", []);
         $this->_test_notfound($response);
     }
     
+    /**
+        * @depends test_place_create
+    */
+    public function test_place_favourite(object $place)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        // Upload fake file using API web service
+        $response = $this->postJson("/api/places/{$place->id}/favourite", [
+            "place" => $place,
+        ]);
+        // Check OK response
+        $this->_test_ok($response, 201);
+        // Read, update and delete dependency!!!
+        $json = $response->getData();
+        return $json->data;
+    }
+    
+    /**
+        * @depends test_place_favourite
+    */
+    public function test_place_unfavourite(object $place)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        // Delete one file using API web service
+        $response = $this->deleteJson("/api/places/{$place->id}/favourite");
+        // Check OK response
+        $this->_test_ok($response);
+    }
     /**
         * @depends test_place_create
     */
@@ -210,6 +239,7 @@ class PlaceTest extends TestCase
     
     public function test_place_delete_notfound()
     {
+        Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
         $response = $this->deleteJson("/api/places/{$id}");
         $this->_test_notfound($response);
@@ -225,8 +255,6 @@ class PlaceTest extends TestCase
             "data"    => true // any value
         ]);
     }
-    
-
  
     protected function _test_error($response)
     {

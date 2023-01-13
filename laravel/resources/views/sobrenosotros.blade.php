@@ -58,41 +58,29 @@
     }
 
     .imagenIC{
-        background: url(/img/collage.png) -14px -11px !important;  
+        background: url(/img/collage.png) -14px -11px;  
         filter: grayscale(100%);
-        height: 458px !important;
-        width: 100% !important;
-        
+        height: 458px;
+        width: 100%;
     }
 
-    .imagenIC2{
-        background: url(/img/collage.png) -14px 450px !important;  
+    .imagenIC:hover{
+        background: url(/img/collage.png) -14px 450px;  
         filter: contrast(150%);
-        height: 458px !important;
-        width: 100% !important;
-        
     }
 
     .imagenIM{
-        background: url(/img/collage.png) -375px -11px !important;  
-        filter: contrast(150%);
-        height: 458px !important;
-        width: 100% !important;
-        
-    }
-
-    .imagenIM2{
-        background: url(/img/collage.png) -375px -485px !important;  
+        background: url(/img/collage.png) -375px -485px;  
         filter: grayscale(100%);
-        height: 458px !important;
-        width: 100% !important;
-        
+        height: 458px;
+        width: 100%;
     }
 
-
-    .cardgiratorio{
-        height: 508px;
+    .imagenIM:hover{
+        background: url(/img/collage.png) -375px -11px;
+        filter: contrast(150%);  
     }
+
     
 </style>
 <!-- Modal Iker C -->
@@ -223,7 +211,7 @@
         </div>
         <div class="card " style="width: 18rem;">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#Modal">
-                <div class="card-img-top cardgiratorio imagenIM2" id="imagen2" alt="Card image cap"></div>
+                <div class="card-img-top cardgiratorio imagenIM" id="imagen2" alt="Card image cap"></div>
             </button>
             <div class="card-body">
                 <h5 class="card-title">Iker Martinez</h5>
@@ -252,8 +240,6 @@
 
     function pararF(){
         // document.getElementById('imagenIC').src="/img/collage.png";
-        imagen.classList.add('imagenIC');
-        imagen.classList.remove('imagenIC2');
         aud.pause();
         imagen.classList.add('imgSNF');
         imagen.classList.remove('imgSNC');
@@ -263,8 +249,6 @@
 
     function iniciarF(){
         // document.querySelectorAll('.imagenIC2').src="/img/collage.png";
-        imagen.classList.remove('imagenIC');
-        imagen.classList.add('imagenIC2');
         aud.play();
         imagen.classList.remove('imgSNF');
         imagen.classList.add('imgSNC');
@@ -288,8 +272,6 @@
     }
 
     function parar2F(){
-        imagen2.classList.add('imagenIM2');
-        imagen2.classList.remove('imagenIM');
         bar.pause();
         imagen2.classList.add('imgSNF');
         imagen2.classList.remove('imgSNC');
@@ -298,8 +280,6 @@
     }
 
     function iniciar2F(){
-        imagen2.classList.remove('imagenIM2');
-        imagen2.classList.add('imagenIM');
         bar.play();
         imagen2.classList.remove('imgSNF');
         imagen2.classList.add('imgSNC');

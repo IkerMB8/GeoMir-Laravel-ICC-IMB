@@ -254,4 +254,42 @@ class PlaceController extends Controller
             ], 404);
         }
     }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function favourite(Place $place){
+        $place = Place::find($id);
+        $favourite = Favourite::create([
+            'user_id' => auth()->user()->id,
+            'place_id' => $place->id,
+        ]);
+        return response()->json([
+            'success' => true,
+            'data'    => "Favourited placed successfully"
+        ], 200);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function unfavourite(Place $place){
+        $place = Place::find($id);
+        Favourite::where('user_id',auth()->user()->id)
+                 ->where('place_id', $place->id )->delete();
+        return response()->json([
+            'success' => true,
+            'data'    => "Unfavourited placed successfully"
+        ], 200);
+    }
 }

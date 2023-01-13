@@ -62,14 +62,8 @@ Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class
 Route::post('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'favourite'])->name('places.favourite');
 Route::delete('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'unfavourite'])->name('places.unfavourite');
 
-Route::post('/posts/{post}/favourite', [App\Http\Controllers\PostController::class, 'favourite'])->name('posts.favourite');
-Route::delete('/posts/{post}/favourite', [App\Http\Controllers\PostController::class, 'unfavourite'])->name('posts.unfavourite');
-
 Route::post('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
 Route::delete('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'unlike'])->name('posts.unlike');
-
-Route::post('/places/{place}/like', [App\Http\Controllers\PlaceController::class, 'like'])->name('places.like');
-Route::delete('/places/{place}/like', [App\Http\Controllers\PlaceController::class, 'unlike'])->name('places.unlike');
 
 Route::get('/sobrenosotros', function () {
     return view('sobrenosotros');
