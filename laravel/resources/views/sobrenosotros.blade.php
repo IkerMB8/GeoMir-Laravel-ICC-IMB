@@ -2,21 +2,31 @@
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <style>
+
+    /* Aquesta clase (.botoneraVid) serveix per personalitzar el div dels botons per quan obres el modal de cada integrant del grup */
     .botoneraVid{
         width:100%;
         display:flex;
         justify-content:center;
     }
+
+    /* Aquesta clase (video) serveix per modificar la grandària del video del modal */
     video{
         width: 100%;
         height: 100%;
     }
+
+    /* Aquesta clase (.h1video) serveix per modificar el color del text (VIDEO) quan obres el modal */
     .h1video{
         color:white;
     }
+
+    /* Aquesta clase (.modal-content) serveix per modificar el color de fons del modal */
     .modal-content{
         background-color: #1A1830 !important;
     }
+
+    /* Aquesta clase (.modalBody) serveix per modificar la posició del lloc on es troben els botons del modal (Play Video i Pause Video) */
     .modalBody{
         display: flex;
         justify-content:center;
@@ -24,17 +34,18 @@
         width:10%;
     }
 
+
+    /* Aquesta clase (.imgSNF) serveix per modificar el color de la foto sèria, aplicant el filtre en blanc i negre */
     .imgSNF{
         filter: grayscale(100%);
     }
+
+    /* Aquesta clase (.imgSNC) serveix per modificar el color de la foto divertida, aplicant més contrast. */
     .imgSNC{
         filter: contrast(200%);
     }
-    .imgSN:hover {
-        width: 300px;
-        transition: width 2s;
-    }
 
+    /* Aquesta clase (.btoVID) serveix per modificar el botó del modal, donant-li un color de fons, una vora, padding, etc... */
     .btoVID{
         padding:15px;
         border-radius: 25px;
@@ -42,21 +53,28 @@
         background-color:white;
     }
 
+    /* Això no és una clase però es l'animació que fa que les imatges girin continuament */
     @keyframes rotate {from {transform: rotate(0deg);}
         to {transform: rotate(360deg);}}
     @-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
         to {-webkit-transform: rotate(360deg);}}
+
+
+    /* Aquesta clase (.cardgiratorio:hover) serveix per activar l'animació d'abans */
     .cardgiratorio:hover{
         -webkit-animation: 3s rotate linear infinite;
         animation: 3s rotate linear infinite;
         -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
     }
+
+    /* Aquesta id (.imagen) serveix, entre d'altres, per fer que una imatge giri cap un costat i l'altre cap altra. */
     #imagen{
         -webkit-animation-direction: reverse;
         animation-direction: reverse;
     }
 
+    /* Aquesta clase (.imagenIC) serveix per fer el sprite de la imatge sèria de l'Iker Castellano */
     .imagenIC{
         background: url(/img/collage.png) -14px -11px;  
         filter: grayscale(100%);
@@ -64,11 +82,14 @@
         width: 100%;
     }
 
+    /* Aquesta clase (.imagenIC:hover) serveix per canviar la foto sèria de l'Iker Castellano a la divertida */
     .imagenIC:hover{
         background: url(/img/collage.png) -14px 450px;  
         filter: contrast(150%);
     }
 
+
+    /* Aquesta clase (.imagenIM) serveix per fer el sprite de la imatge sèria de l'Iker Martinez */
     .imagenIM{
         background: url(/img/collage.png) -375px -485px;  
         filter: grayscale(100%);
@@ -76,6 +97,7 @@
         width: 100%;
     }
 
+    /* Aquesta clase (.imagenIM:hover) serveix per canviar la foto sèria de l'Iker Martinez a la divertida */
     .imagenIM:hover{
         background: url(/img/collage.png) -375px -11px;
         filter: contrast(150%);  
@@ -83,6 +105,8 @@
 
     
 </style>
+
+
 <!-- Modal Iker C -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
