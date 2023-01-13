@@ -172,6 +172,7 @@ class PostTest extends TestCase
         */
     public function test_post_update_error(object $post)
     {
+        Sanctum::actingAs(self::$testUser);
         // Create fake file with invalid max size
         $name  = "photo.jpg";
         $size = 5000; /*KB*/
@@ -186,9 +187,50 @@ class PostTest extends TestCase
     
     public function test_post_update_notfound()
     {
+        Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
         $response = $this->putJson("/api/posts/{$id}", []);
         $this->_test_notfound($response);
+    }
+    
+    /**
+        * @depends test_post_create
+    */
+    public function test_post_like(object $post)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->postJson("/api/posts/{$post->id}/like");
+        $this->_test_ok($response);
+    }
+    
+    /**
+        * @depends test_post_create
+    */
+    public function test_post_like_error(object $post)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->postJson("/api/posts/{$post->id}/like");
+        $response->assertStatus(500);
+    }
+    
+    /**
+        * @depends test_post_create
+    */
+    public function test_post_unlike(object $post)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->deleteJson("/api/posts/{$post->id}/like");
+        $this->_test_ok($response);
+    }
+    
+    /**
+        * @depends test_post_create
+    */
+    public function test_post_unlike_error(object $post)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->deleteJson("/api/posts/{$post->id}/like");
+        $response->assertStatus(500);
     }
     
     /**
@@ -205,6 +247,7 @@ class PostTest extends TestCase
     
     public function test_post_delete_notfound()
     {
+        Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
         $response = $this->deleteJson("/api/posts/{$id}");
         $this->_test_notfound($response);

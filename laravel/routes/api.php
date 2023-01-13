@@ -25,9 +25,9 @@ Route::post('register', [TokenController::class, 'register']);
 Route::apiResource('files', FileController::class)->middleware(['auth:sanctum']);
 
 Route::apiResource('places', PlaceController::class);
-Route::post('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'favourite'])->middleware(['auth:sanctum']);
-Route::delete('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'unfavourite'])->middleware(['auth:sanctum']);
+Route::post('/places/{place}/favourite', [PlaceController::class, 'favourite'])->middleware(['auth:sanctum']);
+Route::delete('/places/{place}/favourite', [PlaceController::class, 'unfavourite'])->middleware(['auth:sanctum']);
 
 Route::apiResource('posts', PostController::class);
-Route::post('/posts/{post}/favourite', [App\Http\Controllers\PostController::class, 'favourite'])->middleware(['auth:sanctum']);
-Route::delete('/posts/{post}/favourite', [App\Http\Controllers\PostController::class, 'unfavourite'])->middleware(['auth:sanctum']);
+Route::post('/posts/{post}/like', [PostController::class, 'like'])->middleware(['auth:sanctum']);
+Route::delete('/posts/{post}/like', [PostController::class, 'unlike'])->middleware(['auth:sanctum']);

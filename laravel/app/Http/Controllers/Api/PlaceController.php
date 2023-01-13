@@ -263,16 +263,23 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function favourite(Place $place){
+    public function favourite($id){
         $place = Place::find($id);
-        $favourite = Favourite::create([
-            'user_id' => auth()->user()->id,
-            'place_id' => $place->id,
-        ]);
-        return response()->json([
-            'success' => true,
-            'data'    => "Favourited placed successfully"
-        ], 200);
+        if (Favourite::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you can't put in favourite the same post two times"
+            ], 500);
+        }else{
+            $favourite = Favourite::create([
+                'user_id' => auth()->user()->id,
+                'place_id' => $place->id,
+            ]);
+            return response()->json([
+                'success' => true,
+                'data'    => "Favourited placed successfully"
+            ], 200);
+        }
     }
 
 
@@ -283,13 +290,20 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function unfavourite(Place $place){
+    public function unfavourite($id){
         $place = Place::find($id);
-        Favourite::where('user_id',auth()->user()->id)
-                 ->where('place_id', $place->id )->delete();
-        return response()->json([
-            'success' => true,
-            'data'    => "Unfavourited placed successfully"
-        ], 200);
+        if (Favourite::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            Favourite::where('user_id',auth()->user()->id)
+                    ->where('place_id', $place->id )->delete();
+            return response()->json([
+                'success' => true,
+                'data'    => "Unfavourited placed successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you don't put in favourite this post yet"
+            ], 500);
+        }
     }
 }

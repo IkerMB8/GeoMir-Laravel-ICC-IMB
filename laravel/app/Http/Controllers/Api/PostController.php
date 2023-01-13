@@ -246,4 +246,52 @@ class PostController extends Controller
             ], 404);
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function like($id){
+        $post = Post::find($id);
+        if (Like::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you can't like the same post two timest"
+            ], 500);
+        }else{
+            $like = Like::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $post->id,
+            ]);
+            return response()->json([
+                'success' => true,
+                'data'    => "Liked successfully"
+            ], 200);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unlike($id){
+        $post = Post::find($id);
+        if (Like::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+            Like::where('user_id',auth()->user()->id)
+            ->where('post_id', $post->id )->delete();
+            return response()->json([
+                'success' => true,
+                'data'    => "Unliked successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you don't liked this post yet"
+            ], 500);
+        }
+    }
 }

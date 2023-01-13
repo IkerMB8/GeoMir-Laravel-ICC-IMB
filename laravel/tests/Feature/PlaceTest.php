@@ -203,28 +203,40 @@ class PlaceTest extends TestCase
     public function test_place_favourite(object $place)
     {   
         Sanctum::actingAs(self::$testUser);
-        // Upload fake file using API web service
-        $response = $this->postJson("/api/places/{$place->id}/favourite", [
-            "place" => $place,
-        ]);
-        // Check OK response
-        $this->_test_ok($response, 201);
-        // Read, update and delete dependency!!!
-        $json = $response->getData();
-        return $json->data;
+        $response = $this->postJson("/api/places/{$place->id}/favourite");
+        $this->_test_ok($response);
     }
     
     /**
-        * @depends test_place_favourite
+        * @depends test_place_create
+    */
+    public function test_place_favourite_error(object $place)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->postJson("/api/places/{$place->id}/favourite");
+        $response->assertStatus(500);
+    }
+    
+    /**
+        * @depends test_place_create
     */
     public function test_place_unfavourite(object $place)
     {   
         Sanctum::actingAs(self::$testUser);
-        // Delete one file using API web service
         $response = $this->deleteJson("/api/places/{$place->id}/favourite");
-        // Check OK response
         $this->_test_ok($response);
     }
+    
+    /**
+        * @depends test_place_create
+    */
+    public function test_place_unfavourite_error(object $place)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->deleteJson("/api/places/{$place->id}/favourite");
+        $response->assertStatus(500);
+    }
+
     /**
         * @depends test_place_create
     */
