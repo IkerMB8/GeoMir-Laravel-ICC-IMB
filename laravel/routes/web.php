@@ -69,6 +69,9 @@ Route::delete('/places/{place}/favourite', [App\Http\Controllers\PlaceController
 Route::post('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
 Route::delete('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'unlike'])->name('posts.unlike');
 
+Route::post('/posts/{post}/comment', [App\Http\Controllers\PostController::class, 'comment'])->name('posts.comment');
+Route::delete('/posts/{post}/comment', [App\Http\Controllers\PostController::class, 'uncomment'])->name('posts.uncomment');
+
 Route::get('/sobrenosotros', function () {
     return view('sobrenosotros');
 });
