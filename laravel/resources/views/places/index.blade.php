@@ -8,6 +8,8 @@
                         <div class="perf">
                             <img src="/img/defaultuser.jpg"><p>@ {{ $place->user->name }}</p>
                         </div>
+                        
+                        @hasanyrole('admin|author|editor')
                         <!-- 3 PUNTOS -->
                         <button type="button" class="cerrar3p" data-bs-toggle="modal" data-bs-target="#options{{ $place->id }}">
                             <div style="height: 24px; width: 24px;"><svg aria-label="Más opciones" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg></div>
@@ -26,6 +28,7 @@
                                 </div>    
                             </div>
                         </div>
+                        @endhasanyrole
                     </div>
                     <div>
                         <h5>{{ $place->name }}</h5>
@@ -34,6 +37,7 @@
                 <div>
                     <a href="{{ route('places.show',$place) }}"><img class="imgpub" src='{{ asset("storage/{$place->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"/></a>
                 </div>
+                @hasanyrole('admin|author|editor')
                 <div class="funct">
                     <div class="functizq">
                         @include('partials.buttons-favourites')
@@ -79,6 +83,7 @@
                         <i class="fa-regular fa-2x fa-flag"></i>                    
                     </div>
                 </div>
+                @endhasanyrole
                 <div>
                     @if( $place->favourites_count == 1 )
                         <p>{{ $place->favourites_count }} fav</p>
