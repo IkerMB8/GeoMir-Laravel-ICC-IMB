@@ -29,7 +29,6 @@
                         </div>
                     @endhasanyrole
                 </div>
-                
                 <div>
                     <h5>{{ $post->body }}</h5>
                 </div>
@@ -62,17 +61,27 @@
                                             <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <hr>
+                                        <div class="comments">
+                                            @foreach ($post->comments() as $comment)
+                                                <p style="color:white;">{{ $comment->commentedBy($comment) }}</p>
+                                                <p style="color:white;">{{ $comment->comment }}</p>
+                                                <form method="POST" action="{{ route('posts.comment',$post,$comment) }}" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="botonfun" >borrar</button>
+                                                </form>  
+                                            @endforeach
+                                        </div>
                                         <div class="derechader">
                                             <div></div>
                                             <div class="modal-footer comentario">
                                                 <div style="float:left;">
-                                                    <form>
-                                                        <input style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
+                                                    <form method="POST" action="{{ route('posts.comment',$post) }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input id="pcomment" name="pcomment" style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
+                                                        <button type="submit" class="botonpub" style="padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
                                                     </form>
-                                                </div>
-                                                <div style="float:right;">
-                                                    <button type="button" class="botonpub">Publicar</button>
-                                                </div>         
+                                                </div>      
                                             </div>
                                         </div>
                                     </div>

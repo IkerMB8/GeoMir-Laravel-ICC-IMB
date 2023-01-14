@@ -118,14 +118,13 @@ class PostController extends Controller
         //
         $visibility=Visibility::find($post->visibility_id);
         $post->loadCount('likes');
-
         return view("posts.show", [
             "post" => $post,
             "file" => $post->file,
             "autor" => $post->user,
             "likes" => $post->likes_count,
             "visibility" => $visibility,
-            "comments"  =>  Comment::all()->where('post_id', $post->id)
+            "comments"  =>  $post->comments(),
         ]);
     }
 
