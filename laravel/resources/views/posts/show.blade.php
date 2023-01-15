@@ -18,14 +18,10 @@
                 <div class="comentarios">
                     @foreach ($comments as $comment)
                         <div class="caja_comment">
-                            <p style="color:white;">@ {{ $comment->commentedBy($comment) }}</p>
+                            <p style="color:white;">@ {{ $comment->commentedBy() }}</p>
                             <div class="comment_del">
                                 <p style="color:white;">{{ $comment->comment }}</p>
-                                <form method="POST" action="{{ route('posts.comment',$post,$comment) }}" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="botonfun"><i class="fa-solid fa-trash-can"></i></button>
-                                </form>
+                                @include('partials.buttons-delete')
                             </div>
                         </div>
                     @endforeach

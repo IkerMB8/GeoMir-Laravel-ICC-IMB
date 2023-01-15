@@ -291,13 +291,16 @@ class PostController extends Controller
         }
     }
 
-    public function uncomment(Post $post, Comment $comment){
-        if ($post->user->id == auth()->user()->id || auth()->user()->hasRole(['admin'])){
-            Comment::where('id', $comment->id)->delete();
-            return redirect()->back();
+    public function uncomment(Post $post){
+        $comment = Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first();
+        if ($comment){
+            Comment::where('user_id',auth()->user()->id)
+                ->where('post_id', $post->id )->delete();
+            return redirect()->route('posts.show', $post)
+                ->with('success', __('Comment deleted succesfully'));
         }else{
             return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you don't commented this post yet"));
+            ->with('error', ("ERROR you cannot delete a comment that is not yours"));
         }
     }
 }

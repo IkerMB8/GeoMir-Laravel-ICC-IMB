@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\File;
 use App\Models\Like;
+use App\Models\Comment;
 use App\Models\Visibility;
 
 class PostController extends Controller
@@ -291,6 +292,62 @@ class PostController extends Controller
             return response()->json([
                 'success'  => false,
                 'message' => "ERROR you don't liked this post yet"
+            ], 500);
+        }
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+
+    public function comment($id, Request $request){
+        $post = Post::find($id);
+        $validatedData = $request->validate([
+            'pcomment'  => 'required|string',
+        ]);
+        if (Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you can't comment the same post two timest"
+            ], 500);
+        }else{
+            $comment = Comment::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $post->id,
+                'comment' =>$request->input('pcomment'),
+            ]);
+            return response()->json([
+                'success' => true,
+                'data'    => "Commented successfully"
+            ], 201);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    public function uncomment($id){
+        $post = Post::find($id);
+        if ($post->user->id == auth()->user()->id || auth()->user()->hasRole(['admin'])){
+            Comment::where('post_id', $post->id)
+            ->where('user_id', $post->user_id)->delete();
+            return response()->json([
+                'success' => true,
+                'data'    => "Comment deleted successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you can only delete your comments"
             ], 500);
         }
     }

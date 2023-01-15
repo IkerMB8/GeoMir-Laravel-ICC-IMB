@@ -16,7 +16,7 @@
                         <!-- Modal -->
                         <div class="modal fade" style="--bs-modal-width:40% !important;" id="options{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered logreg">
-                                <div class="modal3p tres_puntos">
+                                <div class="modal3p modal-content">
                                 <form method="post" action="{{ route('posts.destroy',$post) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('DELETE')
@@ -63,17 +63,13 @@
                                         <hr>
                                         <div class="comentarios">
                                             @foreach ($post->comments() as $comment)
-                                            <div class="caja_comment">
-                                                <p style="color:white;">@ {{ $comment->commentedBy($comment) }}</p>
-                                                <div class="comment_del">
-                                                    <p style="color:white;">{{ $comment->comment }}</p>
-                                                    <form method="POST" action="{{ route('posts.comment',$post,$comment) }}" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="botonfun"><i class="fa-solid fa-trash-can"></i></button>
-                                                    </form>
+                                                <div class="caja_comment">
+                                                    <p style="color:white;">@ {{ $comment->commentedBy() }}</p>
+                                                    <div class="comment_del">
+                                                        <p style="color:white;">{{ $comment->comment }}</p>
+                                                        @include('partials.buttons-delete')
+                                                    </div>
                                                 </div>
-                                            </div>
                                             @endforeach
                                         </div>
                                         <div class="derechader">
