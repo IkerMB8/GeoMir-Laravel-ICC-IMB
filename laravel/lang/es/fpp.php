@@ -19,9 +19,9 @@ return [
    'place-notproperty' => 'ERROR, no puedes editar un lugar que no es tuyo',
    'post-notpropertydel' => 'ERROR, no puedes eliminar una publicación que no es tuya',
    'post-notproperty' => 'ERROR, no puedes editar una publicación que no es tuya',
-   'posts' => 'Publicaciónes',
+   'posts' => 'Publicaciones',
    'places' => 'Lugares',
-   'images' => 'Imagenes',
+   'images' => 'Imágenes',
    'video' => 'Vídeos',
    'organize' => 'Ordenar',
 ];

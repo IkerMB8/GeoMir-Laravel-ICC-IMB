@@ -14,7 +14,7 @@
                         <!-- Modal -->
                         <div class="modal fade" style="--bs-modal-width:40% !important;" id="options{{ $place->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered logreg">
-                                <div class="modal3p modal-content">
+                                <div class="modal3p tres_puntos">
                                     <form method="post" action="{{ route('places.destroy',$place) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('DELETE')

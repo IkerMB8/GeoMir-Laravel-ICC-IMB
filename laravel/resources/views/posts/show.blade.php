@@ -1,5 +1,51 @@
 @extends('layouts.app')
 @section('content')
+<div class="modal fade" id="staticBackdrop{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered logreg">
+        <div class="modal-content modalcntnt">
+            <div class="commentizq">
+                <div class="modal-body">
+                    <img class="commentimg" src='{{ asset("storage/{$post->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>  
+                </div>
+            </div>
+            <div class="derecha">
+                <div class="modal-header">
+                    <img src="/img/defaultuser.jpg" class="commentprofimg"></img>
+                    <h5 class="modal-title commentprofname" id="staticBackdropLabel">@ {{ $post->user->name }}</h5>
+                    <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <hr>
+                <div class="comentarios">
+                    @foreach ($comments as $comment)
+                        <div class="caja_comment">
+                            <p style="color:white;">@ {{ $comment->commentedBy($comment) }}</p>
+                            <div class="comment_del">
+                                <p style="color:white;">{{ $comment->comment }}</p>
+                                <form method="POST" action="{{ route('posts.comment',$post,$comment) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="botonfun"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="derechader">
+                    <div></div>
+                    <div class="modal-footer comentario">
+                        <div style="float:left;">
+                            <form method="POST" action="{{ route('posts.comment',$post) }}" enctype="multipart/form-data">
+                                @csrf
+                                <input id="pcomment" name="pcomment" style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
+                                <button type="submit" class="botonpub" style="padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
+                            </form>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="posts">
             <div class="post">
                 <div class="topp">
@@ -14,7 +60,7 @@
                         <!-- Modal -->
                         <div class="modal fade" id="options{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered logreg">
-                                <div class="modal3p modal-content">
+                                <div class="modal3p tres_puntos">
                                     <form method="post" action="{{ route('posts.destroy',$post) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('DELETE')
@@ -40,48 +86,7 @@
                             <i class="fa-regular fa-comment"></i>
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered logreg">
-                                <div class="modal-content modalcntnt">
-                                    <div class="commentizq">
-                                        <div class="modal-body">
-                                            <img class="commentimg" src='{{ asset("storage/{$post->file->filepath}") }}' onerror="this.onerror=null; this.src='/img/notfound.png'"></img></a>  
-                                        </div>
-                                    </div>
-                                    <div class="derecha">
-                                        <div class="modal-header">
-                                            <img src="/img/defaultuser.jpg" class="commentprofimg"></img>
-                                            <h5 class="modal-title commentprofname" id="staticBackdropLabel">@ {{ $post->user->name }}</h5>
-                                            <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <hr>
-                                        <div class="comments">
-                                            @foreach ($comments as $comment)
-                                                <p style="color:white;">{{ $comment->commentedBy($comment) }}</p>
-                                                <p style="color:white;">{{ $comment->comment }}</p>
-                                                <form method="POST" action="{{ route('posts.comment',$post,$comment) }}" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="botonfun" >borrar</button>
-                                                </form>  
-                                            @endforeach
-                                        </div>
-                                        <div class="derechader">
-                                            <div></div>
-                                            <div class="modal-footer comentario">
-                                                <div style="float:left;">
-                                                    <form method="POST" action="{{ route('posts.comment',$post) }}" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input id="pcomment" name="pcomment" style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
-                                                        <button type="submit" class="botonpub" style="padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
-                                                    </form>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <i class="fa-solid fa-2x comment fa-share-from-square"></i>
                     </div>
                     <div style="float: right; margin-top:10px;display:flex;">  
