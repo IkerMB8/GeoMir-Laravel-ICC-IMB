@@ -14,6 +14,7 @@ class PostTest extends TestCase
     public static User $testUser;
     public static array $validData = [];
     public static array $invalidData = [];
+    public static array $invalidComment = [];
     
     public static function setUpBeforeClass() : void
     {
@@ -45,6 +46,9 @@ class PostTest extends TestCase
             'plongitude' => 'a',
             'pvisibility_id' => 'a',
             'pupload' => $fpupload
+        ];
+        self::$invalidComment = [
+            'pcomment' =>  123
         ];
     }
     public function test_post_first()
@@ -230,6 +234,66 @@ class PostTest extends TestCase
     {   
         Sanctum::actingAs(self::$testUser);
         $response = $this->deleteJson("/api/posts/{$post->id}/like");
+        $response->assertStatus(500);
+    }
+    
+    /**
+        * @depends test_post_create
+    */
+    public function test_post_comment(object $post) :   string
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->postJson("/api/posts/{$post->id}/comment", [
+            "pcomment" => "Prueba comentario",
+        ]);
+        // Check OK response
+        $this->_test_ok($response, 201);
+        // Check validation errors
+        $response->assertValid(["pcomment"]);
+        // Read, update and delete dependency!!!
+        $json = $response->getData();
+        return $json->data;
+    }
+    
+    /**
+        * @depends test_post_create
+    */
+    public function test_post_comment_error(object $post)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        // Cridar servei web de l'API
+        $response = $this->postJson("/api/posts/{$post->id}/comment", self::$invalidComment);
+        // TODO Revisar errors de validació
+        $params = ['pcomment'];
+        $response->assertInvalid($params);
+    }
+    
+    /**
+        * @depends test_post_comment
+    */
+    public function test_post_uncomment($commentpost)
+    {   
+        // Sanctum::actingAs(self::$testUser);
+        // $response = $this->deleteJson("/api/posts/{$post->id}/comment");
+        // $this->_test_ok($response);
+        Sanctum::actingAs(self::$testUser);
+        $cp = explode (",", $commentpost);
+        $postid = $cp[1];
+        $commentid = $cp[0];
+        $response = $this->deleteJson("/api/posts/{$postid}/comment/{$commentid}");
+        $this->_test_ok($response);
+    }
+    
+    /**
+        * @depends test_post_comment
+    */
+    public function test_post_uncomment_error($commentpost)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $cp = explode (",", $commentpost);
+        $postid = $cp[1];
+        $commentid = $cp[0];
+        $response = $this->deleteJson("/api/posts/{$postid}/comment/{$commentid}");
         $response->assertStatus(500);
     }
     

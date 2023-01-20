@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\File;
 use App\Models\Like;
+use App\Models\Comment;
 use App\Models\Visibility;
 
 class PostController extends Controller
@@ -292,6 +293,60 @@ class PostController extends Controller
                 'success'  => false,
                 'message' => "ERROR you don't liked this post yet"
             ], 500);
+        }
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+
+    public function comment($id, Request $request){
+        $post = Post::find($id);
+        $validatedData = $request->validate([
+            'pcomment'  => 'required|string',
+        ]);
+        if (Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you can't comment the same post two timest"
+            ], 500);
+        }else{
+            $comment = Comment::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $post->id,
+                'comment' =>$request->input('pcomment'),
+            ]);
+            $commentpost = "$comment->id,$post->id";
+            return response()->json([
+                'success' => true,
+                'data'    => $commentpost,
+            ], 201);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  int  $id2
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    public function uncomment($id, $id2){
+        $post = Post::find($id);
+        $comment = Comment::find($id2);
+        if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
+            $comment->delete();
+            return redirect()->route('posts.show', $post)
+                ->with('success', __('Comment deleted succesfully'));
+        }else{
+            return redirect()->route('posts.show', $post)
+            ->with('error', ("ERROR you cannot delete a comment that is not yours"));
         }
     }
 }

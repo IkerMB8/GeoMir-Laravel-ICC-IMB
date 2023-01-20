@@ -60,4 +60,9 @@ class Post extends Model
         return $this->likedByUser($user);
     }
 
+    public function comments()
+    {
+        return Comment::all()->where('post_id', $this->id);
+    }
+
 }

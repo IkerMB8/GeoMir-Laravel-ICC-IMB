@@ -15,7 +15,9 @@
         </ul>
         <form method="post" id="create" action="{{ route('places.store') }}" enctype="multipart/form-data">
             @csrf
-            @vite('resources/js/places/create-place.js')
+            @env(['local','development'])
+                @vite('resources/js/places/create-place.js')
+            @endenv
             <div class="createpop">
                 <table class="table">
                     <tbody>
@@ -95,5 +97,8 @@
     $imgprev.src = objectURL;
     });
 </script>
-@vite('resources/js/bootstrap.js')
+
+@env(['local','development'])
+    @vite('resources/js/bootstrap.js')
+@endenv
 @endsection

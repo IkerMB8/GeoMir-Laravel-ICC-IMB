@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\File;
 use App\Models\Like;
+use App\Models\Comment;
 use App\Models\Visibility;
 use Illuminate\Http\Request;
 
@@ -117,13 +118,13 @@ class PostController extends Controller
         //
         $visibility=Visibility::find($post->visibility_id);
         $post->loadCount('likes');
-
         return view("posts.show", [
             "post" => $post,
             "file" => $post->file,
             "autor" => $post->user,
             "likes" => $post->likes_count,
             "visibility" => $visibility,
+            "comments"  =>  $post->comments(),
         ]);
     }
 
@@ -249,16 +250,57 @@ class PostController extends Controller
     }
 
     public function like(Post $post){
-        $like = Like::create([
-            'user_id' => auth()->user()->id,
-            'post_id' => $post->id,
-        ]);
-        return redirect()->back();
+        if (Like::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+            return redirect()->route('posts.show', $post)
+            ->with('error', ("ERROR you can't like the same post two timest"));
+        }else{
+            $like = Like::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $post->id,
+            ]);
+            return redirect()->back();
+        }
     }
 
     public function unlike(post $post){
-        Like::where('user_id',auth()->user()->id)
-            ->where('post_id', $post->id )->delete();
-        return redirect()->back();
+        if (Like::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+            Like::where('user_id',auth()->user()->id)
+                ->where('post_id', $post->id )->delete();
+            return redirect()->back();
+        }else{
+            return redirect()->route('posts.show', $post)
+            ->with('error', ("ERROR you don't liked this post yet"));
+        }
+    }
+
+    public function comment(Request $request, Post $post){
+        $validatedData = $request->validate([
+            'pcomment'  => 'required',
+        ]);
+        $repetido = Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->where('comment',$request->input('pcomment'))->first();
+        if ($repetido){
+            return redirect()->route('posts.show', $post)
+            ->with('error', ("ERROR you can't comment the same two times"));
+        }else{
+            $comment = Comment::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $post->id,
+                'comment' =>$request->input('pcomment'),
+            ]);
+            return redirect()->back();
+        }
+    }
+
+    public function uncomment($id, Request  $request){
+        $post = Post::find($id);
+        $comment = Comment::find($request->input('comment_id'));
+        if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
+            $comment->delete();
+            return redirect()->route('posts.show', $post)
+                ->with('success', __('Comment deleted succesfully'));
+        }else{
+            return redirect()->route('posts.show', $post)
+            ->with('error', ("ERROR you cannot delete a comment that is not yours"));
+        }
     }
 }
