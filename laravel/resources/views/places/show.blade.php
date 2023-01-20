@@ -114,7 +114,7 @@
                 </div>
             </div>
     </div>
-    
-    @vite('resources/js/bootstrap.js')
-
+    @env(['local','development'])
+        @vite('resources/js/bootstrap.js')
+    @endenv
     @endsection
