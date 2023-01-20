@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <br>
-                            <video id="myVideo1" width="320px" height="176px">
+                            <video id="myVideo1" width="320px" height="176px" autoplay="true" mute="true">
                                 <source src="/img/iniesta.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                             <br>
-                            <video id="myVideo3" width="320px" height="176px">
+                            <video id="myVideo3" width="320px" height="176px" autoplay="true" mute="true">
                                 <source src="/img/rajoy.mp4" type="video/mp4">
                             </video>
                         </div>
