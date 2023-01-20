@@ -68,3 +68,11 @@ Route::delete('/posts/{post}/like', [App\Http\Controllers\PostController::class,
 Route::get('/sobrenosotros', function () {
     return view('sobrenosotros');
 });
+
+Route::get('/contacto', function () {
+    return view('contacto');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});

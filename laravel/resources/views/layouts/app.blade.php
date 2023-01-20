@@ -32,6 +32,7 @@
                 </form>
                 <div class="botonera">
                     <a href="/sobrenosotros"><i class="fa-regular fa-2x fa-address-card"></i></a>
+                    <a href="/contacto"><i class="fa-regular fa-circle-user fa-2x"></i></a>
                     @hasanyrole('admin|author')
                     <i class="fa-regular msg fa-2x fa-message"></i>
                     <div class="logreg">
