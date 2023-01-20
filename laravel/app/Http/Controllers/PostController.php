@@ -277,10 +277,10 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'pcomment'  => 'required',
         ]);
-        
-        if (Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
+        $repetido = Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->where('comment',$request->input('pcomment'))->first();
+        if ($repetido){
             return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you can't comment the same post two timest"));
+            ->with('error', ("ERROR you can't comment the same two times"));
         }else{
             $comment = Comment::create([
                 'user_id' => auth()->user()->id,
@@ -291,11 +291,11 @@ class PostController extends Controller
         }
     }
 
-    public function uncomment(Post $post){
-        $comment = Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first();
-        if ($comment){
-            Comment::where('user_id',auth()->user()->id)
-                ->where('post_id', $post->id )->delete();
+    public function uncomment($id, Request  $request){
+        $post = Post::find($id);
+        $comment = Comment::find($request->input('comment_id'));
+        if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
+            $comment->delete();
             return redirect()->route('posts.show', $post)
                 ->with('success', __('Comment deleted succesfully'));
         }else{

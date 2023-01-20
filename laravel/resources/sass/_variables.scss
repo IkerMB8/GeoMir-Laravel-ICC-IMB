@@ -972,3 +972,40 @@ body.font-size-16{
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
 }
+.clasificacion #form {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+}
+  
+.clasificacion #form p {
+    text-align: center;
+}
+
+.clasificacion #form label {
+    font-size: 20px;
+}
+
+.clasificacion input[type="radio"] {
+    display: none;
+}
+
+.clasificacion label {
+    color: grey;
+    font-size: 36px;
+}
+
+.clasificacion {
+    margin: 0;
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+.clasificacion label:hover,
+.clasificacion label:hover ~ label {
+    color: orange;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+    color: orange;
+}

@@ -60,17 +60,49 @@
                                             <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <hr>
+                                        <div class="comentarios">
+                                            @foreach ($place->reviews() as $review)
+                                                <div class="caja_comment">
+                                                    <p style="color:white;">@ {{ $review->reviewAuthor() }}</p>
+                                                    <div class="comment_del">
+                                                        <p style="color:white;">{{ $review->review }}</p>
+                                                        @include('partials.buttons-delete-review')
+                                                    </div>
+                                                    <div style="display: flex;margin-top: 5px;">
+                                                        @for ($val = 0; $val < $review->valoracion; $val++)
+                                                            <i class="fa-solid fa-star" style="color:yellow; margin:0;"></i>
+                                                        @endfor
+                                                        @for ($no = 0; $no < (5-$review->valoracion); $no++)
+                                                            <i class="fa-solid fa-star" style="color:white; margin:0;"></i>
+                                                        @endfor
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                         <div class="derechader">
                                             <div></div>
                                             <div class="modal-footer comentario">
-                                                <div style="float:left;">
-                                                    <form>
-                                                        <input style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
+                                                <div style="float:left; width:100%;">
+                                                    <form style="display:flex; align-items:center;justify-content:space-between;width:100%;" method="POST" action="{{ route('places.review' , $place) }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div style="display: flex;flex-direction: column;margin-right: 23px;width: 100%;">
+                                                            <input id="preview" name="preview" style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su review"/>                                                        
+                                                            <p class="clasificacion">
+                                                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                                                <label for="radio1">★</label>
+                                                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                                                <label for="radio2">★</label>
+                                                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                                                <label for="radio3">★</label>
+                                                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                                                <label for="radio4">★</label>
+                                                                <input id="radio5" type="radio" name="estrellas" value="1">
+                                                                <label for="radio5">★</label>
+                                                            </p>
+                                                        </div>
+                                                        <button type="submit" class="botonpub" style="height:46px;padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
                                                     </form>
-                                                </div>
-                                                <div style="float:right;">
-                                                    <button type="button" class="botonpub">Publicar</button>
-                                                </div>         
+                                                </div>          
                                             </div>
                                         </div>
                                     </div>

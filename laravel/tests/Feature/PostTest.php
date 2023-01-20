@@ -240,7 +240,7 @@ class PostTest extends TestCase
     /**
         * @depends test_post_create
     */
-    public function test_post_comment(object $post)
+    public function test_post_comment(object $post) :   string
     {   
         Sanctum::actingAs(self::$testUser);
         $response = $this->postJson("/api/posts/{$post->id}/comment", [
@@ -269,22 +269,31 @@ class PostTest extends TestCase
     }
     
     /**
-        * @depends test_post_create
+        * @depends test_post_comment
     */
-    public function test_post_uncomment(object $post)
+    public function test_post_uncomment($commentpost)
     {   
+        // Sanctum::actingAs(self::$testUser);
+        // $response = $this->deleteJson("/api/posts/{$post->id}/comment");
+        // $this->_test_ok($response);
         Sanctum::actingAs(self::$testUser);
-        $response = $this->deleteJson("/api/posts/{$post->id}/comment");
+        $cp = explode (",", $commentpost);
+        $postid = $cp[1];
+        $commentid = $cp[0];
+        $response = $this->deleteJson("/api/posts/{$postid}/comment/{$commentid}");
         $this->_test_ok($response);
     }
     
     /**
-        * @depends test_post_create
+        * @depends test_post_comment
     */
-    public function test_post_uncomment_error(object $post)
+    public function test_post_uncomment_error($commentpost)
     {   
         Sanctum::actingAs(self::$testUser);
-        $response = $this->deleteJson("/api/posts/{$post->id}/comment");
+        $cp = explode (",", $commentpost);
+        $postid = $cp[1];
+        $commentid = $cp[0];
+        $response = $this->deleteJson("/api/posts/{$postid}/comment/{$commentid}");
         $response->assertStatus(500);
     }
     

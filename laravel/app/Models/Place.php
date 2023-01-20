@@ -60,6 +60,10 @@ class Place extends Model
         $user = auth()->user();
         return $this->favoritedByUser($user);
     }
-    
+
+    public function reviews()
+    {
+        return Review::all()->where('place_id', $this->id);
+    }
 
 }

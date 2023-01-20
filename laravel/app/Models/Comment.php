@@ -23,7 +23,7 @@ class Comment extends Model
 
     public function deleteBool()
     {
-        if (auth()->user()->id == $this->user_id){
+        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
             return true;
         }else{
             return false;

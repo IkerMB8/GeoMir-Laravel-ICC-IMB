@@ -321,9 +321,10 @@ class PostController extends Controller
                 'post_id' => $post->id,
                 'comment' =>$request->input('pcomment'),
             ]);
+            $commentpost = "$comment->id,$post->id";
             return response()->json([
                 'success' => true,
-                'data'    => "Commented successfully"
+                'data'    => $commentpost,
             ], 201);
         }
     }
@@ -332,23 +333,20 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     * @param  int  $id2
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
     */
-    public function uncomment($id){
+    public function uncomment($id, $id2){
         $post = Post::find($id);
-        if ($post->user->id == auth()->user()->id || auth()->user()->hasRole(['admin'])){
-            Comment::where('post_id', $post->id)
-            ->where('user_id', $post->user_id)->delete();
-            return response()->json([
-                'success' => true,
-                'data'    => "Comment deleted successfully"
-            ], 200);
+        $comment = Comment::find($id2);
+        if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
+            $comment->delete();
+            return redirect()->route('posts.show', $post)
+                ->with('success', __('Comment deleted succesfully'));
         }else{
-            return response()->json([
-                'success'  => false,
-                'message' => "ERROR you can only delete your comments"
-            ], 500);
+            return redirect()->route('posts.show', $post)
+            ->with('error', ("ERROR you cannot delete a comment that is not yours"));
         }
     }
 }

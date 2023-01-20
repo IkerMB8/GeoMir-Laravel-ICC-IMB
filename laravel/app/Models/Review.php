@@ -11,8 +11,23 @@ class Review extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'post_id',
+        'place_id',
         'review',
         'valoracion',
     ];
+
+    public function reviewAuthor()
+    {
+        $user = User::where('id',$this->user_id)->first();
+        return $user->name;
+    }
+
+    public function deleteBoolReview()
+    {
+        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

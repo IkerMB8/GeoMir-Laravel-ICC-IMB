@@ -32,4 +32,4 @@ Route::apiResource('posts', PostController::class);
 Route::post('/posts/{post}/like', [PostController::class, 'like'])->middleware(['auth:sanctum']);
 Route::delete('/posts/{post}/like', [PostController::class, 'unlike'])->middleware(['auth:sanctum']);
 Route::post('/posts/{post}/comment', [PostController::class, 'comment'])->middleware(['auth:sanctum']);
-Route::delete('/posts/{post}/comment', [PostController::class, 'uncomment'])->middleware(['auth:sanctum']);
+Route::delete('/posts/{post}/comment/{comment}', [PostController::class, 'uncomment'])->middleware(['auth:sanctum']);

@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
                   ->onUpdate('cascade')->onDelete('cascade');
@@ -23,11 +24,6 @@ return new class extends Migration
             // Eloquent does not support composite PK :-(
             // $table->primary(['user_id', 'post_id']);
             $table->string('comment',255);
-        });
-        // Eloquent compatibility workaround :-)
-        Schema::table('comments', function (Blueprint $table) {
-            $table->id()->first();
-            $table->unique(['user_id', 'post_id']);
         });
     }
 

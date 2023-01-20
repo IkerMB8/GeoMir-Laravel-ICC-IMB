@@ -6,6 +6,7 @@ use App\Models\Place;
 use App\Models\Favourite;
 use App\Models\File;
 use App\Models\Visibility;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -128,6 +129,7 @@ class PlaceController extends Controller
             "autor" => $place->user,
             "favourites" => $place->favourites_count,
             "visibility" => $visibility,
+            "reviews"  =>  $place->reviews(),
         ]);
     }
 
@@ -267,5 +269,37 @@ class PlaceController extends Controller
         Favourite::where('user_id',auth()->user()->id)
                  ->where('place_id', $place->id )->delete();
         return redirect()->route('places.show', $place);
+    }
+
+    public function review(Place $place, Request $request){
+        $validatedData = $request->validate([
+            'preview'   =>  'required',
+            'estrellas' =>  'required',
+        ]);
+        if (Review::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            return redirect()->route('places.show', $place)
+            ->with('error', ("ERROR you can't review the same two times"));
+        }else{
+            $review = Review::create([
+                'user_id'       =>  auth()->user()->id,
+                'place_id'      =>  $place->id,
+                'review'        =>  $request->input('preview'),
+                'valoracion'    =>  $request->input('estrellas'),
+            ]);
+            return redirect()->back();
+        }
+    }
+
+    public function unreview($id, Request  $request){
+        $place = Place::find($id);
+        $review = Review::find($request->input('id'));
+        if ($place->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
+            $review->delete();
+            return redirect()->route('places.show', $place)
+                ->with('success', __('Review deleted succesfully'));
+        }else{
+            return redirect()->route('places.show', $place)
+            ->with('error', ("ERROR you cannot delete a review that is not yours"));
+        }
     }
 }
