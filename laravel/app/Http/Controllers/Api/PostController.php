@@ -321,10 +321,9 @@ class PostController extends Controller
                 'post_id' => $post->id,
                 'comment' =>$request->input('pcomment'),
             ]);
-            $commentpost = "$comment->id,$post->id";
             return response()->json([
                 'success' => true,
-                'data'    => $commentpost,
+                'data'    => "Commented succesfully",
             ], 201);
         }
     }
@@ -333,13 +332,11 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @param  int  $id2
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
     */
-    public function uncomment($id, $id2){
+    public function uncomment($id){
         $post = Post::find($id);
-        $comment = Comment::find($id2);
+        $comment = Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first();
         if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
             $comment->delete();
             return redirect()->route('posts.show', $post)

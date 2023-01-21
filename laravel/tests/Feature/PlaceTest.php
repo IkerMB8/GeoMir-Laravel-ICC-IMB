@@ -14,6 +14,7 @@ class PlaceTest extends TestCase
     public static User $testUser;
     public static array $validData = [];
     public static array $invalidData = [];
+    public static array $invalidReview = [];
     
     public static function setUpBeforeClass() : void
     {
@@ -49,6 +50,10 @@ class PlaceTest extends TestCase
             'pcategory_id' => 'a',
             'pvisibility_id' => 'a',
             'pupload' => $fpupload
+        ];
+        self::$invalidReview = [
+            'preview' =>  123,
+            'estrellas' => 'ss',
         ];
     }
 
@@ -235,6 +240,48 @@ class PlaceTest extends TestCase
         Sanctum::actingAs(self::$testUser);
         $response = $this->deleteJson("/api/places/{$place->id}/favourite");
         $response->assertStatus(500);
+    }
+    
+    /**
+        * @depends test_place_create
+    */
+    public function test_place_review(object $place) 
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->postJson("/api/places/{$place->id}/review", [
+            "preview" => "Prueba review",
+            "estrellas" =>  5,
+        ]);
+        // Check OK response
+        $this->_test_ok($response, 201);
+        // Check validation errors
+        $response->assertValid(["preview", "estrellas"]);
+        // Read, update and delete dependency!!!
+        $json = $response->getData();
+        return $json->data;
+    }
+    
+    /**
+        * @depends test_place_create
+    */
+    public function test_place_review_error(object $place)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        // Cridar servei web de l'API
+        $response = $this->postJson("/api/places/{$place->id}/review", self::$invalidReview);
+        // TODO Revisar errors de validació
+        $params = ['preview', 'estrellas'];
+        $response->assertInvalid($params);
+    }
+    
+    /**
+        * @depends test_place_create
+    */
+    public function test_place_unreview(object $place)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $response = $this->deleteJson("/api/places/{$place->id}/review");
+        $this->_test_ok($response);
     }
 
     /**
