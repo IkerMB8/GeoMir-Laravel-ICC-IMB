@@ -16,7 +16,9 @@
     
         <form method="post" id="create" action="{{ route('posts.store') }}" enctype="multipart/form-data">
             @csrf
-            @vite('resources/js/posts/create-post.js')
+            @env(['local','development'])
+                @vite('resources/js/posts/create-post.js')
+            @endenv
             <div class="createpop">
                 <table class="table">
                     <tbody>
