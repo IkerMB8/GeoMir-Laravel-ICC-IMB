@@ -120,8 +120,6 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
         @endforeach
     </div>
     @env(['local','development'])
