@@ -215,7 +215,7 @@ body.dark .navegador{
 }
 .post{
     border: 4px solid black;
-    width: 550px; 
+    // width: 550px; 
     border-radius: 10px;
     margin-top: 30px;
     padding: 5px 25px 8px 25px;
@@ -242,6 +242,8 @@ body.dark .navegador{
     display:grid; 
     justify-content:center; 
     text-align:center;
+    margin-left: 35%;
+    margin-right: 35%;
     margin-bottom: 30px;
 }
 .imgpub{
@@ -528,14 +530,15 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
 .modalcntnt{
     display:flex !important; 
     flex-direction:row !important; 
-    background-color: #1a1830 !important; 
-    padding: 15px !important;
+    background-color: #1a1830 !important;
+    padding: 0 !important;
 }
 
 .commentizq{
-    margin-right:0 !important; 
-    padding-left:5px !important; 
-    padding-top:5px !important;
+    margin: 5px 0px 5px 5px;
+    // margin-right:0 !important; 
+    // padding-left:5px !important; 
+    // padding-top:5px !important;
     align-items: center;
     display: flex;
 }
@@ -545,8 +548,9 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
 .commentimg{
     border:2px solid black; 
     border-radius: 25px;
-    max-width: 800px;
-    max-height: 700px;
+    // max-width: 800px;
+    // max-height: 700px;
+    width: 100%;
 }
 .modal{
     --bs-modal-width:100% !important;
@@ -747,11 +751,15 @@ body.font-size-16{
     transform: translate(-600px);
 }
 
+
 @media (max-width: 768px) {
     .navfiltros{
         display: none;
     }
-
+    .posts {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
     .navegador{
         justify-content: space-between;
     }
@@ -770,9 +778,8 @@ body.font-size-16{
         width: 100% !important;
     }
 
-    .commentizq img{
-        width: 100%;
-        max-height: 800px;
+    .commentizq{
+        display: none;
     }
     .contenidoSN{
         display: grid !important;
@@ -780,6 +787,36 @@ body.font-size-16{
         align-items: center !important;
         margin-top: 20px !important;
         flex-direction: column !important;
+    }
+}
+@media (max-width: 500px){
+    .modalcntnt{
+        margin: 0;
+        height: 100%;
+    }
+    .comentariosmodal{
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+    }
+    .derechader{
+        height: 89%;
+        width: 100%;
+    }
+}
+@media (max-width: 400px) {
+    .posts {
+        margin-left: 0%;
+        margin-right: 0%;
+        margin-bottom: 80px;
+    }
+    .post{
+        border-radius: 0;
+        border: 0px;
+        border-bottom: 2px solid black;
+    }
+    br{
+        display: none;
     }
 }
 .like{
