@@ -150,6 +150,7 @@ i{
     width: 80% !important;
     margin-left: 10%;
     margin-right: 10%;
+    gap: 20px
 }
 .navfiltros{
     display:grid; 
@@ -621,11 +622,9 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
     margin:0;
 }
 .derechader{
-    height: 590px; 
     display: flex; 
     flex-direction: column; 
     justify-content: space-between;
-    padding-left: 10px;
 }
 
 .addpopup{
@@ -882,7 +881,6 @@ body.font-size-16{
     margin:0;
 }
 .comentario{
-    margin-left:10px !important; 
     border: 2px solid black !important;
     background-color: white !important;
     border-radius: 25px !important; 
@@ -974,4 +972,67 @@ body.font-size-16{
 }
 .fotosSN  a:hover big {
     display:none;text-decoration:none;
+}
+
+.comentarios{
+    overflow: auto;
+    overflow-x: hidden;
+    height: 600px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.caja_comment{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 40px;
+}
+
+.caja_comment p{
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.comment_del{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tres_puntos{
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: var(--bs-modal-bg);
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
+}
+
+.clasificacion input[type="radio"] {
+    display: none;
+}
+
+.clasificacion label {
+    color: grey;
+    font-size: 36px;
+}
+
+.clasificacion {
+    margin: 0;
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+.clasificacion label:hover,
+.clasificacion label:hover ~ label {
+    color: orange;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+    color: orange;
 }
