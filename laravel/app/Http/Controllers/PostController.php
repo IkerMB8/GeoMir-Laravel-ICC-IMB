@@ -294,9 +294,7 @@ class PostController extends Controller
         }
     }
 
-    public function uncomment($id, Request  $request){
-        $post = Post::find($id);
-        $comment = Comment::find($request->input('comment_id'));
+    public function uncomment(Post $post, Comment $comment){
         if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
             $comment->delete();
             return redirect()->route('posts.show', $post)

@@ -245,7 +245,7 @@ class PlaceTest extends TestCase
     /**
         * @depends test_place_create
     */
-    public function test_place_review(object $place) 
+    public function test_place_review(object $place) : object
     {   
         Sanctum::actingAs(self::$testUser);
         $response = $this->postJson("/api/places/{$place->id}/review", [
@@ -275,13 +275,24 @@ class PlaceTest extends TestCase
     }
     
     /**
-        * @depends test_place_create
+        * @depends test_place_review
     */
-    public function test_place_unreview(object $place)
+    public function test_place_unreview(object $review)
     {   
         Sanctum::actingAs(self::$testUser);
-        $response = $this->deleteJson("/api/places/{$place->id}/review");
+        $response = $this->deleteJson("/api/places/{$review->place_id}/review/{$review->id}");
         $this->_test_ok($response);
+    }
+    
+    /**
+        * @depends test_place_review
+    */
+    public function test_place_unreview_notfound(object $review)
+    {   
+        Sanctum::actingAs(self::$testUser);
+        $id = "not_exists";
+        $response = $this->deleteJson("/api/places/{$review->place_id}/review/{$id}");
+        $this->_test_notfound($response);
     }
 
     /**

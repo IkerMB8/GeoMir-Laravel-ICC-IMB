@@ -303,9 +303,7 @@ class PlaceController extends Controller
         }
     }
 
-    public function unreview($id, Request  $request){
-        $place = Place::find($id);
-        $review = Review::find($request->input('id'));
+    public function unreview(Place $place, Review $review){
         if ($place->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
             $review->delete();
             return redirect()->route('places.show', $place)

@@ -83,25 +83,7 @@
                                             <div></div>
                                             <div class="modal-footer comentario">
                                                 <div style="float:left; width:100%;">
-                                                    <form style="display:flex; align-items:center;justify-content:space-between;width:100%;" method="POST" action="{{ route('places.review' , $place) }}" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <div style="display: flex;flex-direction: column;margin-right: 23px;width: 100%;">
-                                                            <input id="preview" name="preview" style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su review"/>                                                        
-                                                            <p class="clasificacion">
-                                                                <input id="radio1" type="radio" name="estrellas" value="5">
-                                                                <label for="radio1">★</label>
-                                                                <input id="radio2" type="radio" name="estrellas" value="4">
-                                                                <label for="radio2">★</label>
-                                                                <input id="radio3" type="radio" name="estrellas" value="3">
-                                                                <label for="radio3">★</label>
-                                                                <input id="radio4" type="radio" name="estrellas" value="2">
-                                                                <label for="radio4">★</label>
-                                                                <input id="radio5" type="radio" name="estrellas" value="1">
-                                                                <label for="radio5">★</label>
-                                                            </p>
-                                                        </div>
-                                                        <button type="submit" class="botonpub" style="height:46px;padding: 10px; background-color: #7000ff; color:white; border-radius:15px;">Publicar</button>
-                                                    </form>
+                                                    @include('partials.formreview')
                                                 </div>          
                                             </div>
                                         </div>
@@ -129,7 +111,12 @@
                         <p></p>
                     </div>
                     <div>
-                        <i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i>
+                        @for ($val = 0; $val < $place->valTtlReview(); $val++)
+                            <i class="fa-solid fa-star" style="color:yellow; margin:0;"></i>
+                        @endfor
+                        @for ($no = 0; $no < (5-$place->valTtlReview()); $no++)
+                            <i class="fa-solid fa-star" style="color:black; margin:0;"></i>
+                        @endfor
                     </div>
                 </div>
             </div>

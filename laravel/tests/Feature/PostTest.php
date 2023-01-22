@@ -240,7 +240,7 @@ class PostTest extends TestCase
     /**
         * @depends test_post_create
     */
-    public function test_post_comment(object $post) 
+    public function test_post_comment(object $post) : object
     {   
         Sanctum::actingAs(self::$testUser);
         $response = $this->postJson("/api/posts/{$post->id}/comment", [
@@ -269,23 +269,24 @@ class PostTest extends TestCase
     }
     
     /**
-        * @depends test_post_create
+        * @depends test_post_comment
     */
-    public function test_post_uncomment(object $post)
+    public function test_post_uncomment(object $comment)
     {   
         Sanctum::actingAs(self::$testUser);
-        $response = $this->deleteJson("/api/posts/{$post->id}/comment");
+        $response = $this->deleteJson("/api/posts/{$comment->post_id}/comment/{$comment->id}");
         $this->_test_ok($response);
     }
     
     /**
-        * @depends test_post_create
+        * @depends test_post_comment
     */
-    public function test_post_uncomment_error(object $post)
+    public function test_post_uncomment_notfound(object $comment)
     {   
         Sanctum::actingAs(self::$testUser);
-        $response = $this->deleteJson("/api/posts/{$post->id}/comment");
-        $response->assertStatus(500);
+        $id = "not_exists";
+        $response = $this->deleteJson("/api/posts/{$comment->post_id}/comment/{$id}");
+        $this->_test_notfound($response);
     }
     
     /**
