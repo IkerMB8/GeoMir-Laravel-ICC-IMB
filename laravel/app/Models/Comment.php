@@ -21,9 +21,9 @@ class Comment extends Model
         return $user->name;
     }
 
-    public function deleteBool()
+    public function deleteBool($post)
     {
-        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
+        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $post->user_id == auth()->user()->id ){
             return true;
         }else{
             return false;

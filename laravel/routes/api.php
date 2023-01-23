@@ -27,6 +27,8 @@ Route::apiResource('files', FileController::class)->middleware(['auth:sanctum'])
 Route::apiResource('places', PlaceController::class);
 Route::post('/places/{place}/favourite', [PlaceController::class, 'favourite'])->middleware(['auth:sanctum']);
 Route::delete('/places/{place}/favourite', [PlaceController::class, 'unfavourite'])->middleware(['auth:sanctum']);
+Route::post('/places/{place}/review', [PlaceController::class, 'review'])->middleware(['auth:sanctum']);
+Route::delete('/places/{place}/review/{review}', [PlaceController::class, 'unreview'])->middleware(['auth:sanctum']);
 
 Route::apiResource('posts', PostController::class);
 Route::post('/posts/{post}/like', [PostController::class, 'like'])->middleware(['auth:sanctum']);

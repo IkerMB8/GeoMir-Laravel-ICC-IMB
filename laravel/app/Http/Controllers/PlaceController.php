@@ -258,17 +258,29 @@ class PlaceController extends Controller
     }
 
     public function favourite(Place $place){
-        $favourite = Favourite::create([
-            'user_id' => auth()->user()->id,
-            'place_id' => $place->id,
-        ]);
-        return redirect()->back();
+        if (Favourite::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            return redirect()->route('places.show', $place)
+            ->with('error', __("fpp.place-favourite-error"));
+        }else{
+            $favourite = Favourite::create([
+                'user_id' => auth()->user()->id,
+                'place_id' => $place->id,
+            ]);
+            return redirect()->back()
+            ->with('success', __("fpp.place-favourite"));
+        }
     }
 
     public function unfavourite(Place $place){
-        Favourite::where('user_id',auth()->user()->id)
-                 ->where('place_id', $place->id )->delete();
-        return redirect()->route('places.show', $place);
+        if (Favourite::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            Favourite::where('user_id',auth()->user()->id)
+                     ->where('place_id', $place->id )->delete();;
+            return redirect()->back()
+            ->with('success', __("fpp.place-unfavourite"));
+        }else{
+            return redirect()->route('places.show', $place)
+            ->with('error', __("fpp.place-unfavourite-error"));
+        }
     }
 
     public function review(Place $place, Request $request){
@@ -278,7 +290,7 @@ class PlaceController extends Controller
         ]);
         if (Review::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
             return redirect()->route('places.show', $place)
-            ->with('error', ("ERROR you can't review the same two times"));
+            ->with('error', __('fpp.place-review-error'));
         }else{
             $review = Review::create([
                 'user_id'       =>  auth()->user()->id,
@@ -286,20 +298,19 @@ class PlaceController extends Controller
                 'review'        =>  $request->input('preview'),
                 'valoracion'    =>  $request->input('estrellas'),
             ]);
-            return redirect()->back();
+            return redirect()->back()
+            ->with('success', __('fpp.place-review'));;
         }
     }
 
-    public function unreview($id, Request  $request){
-        $place = Place::find($id);
-        $review = Review::find($request->input('id'));
+    public function unreview(Place $place, Review $review){
         if ($place->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
             $review->delete();
             return redirect()->route('places.show', $place)
-                ->with('success', __('Review deleted succesfully'));
+                ->with('success', __('fpp.place-unreview'));
         }else{
             return redirect()->route('places.show', $place)
-            ->with('error', ("ERROR you cannot delete a review that is not yours"));
+            ->with('error', __('fpp.place-unreview-error'));
         }
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                   ->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('place_id');
-            $table->foreign('place_id')->references('id')->on('posts')
+            $table->foreign('place_id')->references('id')->on('places')
                   ->onUpdate('cascade')->onDelete('cascade');
             // Eloquent does not support composite PK :-(
             // $table->primary(['user_id', 'place_id']);

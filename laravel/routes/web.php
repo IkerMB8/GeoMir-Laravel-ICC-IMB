@@ -63,13 +63,13 @@ Route::post('/places/{place}/favourite', [App\Http\Controllers\PlaceController::
 Route::delete('/places/{place}/favourite', [App\Http\Controllers\PlaceController::class, 'unfavourite'])->name('places.unfavourite');
 
 Route::post('/places/{place}/review', [App\Http\Controllers\PlaceController::class, 'review'])->name('places.review');
-Route::delete('/places/{place}/review', [App\Http\Controllers\PlaceController::class, 'unreview'])->name('places.unreview');
+Route::delete('/places/{place}/review/{review}', [App\Http\Controllers\PlaceController::class, 'unreview'])->name('places.unreview');
 
 Route::post('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
 Route::delete('/posts/{post}/like', [App\Http\Controllers\PostController::class, 'unlike'])->name('posts.unlike');
 
 Route::post('/posts/{post}/comment', [App\Http\Controllers\PostController::class, 'comment'])->name('posts.comment');
-Route::delete('/posts/{post}/comment}', [App\Http\Controllers\PostController::class, 'uncomment'])->name('posts.uncomment');
+Route::delete('/posts/{post}/comment/{comment}', [App\Http\Controllers\PostController::class, 'uncomment'])->name('posts.uncomment');
 
 Route::get('/sobrenosotros', function () {
     return view('sobrenosotros');

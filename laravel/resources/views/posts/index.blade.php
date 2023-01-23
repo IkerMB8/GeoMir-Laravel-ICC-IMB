@@ -16,7 +16,7 @@
                         <!-- Modal -->
                         <div class="modal fade" style="--bs-modal-width:40% !important;" id="options{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered logreg">
-                                <div class="modal3p modal-content">
+                                <div class="modal3p tres_puntos">
                                 <form method="post" action="{{ route('posts.destroy',$post) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('DELETE')
@@ -47,7 +47,7 @@
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="post{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered logreg">
+                            <div class="modal-dialog modal-dialog-centered logreg comentariosmodal">
                                 <div class="modal-content modalcntnt">
                                     <div class="commentizq">
                                         <div class="modal-body">
@@ -104,8 +104,6 @@
                 @endif
             </div>
         </div>
-        
-        <br><br><br>
     @endforeach
 </div>
 @env(['local','development'])

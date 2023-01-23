@@ -252,13 +252,14 @@ class PostController extends Controller
     public function like(Post $post){
         if (Like::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
             return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you can't like the same post two timest"));
+            ->with('error', __("fpp.post-like-error"));
         }else{
             $like = Like::create([
                 'user_id' => auth()->user()->id,
                 'post_id' => $post->id,
             ]);
-            return redirect()->back();
+            return redirect()->back()
+            ->with('success', __("fpp.post-like"));
         }
     }
 
@@ -266,10 +267,11 @@ class PostController extends Controller
         if (Like::where('user_id',auth()->user()->id)->where('post_id', $post->id )->first()){
             Like::where('user_id',auth()->user()->id)
                 ->where('post_id', $post->id )->delete();
-            return redirect()->back();
+            return redirect()->back()
+            ->with('success', __("fpp.post-unlike"));
         }else{
             return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you don't liked this post yet"));
+            ->with('error', __("fpp.post-unlike-error"));
         }
     }
 
@@ -280,27 +282,26 @@ class PostController extends Controller
         $repetido = Comment::where('user_id',auth()->user()->id)->where('post_id', $post->id )->where('comment',$request->input('pcomment'))->first();
         if ($repetido){
             return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you can't comment the same two times"));
+            ->with('error', __('fpp.post-comment-error'));
         }else{
             $comment = Comment::create([
                 'user_id' => auth()->user()->id,
                 'post_id' => $post->id,
                 'comment' =>$request->input('pcomment'),
             ]);
-            return redirect()->back();
+            return redirect()->back()
+            ->with('success', __('fpp.post-comment'));
         }
     }
 
-    public function uncomment($id, Request  $request){
-        $post = Post::find($id);
-        $comment = Comment::find($request->input('comment_id'));
+    public function uncomment(Post $post, Comment $comment){
         if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
             $comment->delete();
             return redirect()->route('posts.show', $post)
-                ->with('success', __('Comment deleted succesfully'));
+                ->with('success', __('fpp.post-uncomment'));
         }else{
             return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you cannot delete a comment that is not yours"));
+            ->with('error', __('fpp.post-uncomment-error'));
         }
     }
 }

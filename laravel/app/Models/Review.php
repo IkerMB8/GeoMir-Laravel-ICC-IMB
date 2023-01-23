@@ -22,9 +22,9 @@ class Review extends Model
         return $user->name;
     }
 
-    public function deleteBoolReview()
+    public function deleteBoolReview($place)
     {
-        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
+        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $place->user_id == auth()->user()->id ){
             return true;
         }else{
             return false;

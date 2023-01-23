@@ -1,5 +1,5 @@
 import './bootstrap';
-import './bootstrap';
+import './validator';
 import './files/create';
 import './places/create-place';
 import './posts/create-post';

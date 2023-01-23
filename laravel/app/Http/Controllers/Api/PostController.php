@@ -321,10 +321,9 @@ class PostController extends Controller
                 'post_id' => $post->id,
                 'comment' =>$request->input('pcomment'),
             ]);
-            $commentpost = "$comment->id,$post->id";
             return response()->json([
                 'success' => true,
-                'data'    => $commentpost,
+                'data'    => $comment,
             ], 201);
         }
     }
@@ -334,19 +333,29 @@ class PostController extends Controller
      *
      * @param  int  $id
      * @param  int  $id2
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
     */
     public function uncomment($id, $id2){
         $post = Post::find($id);
         $comment = Comment::find($id2);
-        if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
-            $comment->delete();
-            return redirect()->route('posts.show', $post)
-                ->with('success', __('Comment deleted succesfully'));
+        if ($comment){
+            if ($post->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $comment->user_id == auth()->user()->id ){
+                $comment->delete();
+                return response()->json([
+                    'success' => true,
+                    'data'    => "Comment deleted successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'success'  => false,
+                    'message' => "ERROR, you can not delete a comment that is not yours"
+                ], 500);
+            }
         }else{
-            return redirect()->route('posts.show', $post)
-            ->with('error', ("ERROR you cannot delete a comment that is not yours"));
+            return response()->json([
+                'success'  => false,
+                'message' => "Comment not found"
+            ], 404);
         }
     }
 }
