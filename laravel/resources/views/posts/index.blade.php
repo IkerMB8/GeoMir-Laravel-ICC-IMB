@@ -108,7 +108,6 @@
         <br><br><br>
     @endforeach
 </div>
-
 @env(['local','development'])
     @vite('resources/js/bootstrap.js')
 @endenv

@@ -363,7 +363,6 @@
         }
     );
 </script>
-
 @env(['local','development'])
     @vite('resources/js/bootstrap.js')
 @endenv

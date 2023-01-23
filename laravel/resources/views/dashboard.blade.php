@@ -87,7 +87,6 @@
                 </div>
             </div>
         </div>
-        
         @env(['local','development'])
             @vite('resources/js/bootstrap.js')
         @endenv
