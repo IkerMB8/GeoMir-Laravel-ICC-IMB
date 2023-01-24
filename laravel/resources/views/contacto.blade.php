@@ -35,14 +35,14 @@
 .encima{
     position: absolute;
     top: 45%;
-    left: 44%;
+    left: 42%;
     color: white;
 }
 
 .encima2{
     position: absolute;
     top: 50%;
-    left: 44.5%;
+    left: 42.5%;
     color: white;
 }
 
@@ -51,7 +51,7 @@
     top: 55%;
     color: white;
     background-color: #1a1830;
-    left: 46%;
+    left: 44.5%;
     opacity: 0.6;
     border: 1px solid lightgray;
     padding: 10px;
@@ -59,13 +59,13 @@
 }
 
 .pie{
-    height: 20vh;
+    height: 15vh;
     width: 100%;
-    background-color: #E8072B;
+    background-color: #1a1830;
     display: flex;
-    align-items: center;
     justify-content: center;
     color: white;
+    position: absolute;
 }
 
 .div_pie{
@@ -77,7 +77,6 @@
 }
 
 .tabla_pie{
-    width: 40%;
     text-align: center;
     justify-content: center;
     font-size: 0.6em;
@@ -91,6 +90,24 @@ a{
 a:hover{
     color:white;
 }
+
+.RS{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.divMAPA{
+    background-color: #fafce1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h1MAPA{
+    margin-top: 2%;
+    font-size: 3em;
+}
 </style>
 
 <div class="divVideo">
@@ -99,12 +116,13 @@ a:hover{
     <h3 class="encima2">Envia el teu missatge</h3>
     <a class="btnGif" href="./contact" target="blank">Formulario de Contacto</a>
 </div>
-<div>
+<div class="divMAPA">
+    <h1 class="h1MAPA">Vols visitar-nos?</h1>
+    <h4>Ubica'ns al mapa!</h4>
+    <img src="/img/mapa.png" style="width:950px; height: 700px">
 </div>
 <div class="pie">
     <div class="div_pie">
-        <a class="fa-solid fa-2x fa-phone"></a>
-        <hr>
         <div class="tabla_pie">
             <table>
                 <tr>
@@ -112,12 +130,15 @@ a:hover{
                         <h3>SÍGUENOS EN REDES!</h3>
                     </td>
                 </tr>
+                <tr>
+                    <td class="RS">
+                        <a href="https://twitter.com/ikercc44/" class="fa-brands fa-3x fa-twitter"></a>
+                        <a href="https://instagram.com/ikercc4/" class="fa-brands fa-3x fa-instagram"></a>
+                        <a href="https://www.facebook.com/iker.castellano.3154" class="fa-3x fa fa-facebook"></a>
+                    </td>
+                </tr>
             </table>
-        </div>
-        <hr>
-        <a href="https://twitter.com/ikercc44/" class="fa-brands fa-2x fa-twitter"></a>
-        <a href="https://instagram.com/ikercc4/" class="fa-brands fa-2x fa-instagram"></a>
-        <a href="https://www.facebook.com/iker.castellano.3154" class="fa-2x fa fa-facebook"></a>
+        </div>        
     </div>
 </div>
 <script>
