@@ -27,26 +27,26 @@
     display:none !important;
 }
 
-.divVideo_gif{
+.gif{
     width: 100%;
     opacity: 0.4;
 }
 
-.divVideo_encima{
+.encima{
     position: absolute;
     top: 45%;
     left: 42%;
     color: white;
 }
 
-.divVideo_encima2{
+.encima2{
     position: absolute;
     top: 50%;
     left: 42.5%;
     color: white;
 }
 
-.divVideo_btnGif{
+.btnGif{
     position: absolute;
     top: 55%;
     color: white;
@@ -76,13 +76,13 @@
     justify-content: center;
 }
 
-.pie_div-tabla{
+.pie_tabla{
     text-align: center;
     justify-content: center;
     font-size: 0.6em;
 }
 
-.pie_div-tabla-RS{
+.pie_RS{
     display: flex;
     justify-content: space-evenly;
 }
@@ -116,10 +116,10 @@ a:hover{
 </style>
 
 <div class="divVideo">
-    <img class="divVideo_gif" src="/img/paisaje.gif"/>
-    <h1 class="divVideo_encima">CONTACTA'NS!</h1>
-    <h3 class="divVideo_encima2">Envia el teu missatge</h3>
-    <a class="divVideo_btnGif" href="./contact" target="blank">Formulario de Contacto</a>
+    <img class="gif" src="/img/paisaje.gif"/>
+    <h1 class="encima">CONTACTA'NS!</h1>
+    <h3 class="encima2">Envia el teu missatge</h3>
+    <a class="btnGif" href="./contact" target="blank">Formulario de Contacto</a>
 </div>
 <div class="divMAPA">
     <h1 class="divMAPA_h1">Vols visitar-nos?</h1>
@@ -128,7 +128,7 @@ a:hover{
 </div>
 <div class="pie">
     <div class="pie_div">
-        <div class="pie_div-tabla">
+        <div class="pie_tabla">
             <table>
                 <tr>
                     <td>
@@ -136,7 +136,7 @@ a:hover{
                     </td>
                 </tr>
                 <tr>
-                    <td class="pie_div-tabla-RS">
+                    <td class="pie_RS">
                         <a href="https://twitter.com/ikercc44/" class="fa-brands fa-3x fa-twitter"></a>
                         <a href="https://instagram.com/ikercc4/" class="fa-brands fa-3x fa-instagram"></a>
                         <a href="https://www.facebook.com/iker.castellano.3154" class="fa-3x fa fa-facebook"></a>
