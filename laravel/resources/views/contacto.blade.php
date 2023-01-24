@@ -27,26 +27,26 @@
     display:none !important;
 }
 
-.gif{
+.divVideo_gif{
     width: 100%;
     opacity: 0.4;
 }
 
-.encima{
+.divVideo_encima{
     position: absolute;
     top: 45%;
     left: 42%;
     color: white;
 }
 
-.encima2{
+.divVideo_encima2{
     position: absolute;
     top: 50%;
     left: 42.5%;
     color: white;
 }
 
-.btnGif{
+.divVideo_btnGif{
     position: absolute;
     top: 55%;
     color: white;
@@ -68,7 +68,7 @@
     position: absolute;
 }
 
-.div_pie{
+.pie_div{
     display: flex;
     flex-direction: row;
     gap: 18px;
@@ -76,10 +76,15 @@
     justify-content: center;
 }
 
-.tabla_pie{
+.pie_div-tabla{
     text-align: center;
     justify-content: center;
     font-size: 0.6em;
+}
+
+.pie_div-tabla-RS{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 a{
@@ -91,11 +96,6 @@ a:hover{
     color:white;
 }
 
-.RS{
-    display: flex;
-    justify-content: space-evenly;
-}
-
 .divMAPA{
     background-color: #fafce1;
     height: 100vh;
@@ -104,26 +104,31 @@ a:hover{
     align-items: center;
 }
 
-.h1MAPA{
+.divMAPA_h1{
     margin-top: 2%;
     font-size: 3em;
+}
+
+.divMAPA_img{
+    width:950px; 
+    height: 700px
 }
 </style>
 
 <div class="divVideo">
-    <img class="gif" src="/img/paisaje.gif"/>
-    <h1 class="encima">CONTACTA'NS!</h1>
-    <h3 class="encima2">Envia el teu missatge</h3>
-    <a class="btnGif" href="./contact" target="blank">Formulario de Contacto</a>
+    <img class="divVideo_gif" src="/img/paisaje.gif"/>
+    <h1 class="divVideo_encima">CONTACTA'NS!</h1>
+    <h3 class="divVideo_encima2">Envia el teu missatge</h3>
+    <a class="divVideo_btnGif" href="./contact" target="blank">Formulario de Contacto</a>
 </div>
 <div class="divMAPA">
-    <h1 class="h1MAPA">Vols visitar-nos?</h1>
+    <h1 class="divMAPA_h1">Vols visitar-nos?</h1>
     <h4>Ubica'ns al mapa!</h4>
-    <img src="/img/mapa.png" style="width:950px; height: 700px">
+    <img class="divMAPA_img" src="/img/mapa.png">
 </div>
 <div class="pie">
-    <div class="div_pie">
-        <div class="tabla_pie">
+    <div class="pie_div">
+        <div class="pie_div-tabla">
             <table>
                 <tr>
                     <td>
@@ -131,7 +136,7 @@ a:hover{
                     </td>
                 </tr>
                 <tr>
-                    <td class="RS">
+                    <td class="pie_div-tabla-RS">
                         <a href="https://twitter.com/ikercc44/" class="fa-brands fa-3x fa-twitter"></a>
                         <a href="https://instagram.com/ikercc4/" class="fa-brands fa-3x fa-instagram"></a>
                         <a href="https://www.facebook.com/iker.castellano.3154" class="fa-3x fa fa-facebook"></a>
