@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
 <style>
 .navegador {
     width: 100%;
@@ -113,6 +118,9 @@ a:hover{
     width:950px; 
     height: 700px
 }
+
+#map { height: 80%;
+width: 70%;}
 </style>
 
 <div class="divVideo">
@@ -124,7 +132,13 @@ a:hover{
 <div class="divMAPA">
     <h1 class="divMAPA_h1">Vols visitar-nos?</h1>
     <h4>Ubica'ns al mapa!</h4>
-    <img class="divMAPA_img" src="/img/mapa.png">
+    <div id="map"><script>var map = L.map('map').setView([41.2310177, 1.7279358], 19);
+                                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 19,
+                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                            }).addTo(map);
+                        </script>
+    </div>
 </div>
 <div class="pie">
     <div class="pie_div">
@@ -146,9 +160,6 @@ a:hover{
         </div>        
     </div>
 </div>
-<script>
-
-</script>
 @vite('resources/js/bootstrap.js')
 
 @endsection
