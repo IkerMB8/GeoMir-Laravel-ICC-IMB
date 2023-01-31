@@ -127,7 +127,7 @@ width: 70%;}
     <img class="gif" src="/img/paisaje.gif"/>
     <h1 class="encima">CONTACTA'NS!</h1>
     <h3 class="encima2">Envia el teu missatge</h3>
-    <a class="btnGif" href="./contact" target="blank">Formulario de Contacto</a>
+    <a class="btnGif" href="./contact" accesskey="f" target="blank">Formulario de Contacto</a>
 </div>
 <div class="divMAPA">
     <h1 class="divMAPA_h1">Vols visitar-nos?</h1>
@@ -151,15 +151,25 @@ width: 70%;}
                 </tr>
                 <tr>
                     <td class="pie_RS">
-                        <a href="https://twitter.com/ikercc44/" class="fa-brands fa-3x fa-twitter"></a>
-                        <a href="https://instagram.com/ikercc4/" class="fa-brands fa-3x fa-instagram"></a>
-                        <a href="https://www.facebook.com/iker.castellano.3154" class="fa-3x fa fa-facebook"></a>
+                        <a href="https://twitter.com/ikercc44/" accesskey="t" class="fa-brands fa-3x fa-twitter"></a>
+                        <a href="https://instagram.com/ikercc4/" accesskey="i" class="fa-brands fa-3x fa-instagram"></a>
+                        <a href="https://www.facebook.com/iker.castellano.3154" accesskey="a" class="fa-3x fa fa-facebook"></a>
                     </td>
                 </tr>
             </table>
         </div>        
     </div>
 </div>
+<script>
+    var marker = L.marker([51.5, -0.09]).addTo(map);
+
+    var circle = L.circle([41.2313177, 1.7286358], {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius: 50}).addTo(map);
+    navigator.geolocation.getCurrentPosition(showPosition);
+
+    function showPosition(position) {
+        var marker = L.marker([position.coords.latitude , position.coords.longitude]).addTo(map);
+    }
+</script>
 @vite('resources/js/bootstrap.js')
 
 @endsection
