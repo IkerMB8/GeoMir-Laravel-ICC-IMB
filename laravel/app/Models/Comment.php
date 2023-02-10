@@ -15,9 +15,18 @@ class Comment extends Model
         'comment',
     ];
 
-    public function commentedBy(Comment $comment)
+    public function commentedBy()
     {
-        $user = User::where('id',$comment->user_id)->first();
+        $user = User::where('id',$this->user_id)->first();
         return $user->name;
+    }
+
+    public function deleteBool($post)
+    {
+        if ($this->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $post->user_id == auth()->user()->id ){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

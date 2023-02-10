@@ -14,8 +14,22 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @env(['local','development'])
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @endenv
     @include('flash')
+    <!-- Styles and scripts -->
+    @env(['local','development'])
+        @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])  
+    @endenv
+    @env(['production'])
+        @php
+            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        @endphp
+        <script type="module" src="/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+        <link rel="stylesheet" href="/build/{{ $manifest['resources/sass/app.scss']['file'] }}">
+    @endenv
+
 </head>
 <body>
     <div id="app">
@@ -32,6 +46,7 @@
                 </form>
                 <div class="botonera">
                     <a href="/sobrenosotros"><i class="fa-regular fa-2x fa-address-card"></i></a>
+                    <a href="/contacto"><i class="fa-regular fa-circle-user fa-2x"></i></a>
                     @hasanyrole('admin|author')
                     <i class="fa-regular msg fa-2x fa-message"></i>
                     <div class="logreg">

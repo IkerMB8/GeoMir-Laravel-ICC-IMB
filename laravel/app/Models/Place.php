@@ -60,6 +60,26 @@ class Place extends Model
         $user = auth()->user();
         return $this->favoritedByUser($user);
     }
-    
+
+    public function reviews()
+    {
+        return Review::all()->where('place_id', $this->id);
+    }
+
+    public function valTtlReview(){
+        $reviews = Review::all()->where('place_id', $this->id);
+        $valoracion = 0;
+        $cont = 0;
+        foreach ($reviews as $review){
+            $valoracion = $valoracion + $review->valoracion;
+            $cont = $cont + 1;
+        }
+        if ($cont != 0){
+            $valoracion = $valoracion/$cont;
+        }else{
+            $valoracion = 0;
+        }
+        return $valoracion;
+    }
 
 }

@@ -6,6 +6,7 @@ use App\Models\Place;
 use App\Models\Favourite;
 use App\Models\File;
 use App\Models\Visibility;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -128,6 +129,7 @@ class PlaceController extends Controller
             "autor" => $place->user,
             "favourites" => $place->favourites_count,
             "visibility" => $visibility,
+            "reviews"  =>  $place->reviews(),
         ]);
     }
 
@@ -256,16 +258,59 @@ class PlaceController extends Controller
     }
 
     public function favourite(Place $place){
-        $favourite = Favourite::create([
-            'user_id' => auth()->user()->id,
-            'place_id' => $place->id,
-        ]);
-        return redirect()->back();
+        if (Favourite::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            return redirect()->route('places.show', $place)
+            ->with('error', __("fpp.place-favourite-error"));
+        }else{
+            $favourite = Favourite::create([
+                'user_id' => auth()->user()->id,
+                'place_id' => $place->id,
+            ]);
+            return redirect()->back()
+            ->with('success', __("fpp.place-favourite"));
+        }
     }
 
     public function unfavourite(Place $place){
-        Favourite::where('user_id',auth()->user()->id)
-                 ->where('place_id', $place->id )->delete();
-        return redirect()->route('places.show', $place);
+        if (Favourite::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            Favourite::where('user_id',auth()->user()->id)
+                     ->where('place_id', $place->id )->delete();;
+            return redirect()->back()
+            ->with('success', __("fpp.place-unfavourite"));
+        }else{
+            return redirect()->route('places.show', $place)
+            ->with('error', __("fpp.place-unfavourite-error"));
+        }
+    }
+
+    public function review(Place $place, Request $request){
+        $validatedData = $request->validate([
+            'preview'   =>  'required',
+            'estrellas' =>  'required',
+        ]);
+        if (Review::where('user_id',auth()->user()->id)->where('place_id', $place->id )->first()){
+            return redirect()->route('places.show', $place)
+            ->with('error', __('fpp.place-review-error'));
+        }else{
+            $review = Review::create([
+                'user_id'       =>  auth()->user()->id,
+                'place_id'      =>  $place->id,
+                'review'        =>  $request->input('preview'),
+                'valoracion'    =>  $request->input('estrellas'),
+            ]);
+            return redirect()->back()
+            ->with('success', __('fpp.place-review'));;
+        }
+    }
+
+    public function unreview(Place $place, Review $review){
+        if ($place->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
+            $review->delete();
+            return redirect()->route('places.show', $place)
+                ->with('success', __('fpp.place-unreview'));
+        }else{
+            return redirect()->route('places.show', $place)
+            ->with('error', __('fpp.place-unreview-error'));
+        }
     }
 }

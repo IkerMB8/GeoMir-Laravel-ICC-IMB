@@ -8,7 +8,9 @@
                <div class="card-body">
                 <form method="post" id="create" action="{{ route('files.store') }}" enctype="multipart/form-data">
                         @csrf
-                        @vite('resources/js/files/create.js')
+                        @env(['local','development'])
+                            @vite('resources/js/files/create.js')
+                        @endenv
                         <table class="table">
                             <tbody>
                                 <tr>

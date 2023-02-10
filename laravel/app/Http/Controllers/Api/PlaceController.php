@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Place;
-use App\Models\Favourite;
 use App\Models\File;
+use App\Models\Favourite;
+use App\Models\Review;
 use App\Models\Visibility;
 
 class PlaceController extends Controller
@@ -16,7 +17,6 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function __construct(){
         $this->middleware('auth:sanctum')->only('store');
         $this->middleware('auth:sanctum')->only('update');
@@ -304,6 +304,71 @@ class PlaceController extends Controller
                 'success'  => false,
                 'message' => "ERROR you don't put in favourite this post yet"
             ], 500);
+        }
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function review(Request $request, $id){
+        $place = Place::find($id);
+        $validatedData = $request->validate([
+            'preview'   =>  'required|string',
+            'estrellas' =>  'required|integer',
+        ]);
+        if (Review::where('user_id', auth()->user()->id)->where('place_id', $place->id )->first()){
+            return response()->json([
+                'success'  => false,
+                'message' => "ERROR you can't review two times the same place"
+            ], 500);
+        }else{
+            $review = Review::create([
+                'user_id'       =>  auth()->user()->id,
+                'place_id'      =>  $place->id,
+                'review'        =>  $request->input('preview'),
+                'valoracion'    =>  $request->input('estrellas'),
+            ]);
+            return response()->json([
+                'success' => true,
+                'data'    => $review,
+            ], 201);
+        }
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  int  $id2
+     * @return \Illuminate\Http\Response
+    */
+    public function unreview($id, $id2){
+        $place = Place::find($id);
+        $review = Review::find($id2);
+        if ($review){
+            if ($place->user_id == auth()->user()->id || auth()->user()->hasRole(['admin']) || $review->user_id == auth()->user()->id ){
+                $review->delete();
+                return response()->json([
+                    'success' => true,
+                    'data'    => "Review deleted successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'success'  => false,
+                    'message' => "ERROR, you can not delete a review that is not yours"
+                ], 500);
+            }
+        }else{
+            return response()->json([
+                'success'  => false,
+                'message' => "Review not found"
+            ], 404);
         }
     }
 }

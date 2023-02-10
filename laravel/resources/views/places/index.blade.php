@@ -17,7 +17,7 @@
                         <!-- Modal -->
                         <div class="modal fade" style="--bs-modal-width:40% !important;" id="options{{ $place->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered logreg">
-                                <div class="modal3p modal-content">
+                                <div class="modal3p tres_puntos">
                                     <form method="post" action="{{ route('places.destroy',$place) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('DELETE')
@@ -60,17 +60,31 @@
                                             <button type="button" class="btn-close buttonclose" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <hr>
+                                        <div class="comentarios">
+                                            @foreach ($place->reviews() as $review)
+                                                <div class="caja_comment">
+                                                    <p style="color:white;">@ {{ $review->reviewAuthor() }}</p>
+                                                    <div class="comment_del">
+                                                        <p style="color:white;">{{ $review->review }}</p>
+                                                        @include('partials.buttons-delete-review')
+                                                    </div>
+                                                    <div style="display: flex;margin-top: 5px;">
+                                                        @for ($val = 0; $val < $review->valoracion; $val++)
+                                                            <i class="fa-solid fa-star" style="color:yellow; margin:0;"></i>
+                                                        @endfor
+                                                        @for ($no = 0; $no < (5-$review->valoracion); $no++)
+                                                            <i class="fa-solid fa-star" style="color:white; margin:0;"></i>
+                                                        @endfor
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                         <div class="derechader">
                                             <div></div>
                                             <div class="modal-footer comentario">
-                                                <div style="float:left;">
-                                                    <form>
-                                                        <input style="border:0; float:left;" type="textarea" maxlength="140" placeholder="Escriba aquí su comentario"/>
-                                                    </form>
-                                                </div>
-                                                <div style="float:right;">
-                                                    <button type="button" class="botonpub">Publicar</button>
-                                                </div>         
+                                                <div style="float:left; width:100%;">
+                                                    @include('partials.formreview')
+                                                </div>          
                                             </div>
                                         </div>
                                     </div>
@@ -97,14 +111,18 @@
                         <p></p>
                     </div>
                     <div>
-                        <i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i><i class="fa-regular fa-2x fa-star"></i>
+                        @for ($val = 0; $val < $place->valTtlReview(); $val++)
+                            <i class="fa-solid fa-star" style="color:yellow; margin:0;"></i>
+                        @endfor
+                        @for ($no = 0; $no < (5-$place->valTtlReview()); $no++)
+                            <i class="fa-solid fa-star" style="color:black; margin:0;"></i>
+                        @endfor
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
         @endforeach
     </div>
+    @env(['local','development'])
         @vite('resources/js/bootstrap.js')
-
+    @endenv
     @endsection

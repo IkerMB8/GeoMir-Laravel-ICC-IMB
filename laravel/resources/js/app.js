@@ -1,5 +1,8 @@
 import './bootstrap';
-
+import './validator';
+import './files/create';
+import './places/create-place';
+import './posts/create-post';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
