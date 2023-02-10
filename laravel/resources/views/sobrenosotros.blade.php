@@ -29,9 +29,9 @@
     /* Aquesta clase (.modalBody) serveix per modificar la posició del lloc on es troben els botons del modal (Play Video i Pause Video) */
     .modalBody{
         display: flex;
-        justify-content:center;
-        flex-direction: column;
-        width:10%;
+        justify-content: center;
+        width: 50%;
+        gap: 20px;
     }
 
 
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <br>
-                            <video id="myVideo1" width="320px" height="176px" autoplay="true" mute="true">
+                            <video id="myVideo1" width="320px" height="176px" autoplay="true" muted="true" loop="true">
                                 <source src="/img/iniesta.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                             <br>
-                            <video id="myVideo3" width="320px" height="176px" autoplay="true" mute="true">
+                            <video id="myVideo3" width="320px" height="176px" autoplay="true" muted="true" loop="true">
                                 <source src="/img/rajoy.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -313,9 +313,11 @@
 
 
     var vid = document.getElementById("myVideo1"); 
+    // window.addEventListener('load', pauseVid1, false);
+    // window.addEventListener('load', pauseVid3, false);
 
     function playVid1() { 
-        vid.play(); 
+        vid.play();
     } 
 
     function pauseVid1() { 

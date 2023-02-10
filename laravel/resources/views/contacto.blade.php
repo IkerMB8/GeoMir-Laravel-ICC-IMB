@@ -6,6 +6,10 @@
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
     crossorigin=""></script>
+<script src="keymaster.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 <style>
 .navegador {
     width: 100%;
@@ -119,8 +123,12 @@ a:hover{
     height: 700px
 }
 
-#map { height: 80%;
-width: 70%;}
+#map { 
+    height: 80%;
+    width: 70%;
+}
+
+
 </style>
 
 <div class="divVideo">
@@ -132,12 +140,21 @@ width: 70%;}
 <div class="divMAPA">
     <h1 class="divMAPA_h1">Vols visitar-nos?</h1>
     <h4>Ubica'ns al mapa!</h4>
-    <div id="map"><script>var map = L.map('map').setView([41.2310177, 1.7279358], 19);
-                                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                maxZoom: 19,
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                            }).addTo(map);
-                        </script>
+    <div id="map">
+        <script>
+            var map = L.map('map').setView([41.2310177, 1.7279358], 19);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            
+            L.Routing.control({
+            waypoints: [
+                L.latLng(41.2313177, 1.72849),
+                L.latLng(41.22256157954006, 1.710204524207295)
+            ]
+            }).addTo(map);
+        </script>
     </div>
 </div>
 <div class="pie">
@@ -161,15 +178,53 @@ width: 70%;}
     </div>
 </div>
 <script>
-    var marker = L.marker([51.5, -0.09]).addTo(map);
+    ///Circulo MIR
+    L.circle([41.2313177, 1.72869], {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius: 50}).addTo(map);
 
-    var circle = L.circle([41.2313177, 1.7286358], {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius: 50}).addTo(map);
-    navigator.geolocation.getCurrentPosition(showPosition);
+    // 4.2 ATAJOS DE TECLADO
 
-    function showPosition(position) {
-        var marker = L.marker([position.coords.latitude , position.coords.longitude]).addTo(map);
-    }
+    document.onkeyup = function(e) {
+        if (e.ctrlKey && e.altKey && e.which == 71){
+            var opciones = {
+                enableHighAccuracy: true,
+                timeout: 6000,
+                maximumAge: 0
+            };
+            navigator.geolocation.getCurrentPosition( success, error, options );
+            function success(position) {
+                var coordenadas = position.coords;
+                alert("Tu posición actual es: "+
+                "\n- Latitud: " + coordenadas.latitude+
+                "\n- Longitude: " + coordenadas.longitude+
+                "\n- Rango de error de " + coordenadas.accuracy + " metros");
+            };
+            function error(error) {
+                console.warn('ERROR(' + error.code + '): ' + error.message);
+            };
+        }   else if (e.ctrlKey && e.altKey && e.which == 67){
+            map.remove();
+            map = L.map('map').setView([41.2313177,  1.72869], 19);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+                maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a'
+            }).addTo(map);
+
+            circle = L.circle([41.2313, 1.72867], {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius:50}).addTo(map);
+            // navigator.geolocation.getCurrentPosition(showPosition);
+
+            // function showPosition(position) {
+            //     marker = L.marker([position.coords.latitude , position.coords.longitude])addTo(map);
+            // }
+            L.Routing.control({
+            waypoints: [
+                L.latLng(41.2313177, 1.72849),
+                L.latLng(41.22256157954006, 1.710204524207295)
+            ]
+            }).addTo(map);
+        }
+    };
+
 </script>
+
 @vite('resources/js/bootstrap.js')
 
 @endsection
