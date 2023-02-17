@@ -211,13 +211,13 @@ a:hover{
                 timeout: 6000,
                 maximumAge: 0
             };
-            navigator.geolocation.getCurrentPosition( success, error, options );
+            navigator.geolocation.getCurrentPosition( success, error, opciones );
             function success(position) {
                 var coordenadas = position.coords;
-                alert("Tu posición actual es: "+
-                "\n- Latitud: " + coordenadas.latitude+
-                "\n- Longitude: " + coordenadas.longitude+
-                "\n- Rango de error de " + coordenadas.accuracy + " metros");
+                alert("Tus coordenadas son: "+
+                "\nLatitud: " + coordenadas.latitude+
+                "\nLongitude: " + coordenadas.longitude+
+                "\nRango de error de " + coordenadas.accuracy + " metros");
             };
             function error(error) {
                 console.warn('ERROR(' + error.code + '): ' + error.message);
