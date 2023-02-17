@@ -11,6 +11,8 @@
 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
 <style>
+    
+/* DEFINIMOS EL NAV DE ARRIBA, SU COLOR, POSICION, ETC */
 .navegador {
     width: 100%;
     height: 79px;
@@ -22,25 +24,30 @@
     background-color: #1A1830;
 }
 
+/* DEFINIMOS QUE NO QUEREMOS QUE APAREZCAN LOS FILTROS */
 .navfiltros{
     display:none !important;
 }
 
+/* DEFINIMOS COLOR, MARGEN DEL DIV DEL VIDEO */
 .divVideo{
     margin-top: 56px;
     text-align:center;
     background-color: black;
 }
 
+/* DEFINIMOS QUE NO SALGA EL BOTON DE ACCESIBILIDAD */
 .web-accessibility-menu-button{
     display:none !important;
 }
 
+/* DEFINIMOS LA ANCHURA DEL VIDEO Y SU OPACIDAD */
 .gif{
     width: 100%;
     opacity: 0.4;
 }
 
+/* DEFINIMOS LOS OBJETOS DEL FOOTER */
 .encima{
     position: absolute;
     top: 45%;
@@ -48,6 +55,7 @@
     color: white;
 }
 
+/* DEFINIMOS LA POSICION DEL H3 */
 .encima2{
     position: absolute;
     top: 50%;
@@ -55,6 +63,7 @@
     color: white;
 }
 
+/* DEFINIMOS EL BOTON DE CONTACTO */
 .btnGif{
     position: absolute;
     top: 55%;
@@ -67,6 +76,7 @@
     border-radius: 15px;
 }
 
+/* DEFINIMOS EL FOOTER */
 .pie{
     height: 15vh;
     width: 100%;
@@ -77,6 +87,7 @@
     position: absolute;
 }
 
+/* DEFINIMOS EL DIV DEL FOOTER */
 .pie_div{
     display: flex;
     flex-direction: row;
@@ -85,26 +96,31 @@
     justify-content: center;
 }
 
+/* DEFINIMOS LOS OBJETOS DEL FOOTER */
 .pie_tabla{
     text-align: center;
     justify-content: center;
     font-size: 0.6em;
 }
 
+/* DEFINIMOS LA SEPARACION DE LOS OBJETOS DEL FOOTER */
 .pie_RS{
     display: flex;
     justify-content: space-evenly;
 }
 
+/* DEFINIMOS EL COLOR DE LOS LINKS Y QUE NO ESTEN SUBRAYADOS */
 a{
     text-decoration: none;
     color: white;
 }
 
+/* DEFINIMOS EL COLOR DE LOS LINKS AL PASAR POR ENCIMA DE ELLOS */
 a:hover{
     color:white;
 }
 
+/* DEFINIMOS EL COLOR DE FONDO, ALTURA, I PERSONALIZAMOS EL DIV DONDE ESTA SITUADO EL MAPA */
 .divMAPA{
     background-color: #fafce1;
     height: 100vh;
@@ -113,16 +129,19 @@ a:hover{
     align-items: center;
 }
 
+/* DEFINIMOS EL TAMAÑO DEL TEXTO "VOLS VISITAR-NOS" */
 .divMAPA_h1{
     margin-top: 2%;
     font-size: 3em;
 }
 
+/* DEFINIMOS LA ALTURA I LA ANCHURA DE LA IMAGEN DE FONDO */
 .divMAPA_img{
     width:950px; 
     height: 700px
 }
 
+/* DEFINIMOS LA ALTURA I LA ANCHURA DEL MAPA */
 #map { 
     height: 80%;
     width: 70%;
@@ -142,12 +161,14 @@ a:hover{
     <h4>Ubica'ns al mapa!</h4>
     <div id="map">
         <script>
+            ///  DEFINIMOS El MAPA, Y LE DAMOS UNAS COORDENADAS INICIALES
             var map = L.map('map').setView([41.2310177, 1.7279358], 19);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             
+            ///DEFINIMOS AMBAS PARTES DE LA RUTA
             L.Routing.control({
             waypoints: [
                 L.latLng(41.2313177, 1.72849),
@@ -201,7 +222,7 @@ a:hover{
             function error(error) {
                 console.warn('ERROR(' + error.code + '): ' + error.message);
             };
-        }   else if (e.ctrlKey && e.altKey && e.which == 67){
+        }   else if (e.ctrlKey && e.altKey && e.which == 67){  ///PRESIONANDO CTRL + ALT + C HACEMOS QUE EL MAPA SE REINICIE.
             map.remove();
             map = L.map('map').setView([41.2313177,  1.72869], 19);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
@@ -209,11 +230,7 @@ a:hover{
             }).addTo(map);
 
             circle = L.circle([41.2313, 1.72867], {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius:50}).addTo(map);
-            // navigator.geolocation.getCurrentPosition(showPosition);
-
-            // function showPosition(position) {
-            //     marker = L.marker([position.coords.latitude , position.coords.longitude])addTo(map);
-            // }
+           
             L.Routing.control({
             waypoints: [
                 L.latLng(41.2313177, 1.72849),
