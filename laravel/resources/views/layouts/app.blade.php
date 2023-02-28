@@ -41,7 +41,7 @@
             </div>
             <div class="center">
                 <form class="d-flex" role="search">
-                    <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i><span class="noshow">Botón busqueda</span></button>
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
                 <div class="botonera">

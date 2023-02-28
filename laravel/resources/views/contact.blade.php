@@ -145,24 +145,24 @@ ul {
                 <h3>Contacta'ns</h3>
                 <form action="">
                     <p>
-                        <label>Nombre Completo</label>
-                        <input type="text" name="fullname">
+                        <label for="fullname">Nombre Completo</label>
+                        <input id="fullname" type="text" name="fullname">
                     </p>
                     <p>
-                        <label>Correo Electrónico</label>
-                        <input type="email" name="email">
+                        <label for="email">Correo Electrónico</label>
+                        <input id="email" type="email" name="email">    
                     </p>
                     <p>
-                        <label>Teléfono</label>
-                        <input type="tel" name="phone">
+                        <label for="telefono">Teléfono</label>
+                        <input id="telefono" type="tel" name="phone">
                     </p>
                     <p>
-                        <label>Asunto</label>
-                        <input type="text" name="affair">
+                        <label for="asunto">Asunto</label>
+                        <input id="asunto" type="text" name="affair">
                     </p>
                     <p class="block">
-                       <label>Mensaje</label> 
-                        <textarea name="message" rows="3"></textarea>
+                       <label for="mensaje">Mensaje</label> 
+                        <textarea id="mensaje" name="message" rows="3"></textarea>
                     </p>
                     <p class="block">
                         <button>Enviar</button>
