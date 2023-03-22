@@ -36,7 +36,7 @@
         <nav class="navegador">
             <div class="left">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logoGM" src="/img/LogoGeoMir.PNG" />
+                    <img alt="Logo de GEOMIR" class="logoGM" src="/img/LogoGeoMir.PNG" />
                 </a>
             </div>
             <div class="center">
@@ -259,24 +259,36 @@
         <ul id="list-access" class="list-group list-web-accessibility activeAccess" style="display: flex;">
             <li class="list-group-item web-accessibility-item ">
                 <div class="d-inline mr-3">Tt </div>
-                <div class="d-inline web-accessibility-item-font font-size-16 ml-2" data-type="font-size" data-value="16"><button onclick="cambiarclase()">A</button></div>
-                <div class="d-inline web-accessibility-item-font font-size-18 ml-1" data-type="font-size" data-value="18">A</div>
-                <div class="d-inline web-accessibility-item-font font-size-20 ml-1" data-type="font-size" data-value="20">A</div>
-                <div class="d-inline web-accessibility-item-font font-size-22 ml-1" data-type="font-size" data-value="22">A</div>
-                <div class="d-inline web-accessibility-item-font font-size-24 ml-1" data-type="font-size" data-value="24">A</div>
-                <div class="d-inline web-accessibility-item-font font-size-26 ml-1" data-type="font-size" data-value="26">A</div>
+                <div class="d-inline web-accessibility-item-font font-size-16 ml-2" data-type="font-size" data-value="16"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
+                <div class="d-inline web-accessibility-item-font font-size-18 ml-1" data-type="font-size" data-value="18"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
+                <div class="d-inline web-accessibility-item-font font-size-20 ml-1" data-type="font-size" data-value="20"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
+                <div class="d-inline web-accessibility-item-font font-size-22 ml-1" data-type="font-size" data-value="22"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
+                <div class="d-inline web-accessibility-item-font font-size-24 ml-1" data-type="font-size" data-value="24"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
+                <div class="d-inline web-accessibility-item-font font-size-26 ml-1" data-type="font-size" data-value="26"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
             </li>
-            <li class="list-group-item web-accessibility-item  web-accessibility-item-direct" data-type="reset">
+            <button class="btnAccess" ><li class="list-group-item web-accessibility-item">
+                <div class="d-inline mr-3"><i class="fa-solid fa-microphone"></i></div>
+                <div class="d-inline  ml-2">Voice-Recognition</div>
+            </li></button>
+            <button id="leerTexto" onclick="leerText()" class="btnAccess"><li class="list-group-item web-accessibility-item">
+                <div class="d-inline mr-3"><i class="fa-solid fa-volume-high"></i></div>
+                <div class="d-inline  ml-2">Leer Texto</div>
+            </li></button>
+            <button class="btnAccess"><li class="list-group-item web-accessibility-item">
+                <div class="d-inline mr-3"><i class="fa-solid fa-closed-captioning"></i></div>
+                <div class="d-inline  ml-2">Mode Subtítols</div>
+            </li></button>
+            <button class="btnAccess"><li class="list-group-item web-accessibility-item  web-accessibility-item-direct" data-type="reset">
                 <div class="d-inline mr-3"><i class="fas fa-undo"></i></div>
                 <div class="d-inline  ml-2">Reset</div>
-            </li>
+            </li></button>
         </ul>
         <main>
             @yield('content')
         </main>
         <footer>
             <div class="footer">
-                <a href="{{ url('/') }}"><i class="fa-solid fa-2x fa-house"></i></a>
+                <a href="{{ url('/') }}"><p style="display: none;">Link Home</p><i class="fa-solid fa-2x fa-house"></i></a>
                 <form class="d-flex" role="search">
                     <i class="fa-solid fa-2x fa-magnifying-glass"></i>
                 </form>
@@ -321,5 +333,22 @@
     cambiarClase2.addEventListener('click', (e) => {
         menu2.classList.toggle('activeAccess');
     });
+
+    function leerText() {
+        //Obtener el texto del elemento HTML
+        var texto = document.getElementById("leerTexto").innerText;
+
+        //Crear una instancia de SpeechSynthesis
+        var synth = window.speechSynthesis;
+
+        //Crear un objeto de mensaje de voz
+        var msg = new SpeechSynthesisUtterance();
+
+        //Establecer el texto a leer
+        msg.text = texto;
+
+        //Habilitar la sintesis de voz
+        synth.speak(msg);
+    }
 </script>
-</html>
+</html><i class="fa-solid fa-megaphone"></i>

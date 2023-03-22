@@ -225,20 +225,22 @@
     <div class="abajo">
         <div class="card " style="width: 18rem;">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <p style="display: none;">Botón Modal IkerC</p>
                 <div class="card-img-top cardgiratorio imagenIC" id="imagen" alt="Card image cap"></div>
             </button>
             <div class="card-body">
-                <h5 class="card-title">Iker Castellano</h5>
+                <h1 class="card-title">Iker Castellano</h1>
                 <p class="card-text" id="S1">Co-Owner</p>
                 <p class="card-text noshow" id="NS1">Amante de las pelotas</p>
             </div>
         </div>
         <div class="card " style="width: 18rem;">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#Modal">
+                <p style="display: none;">Botón Modal IkerM</p>
                 <div class="card-img-top cardgiratorio imagenIM" id="imagen2" alt="Card image cap"></div>
             </button>
             <div class="card-body">
-                <h5 class="card-title">Iker Martinez</h5>
+                <h1 class="card-title">Iker Martinez</h1>
                 <p class="card-text" id="S2">Co-Owner</p>
                 <p class="card-text noshow" id="NS2">Paseador de caracoles</p>
             </div>

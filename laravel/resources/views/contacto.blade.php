@@ -182,11 +182,7 @@ a:hover{
     <div class="pie_div">
         <div class="pie_tabla">
             <table>
-                <tr>
-                    <td>
-                        <h3>SÍGUENOS EN REDES!</h3>
-                    </td>
-                </tr>
+                <th><h3>SÍGUENOS EN REDES!</h3></th>
                 <tr>
                     <td class="pie_RS">
                         <a href="https://twitter.com/ikercc44/" accesskey="t" class="fa-brands fa-3x fa-twitter"></a>
@@ -239,6 +235,10 @@ a:hover{
             }).addTo(map);
         }
     };
+
+    // let utterance = new SpeechSynthesisUtterance("Hello world!");
+    // speechSynthesis.speak(utterance);
+
 
 </script>
 

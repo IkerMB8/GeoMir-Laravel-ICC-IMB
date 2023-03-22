@@ -93,6 +93,13 @@ $theme-colors: (
     font-weight: bold;
 }
 
+.btnAccess{
+    padding: 0;
+    border: 0;
+    background-color: #1A1830;
+    color: white;
+}
+
 .botonLog{
     display: block;
     padding: 5px;
@@ -585,7 +592,7 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
 }
 
 .spanDelete{
-    color: red;
+    color: #123F98;
     font-weight: 700;
 }
 
@@ -631,6 +638,7 @@ display:flex; margin-top:45px; align-items:top; justify-content:space-around;
 }
 .aceptar{
   background-color:#7000FF;  
+  color: white;
 }
 iframe{
     width: 100%;
