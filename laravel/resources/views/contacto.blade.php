@@ -151,9 +151,9 @@ a:hover{
 </style>
 
 <div class="divVideo">
-    <img class="gif" src="/img/paisaje.gif"/>
+    <img class="gif" alt="Imagen Fondo" src="/img/paisaje.gif"/>
     <h1 class="encima">CONTACTA'NS!</h1>
-    <h3 class="encima2">Envia el teu missatge</h3>
+    <h2 class="encima2">Envia el teu missatge</h2>
     <a class="btnGif" href="./contact" accesskey="f" target="blank">Formulario de Contacto</a>
 </div>
 <div class="divMAPA">
@@ -185,9 +185,9 @@ a:hover{
                 <th><h3>SÍGUENOS EN REDES!</h3></th>
                 <tr>
                     <td class="pie_RS">
-                        <a href="https://twitter.com/ikercc44/" accesskey="t" class="fa-brands fa-3x fa-twitter"></a>
-                        <a href="https://instagram.com/ikercc4/" accesskey="i" class="fa-brands fa-3x fa-instagram"></a>
-                        <a href="https://www.facebook.com/iker.castellano.3154" accesskey="a" class="fa-3x fa fa-facebook"></a>
+                        <a href="https://twitter.com/ikercc44/" accesskey="t" class="fa-brands fa-3x fa-twitter"><span class="noshow">Twitter</span></a>
+                        <a href="https://instagram.com/ikercc4/" accesskey="i" class="fa-brands fa-3x fa-instagram"><span class="noshow">Instagram</span></a>
+                        <a href="https://www.facebook.com/iker.castellano.3154" accesskey="a" class="fa-3x fa fa-facebook"><span class="noshow">Facebook</span></a>
                     </td>
                 </tr>
             </table>
