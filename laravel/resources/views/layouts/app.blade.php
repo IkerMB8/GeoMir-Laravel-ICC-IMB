@@ -266,7 +266,7 @@
                 <div class="d-inline web-accessibility-item-font font-size-24 ml-1" data-type="font-size" data-value="24"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
                 <div class="d-inline web-accessibility-item-font font-size-26 ml-1" data-type="font-size" data-value="26"><button class="btnAccess" onclick="cambiarclase()">A</button></div>
             </li>
-            <button class="btnAccess" ><li class="list-group-item web-accessibility-item">
+            <button class="btnAccess" id="voice"><li class="list-group-item web-accessibility-item">
                 <div class="d-inline mr-3"><i class="fa-solid fa-microphone"></i></div>
                 <div class="d-inline  ml-2">Voice-Recognition</div>
             </li></button>

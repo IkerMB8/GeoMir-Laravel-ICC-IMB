@@ -38,7 +38,7 @@
 
 /* DEFINIMOS QUE NO SALGA EL BOTON DE ACCESIBILIDAD */
 .web-accessibility-menu-button{
-    display:none !important;
+    position: absolute;
 }
 
 /* DEFINIMOS LA ANCHURA DEL VIDEO Y SU OPACIDAD */
@@ -236,8 +236,8 @@ a:hover{
         }
     };
 
-    // let utterance = new SpeechSynthesisUtterance("Hello world!");
-    // speechSynthesis.speak(utterance);
+
+
 
 
 </script>

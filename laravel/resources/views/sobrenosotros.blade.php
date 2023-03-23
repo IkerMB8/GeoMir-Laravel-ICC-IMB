@@ -223,12 +223,12 @@
         </audio>
     </div>
     <div class="abajo">
-        <div class="card " style="width: 18rem;">
+        <div class="card " style="width: 18rem;" id="boton-leer">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <p style="display: none;">Botón Modal IkerC</p>
                 <div class="card-img-top cardgiratorio imagenIC" id="imagen" alt="Card image cap"></div>
             </button>
-            <div class="card-body">
+            <div class="card-body contenido-boton">
                 <h1 class="card-title">Iker Castellano</h1>
                 <p class="card-text" id="S1">Co-Owner</p>
                 <p class="card-text noshow" id="NS1">Amante de las pelotas</p>
@@ -366,6 +366,78 @@
             dragClass: "drag"
         }
     );
+
+   
+    const boton = document.getElementById('boton-leer');
+    const contenido = document.querySelector('.contenido-boton');
+
+    function leerContenido() {
+        const mensaje = new SpeechSynthesisUtterance();
+        mensaje.lang = 'es-ES';
+        mensaje.text = contenido.textContent;
+        window.speechSynthesis.speak(mensaje);
+    }
+    
+    boton.addEventListener('dblclick', leerContenido);
+    
+
+    function speakPage() {
+        const text = document.body.innerText;
+        const synth = window.speechSynthesis;
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang= 'es-ES';
+        synth.speak(utterance);
+
+    }
+
+    document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.altKey && e.key === "s") {
+        speakPage();
+    }
+    });
+
+
+
+    const recognition = new webkitSpeechRecognition();
+
+    // Configuramos la instancia
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = 'es-ES';
+
+    // Al activarse el botón, empezamos a escuchar la voz del usuario
+    document.getElementById('voice').addEventListener('click', () => {
+        recognition.start();
+    });
+
+    // Cuando se detecta una palabra clave, se sube o baja la página
+    recognition.onresult = (event) => {
+    const last = event.results.length - 1;
+    const command = event.results[last][0].transcript.toLowerCase();
+    console.log(command);
+    if (command.includes('subir página')) {
+        window.scrollBy(0, -window.innerHeight);
+    } else if (command.includes('bajar página')) {
+        window.scrollBy(0, window.innerHeight);
+    }else if (command.includes('españa')) {
+        iniciar1F();
+    }
+    else if (command.includes('españa parar')) {
+        parar1F();
+    }
+    };
+
+    let jul = document.getElementById('españa');
+
+    function parar1F(){
+        jul.pause();
+    }
+    function iniciar1F(){
+        jul.volume = 1;
+        jul.play();
+    }
+
 </script>
 @env(['local','development'])
     @vite('resources/js/bootstrap.js')
