@@ -359,19 +359,27 @@
             dragClass: "drag"
         }
     );
+    
+    /////////////////////////////////////////////////////////////////////
+    // AQUI EMPIEZA JS DE ACCESIBILIDAD
+    /////////////////////////////////////////////////////////////////////
 
+
+    //DEFINIMOS EL BOTÓN QUE EJECUTARÁ LA FUNCIÓN
     const boton = document.getElementById('boton-leer');
+    //DEFINIMOS EL DIV QUE CONTIENE EL CONTENIDO QUE QUEREMOS LEER
     const contenido = document.querySelector('.contenido-boton');
-
+    //CREAMOS UNA FUNCIÓN LA CUAL MEDIANTE EL DIV DE CONTENIDO RECOGE TODO EL TEXTO QUE CONTIENE Y LO LEE
     function leerContenido() {
         const mensaje = new SpeechSynthesisUtterance();
         mensaje.lang = 'es-ES';
         mensaje.text = contenido.textContent;
         window.speechSynthesis.speak(mensaje);
     }
-    
+    //EJECUTAMOS LA FUNCIÓN LEER CONTENIDO AL HACER DOBLE CLICK AL BOTÓN DEFINIDO ARRIBA
     boton.addEventListener('dblclick', leerContenido);
 
+    //EL SIGUIENTE CODIGO ES UN DUPLICADO DEL DE ARRIBA
     const boton2 = document.getElementById('boton-leer2');
     const contenido2 = document.querySelector('.contenido-boton2');
 
@@ -384,7 +392,7 @@
 
     boton2.addEventListener('dblclick', leerContenido2);
     
-
+    //LA SIGUIENTE FUNCION LEE TODO EL TEXTO QUE HAY EN LA PAGINA
     function speakPage() {
         const text = document.body.innerText;
         const synth = window.speechSynthesis;
@@ -395,6 +403,7 @@
 
     }
 
+    //EJECUTAMOS LA FUNCIÓN DE LEER EL TEXTO HACIENDO CTRL+ALT+S
     document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.altKey && e.key === "s") {
         speakPage();

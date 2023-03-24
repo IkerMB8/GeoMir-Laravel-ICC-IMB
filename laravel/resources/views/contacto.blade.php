@@ -263,6 +263,10 @@
             }).addTo(map);
         }
     };
+    
+    /////////////////////////////////////////////////////////////////////
+    // AQUI EMPIEZA JS DE ACCESIBILIDAD
+    /////////////////////////////////////////////////////////////////////
 
     const recognition = new webkitSpeechRecognition();
 
@@ -271,49 +275,45 @@
     recognition.interimResults = false;
     recognition.lang = 'es-ES';
 
-    // Al activarse el botón, empezamos a escuchar la voz del usuario
+    // Al dar al botón, comienza a escuchar la voz del usuario
     document.getElementById('voice').addEventListener('click', () => {
         recognition.start();
     });
 
-    // Cuando se detecta una palabra clave, se sube o baja la página
+    // Cuando se detecta una palabra clave, hace una función
     recognition.onresult = (event) => {
     const last = event.results.length - 1;
     const command = event.results[last][0].transcript.toLowerCase();
     console.log(command);
+    // Al detectar la palabra subir página, sube la vista de la página
     if (command.includes('subir página')) {
         window.scrollBy(0, -window.innerHeight);
+    // Al detectar la palabra bajar página, baja la vista de la página
     }else if (command.includes('bajar página')) {
         window.scrollBy(0, window.innerHeight);
+    // Al detectar la palabra alejar mas, aleja el zoom de la página
     }else if (command.includes('alejar más')) {
         document.body.style.zoom="50%"
+    // Al detectar la palabra alejar, deja el zoom default
     }else if (command.includes('alejar')) {
         document.body.style.zoom="100%"
+    // Al detectar la palabra acercar, pone el zoom de la página a 150%
     }else if (command.includes('acercar')) {
         document.body.style.zoom="150%"
+    // Al detectar la palabra acercar mas, pone el zoom de la página a 200%
     }else if (command.includes('acercar más')) {
         document.body.style.zoom="200%"
     }
     };
 
+    // Al detectar la combinación ctrl, alt + l reinicia el zoom y sube arriba del todo de la página
     document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.altKey && e.key === "l") {
         document.body.style.zoom="100%"
         window.scrollBy(-50, -window.innerHeight);
     }
     });
-
-    let jul = document.getElementById('españa');
-
-    function parar1F(){
-        jul.pause();
-    }
-    function iniciar1F(){
-        jul.volume = 1;
-        jul.play();
-    }
 </script>
 
 @vite('resources/js/bootstrap.js')
-
 @endsection
