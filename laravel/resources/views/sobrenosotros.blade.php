@@ -369,7 +369,7 @@
 
    
     const boton = document.getElementById('boton-leer');
-    const contenido = document.querySelector('.contenido-boton');
+    const contenido = document.querySelector('contenido-boton');
 
     function leerContenido() {
         const mensaje = new SpeechSynthesisUtterance();
@@ -426,7 +426,28 @@
     else if (command.includes('españa parar')) {
         parar1F();
     }
+    else if (command.includes('alejar más')) {
+        document.body.style.zoom="50%"
+    }
+    else if (command.includes('alejar')) {
+        document.body.style.zoom="100%"
+    }
+    else if (command.includes('acercar')) {
+        document.body.style.zoom="150%"
+    }
+    else if (command.includes('acercar más')) {
+        document.body.style.zoom="200%"
+    }
     };
+
+    document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.altKey && e.key === "l") {
+        document.body.style.zoom="100%"
+        window.scrollBy(-50, -window.innerHeight);
+    }
+    });
+
+
 
     let jul = document.getElementById('españa');
 
