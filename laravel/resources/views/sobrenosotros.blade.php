@@ -234,12 +234,12 @@
                 <p class="card-text noshow" id="NS1">Amante de las pelotas</p>
             </div>
         </div>
-        <div class="card " style="width: 18rem;">
+        <div class="card " style="width: 18rem;" id="boton-leer2">
             <button type="button" style="border:0; padding:0;" data-bs-toggle="modal" data-bs-target="#Modal">
                 <p style="display: none;">Botón Modal IkerM</p>
                 <div class="card-img-top cardgiratorio imagenIM" id="imagen2" alt="Card image cap"></div>
             </button>
-            <div class="card-body">
+            <div class="card-body contenido-boton2">
                 <h1 class="card-title">Iker Martinez</h1>
                 <p class="card-text" id="S2">Co-Owner</p>
                 <p class="card-text noshow" id="NS2">Paseador de caracoles</p>
@@ -282,9 +282,6 @@
         document.getElementById('NS1').classList.remove('noshow');
     }
 
-    
-
-    
     var imagen2=document.getElementById('imagen2');
     window.addEventListener('load', iniciar2, false);
     window.addEventListener('load', parar2, false);
@@ -313,7 +310,6 @@
         document.getElementById('NS2').classList.remove('noshow');
     }
 
-
     var vid = document.getElementById("myVideo1"); 
     // window.addEventListener('load', pauseVid1, false);
     // window.addEventListener('load', pauseVid3, false);
@@ -336,7 +332,6 @@
         vid2.pause(); 
     }
 
-
     var vid3 = document.getElementById("myVideo3"); 
 
     function playVid3() { 
@@ -346,8 +341,6 @@
     function pauseVid3() { 
         vid3.pause(); 
     }
-
-
 
     var vid4 = document.getElementById("myVideo4"); 
 
@@ -367,9 +360,8 @@
         }
     );
 
-   
     const boton = document.getElementById('boton-leer');
-    const contenido = document.querySelector('contenido-boton');
+    const contenido = document.querySelector('.contenido-boton');
 
     function leerContenido() {
         const mensaje = new SpeechSynthesisUtterance();
@@ -379,6 +371,18 @@
     }
     
     boton.addEventListener('dblclick', leerContenido);
+
+    const boton2 = document.getElementById('boton-leer2');
+    const contenido2 = document.querySelector('.contenido-boton2');
+
+    function leerContenido2() {
+        const mensaje2 = new SpeechSynthesisUtterance();
+        mensaje2.lang = 'es-ES';
+        mensaje2.text = contenido2.textContent;
+        window.speechSynthesis.speak(mensaje2);
+    }
+
+    boton2.addEventListener('dblclick', leerContenido2);
     
 
     function speakPage() {
@@ -396,69 +400,6 @@
         speakPage();
     }
     });
-
-
-
-    const recognition = new webkitSpeechRecognition();
-
-    // Configuramos la instancia
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.lang = 'es-ES';
-
-    // Al activarse el botón, empezamos a escuchar la voz del usuario
-    document.getElementById('voice').addEventListener('click', () => {
-        recognition.start();
-    });
-
-    // Cuando se detecta una palabra clave, se sube o baja la página
-    recognition.onresult = (event) => {
-    const last = event.results.length - 1;
-    const command = event.results[last][0].transcript.toLowerCase();
-    console.log(command);
-    if (command.includes('subir página')) {
-        window.scrollBy(0, -window.innerHeight);
-    } else if (command.includes('bajar página')) {
-        window.scrollBy(0, window.innerHeight);
-    }else if (command.includes('españa')) {
-        iniciar1F();
-    }
-    else if (command.includes('españa parar')) {
-        parar1F();
-    }
-    else if (command.includes('alejar más')) {
-        document.body.style.zoom="50%"
-    }
-    else if (command.includes('alejar')) {
-        document.body.style.zoom="100%"
-    }
-    else if (command.includes('acercar')) {
-        document.body.style.zoom="150%"
-    }
-    else if (command.includes('acercar más')) {
-        document.body.style.zoom="200%"
-    }
-    };
-
-    document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.altKey && e.key === "l") {
-        document.body.style.zoom="100%"
-        window.scrollBy(-50, -window.innerHeight);
-    }
-    });
-
-
-
-    let jul = document.getElementById('españa');
-
-    function parar1F(){
-        jul.pause();
-    }
-    function iniciar1F(){
-        jul.volume = 1;
-        jul.play();
-    }
-
 </script>
 @env(['local','development'])
     @vite('resources/js/bootstrap.js')

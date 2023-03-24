@@ -11,150 +11,175 @@
 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
 <style>
+    .divVideo__titulo{
+        color: white;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .divVideo__btnGif{
+        color: white;
+        background-color: #1a1830;
+        border: 1px solid lightgray;
+        padding: 10px;
+        border-radius: 15px;
+    }
+    .divVideo__btnGif:hover{
+        filter: invert(100%);
+    }
+    .divVideo{
+        background-color: black;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./img/paisaje.gif);
+        background-position: center;
+        height: 950px;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .divVideo div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
     
-/* DEFINIMOS EL NAV DE ARRIBA, SU COLOR, POSICION, ETC */
-.navegador {
-    width: 100%;
-    height: 79px;
-    background-color: white;
-    top: 0;
-    margin: 0;
-    position: absolute !important;
-    display: flex;
-    background-color: #1A1830;
-}
+    /* DEFINIMOS EL NAV DE ARRIBA, SU COLOR, POSICION, ETC */
+    .navegador {
+        width: 100%;
+        height: 79px;
+        background-color: white;
+        top: 0;
+        margin: 0;
+        position: absolute !important;
+        display: flex;
+        background-color: #1A1830;
+    }
 
-/* DEFINIMOS QUE NO QUEREMOS QUE APAREZCAN LOS FILTROS */
-.navfiltros{
-    display:none !important;
-}
+    /* DEFINIMOS QUE NO QUEREMOS QUE APAREZCAN LOS FILTROS */
+    .navfiltros{
+        display:none !important;
+    }
 
-/* DEFINIMOS COLOR, MARGEN DEL DIV DEL VIDEO */
-.divVideo{
-    margin-top: 56px;
-    text-align:center;
-    background-color: black;
-}
+    /* DEFINIMOS QUE NO SALGA EL BOTON DE ACCESIBILIDAD */
+    .web-accessibility-menu-button{
+        position: absolute;
+    }
 
-/* DEFINIMOS QUE NO SALGA EL BOTON DE ACCESIBILIDAD */
-.web-accessibility-menu-button{
-    position: absolute;
-}
+    /* DEFINIMOS LA ANCHURA DEL VIDEO Y SU OPACIDAD */
+    .gif{
+        width: 100%;
+        opacity: 0.4;
+    }
 
-/* DEFINIMOS LA ANCHURA DEL VIDEO Y SU OPACIDAD */
-.gif{
-    width: 100%;
-    opacity: 0.4;
-}
+    /* DEFINIMOS LOS OBJETOS DEL FOOTER */
+    .encima{
+        position: absolute;
+        top: 45%;
+        left: 42%;
+        color: white;
+    }
 
-/* DEFINIMOS LOS OBJETOS DEL FOOTER */
-.encima{
-    position: absolute;
-    top: 45%;
-    left: 42%;
-    color: white;
-}
+    /* DEFINIMOS LA POSICION DEL H3 */
+    .encima2{
+        position: absolute;
+        top: 50%;
+        left: 42.5%;
+        color: white;
+    }
 
-/* DEFINIMOS LA POSICION DEL H3 */
-.encima2{
-    position: absolute;
-    top: 50%;
-    left: 42.5%;
-    color: white;
-}
+    /* DEFINIMOS EL BOTON DE CONTACTO */
+    .btnGif{
+        position: absolute;
+        top: 55%;
+        color: white;
+        background-color: #1a1830;
+        left: 44.5%;
+        opacity: 0.6;
+        border: 1px solid lightgray;
+        padding: 10px;
+        border-radius: 15px;
+    }
 
-/* DEFINIMOS EL BOTON DE CONTACTO */
-.btnGif{
-    position: absolute;
-    top: 55%;
-    color: white;
-    background-color: #1a1830;
-    left: 44.5%;
-    opacity: 0.6;
-    border: 1px solid lightgray;
-    padding: 10px;
-    border-radius: 15px;
-}
+    /* DEFINIMOS EL FOOTER */
+    .pie{
+        height: 15vh;
+        width: 100%;
+        background-color: #1a1830;
+        display: flex;
+        justify-content: center;
+        color: white;
+        position: absolute;
+    }
 
-/* DEFINIMOS EL FOOTER */
-.pie{
-    height: 15vh;
-    width: 100%;
-    background-color: #1a1830;
-    display: flex;
-    justify-content: center;
-    color: white;
-    position: absolute;
-}
+    /* DEFINIMOS EL DIV DEL FOOTER */
+    .pie_div{
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+        align-items: center;
+        justify-content: center;
+    }
 
-/* DEFINIMOS EL DIV DEL FOOTER */
-.pie_div{
-    display: flex;
-    flex-direction: row;
-    gap: 18px;
-    align-items: center;
-    justify-content: center;
-}
+    /* DEFINIMOS LOS OBJETOS DEL FOOTER */
+    .pie_tabla{
+        text-align: center;
+        justify-content: center;
+        font-size: 0.6em;
+    }
 
-/* DEFINIMOS LOS OBJETOS DEL FOOTER */
-.pie_tabla{
-    text-align: center;
-    justify-content: center;
-    font-size: 0.6em;
-}
+    /* DEFINIMOS LA SEPARACION DE LOS OBJETOS DEL FOOTER */
+    .pie_RS{
+        display: flex;
+        justify-content: space-evenly;
+    }
 
-/* DEFINIMOS LA SEPARACION DE LOS OBJETOS DEL FOOTER */
-.pie_RS{
-    display: flex;
-    justify-content: space-evenly;
-}
+    /* DEFINIMOS EL COLOR DE LOS LINKS Y QUE NO ESTEN SUBRAYADOS */
+    a{
+        text-decoration: none;
+        color: white;
+    }
 
-/* DEFINIMOS EL COLOR DE LOS LINKS Y QUE NO ESTEN SUBRAYADOS */
-a{
-    text-decoration: none;
-    color: white;
-}
+    /* DEFINIMOS EL COLOR DE LOS LINKS AL PASAR POR ENCIMA DE ELLOS */
+    a:hover{
+        color:white;
+    }
 
-/* DEFINIMOS EL COLOR DE LOS LINKS AL PASAR POR ENCIMA DE ELLOS */
-a:hover{
-    color:white;
-}
+    /* DEFINIMOS EL COLOR DE FONDO, ALTURA, I PERSONALIZAMOS EL DIV DONDE ESTA SITUADO EL MAPA */
+    .divMAPA{
+        background-color: #fafce1;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* DEFINIMOS EL COLOR DE FONDO, ALTURA, I PERSONALIZAMOS EL DIV DONDE ESTA SITUADO EL MAPA */
-.divMAPA{
-    background-color: #fafce1;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    /* DEFINIMOS EL TAMAÑO DEL TEXTO "VOLS VISITAR-NOS" */
+    .divMAPA_h1{
+        margin-top: 2%;
+        font-size: 3em;
+    }
 
-/* DEFINIMOS EL TAMAÑO DEL TEXTO "VOLS VISITAR-NOS" */
-.divMAPA_h1{
-    margin-top: 2%;
-    font-size: 3em;
-}
+    /* DEFINIMOS LA ALTURA I LA ANCHURA DE LA IMAGEN DE FONDO */
+    .divMAPA_img{
+        width:950px; 
+        height: 700px
+    }
 
-/* DEFINIMOS LA ALTURA I LA ANCHURA DE LA IMAGEN DE FONDO */
-.divMAPA_img{
-    width:950px; 
-    height: 700px
-}
-
-/* DEFINIMOS LA ALTURA I LA ANCHURA DEL MAPA */
-#map { 
-    height: 80%;
-    width: 70%;
-}
+    /* DEFINIMOS LA ALTURA I LA ANCHURA DEL MAPA */
+    #map { 
+        height: 80%;
+        width: 70%;
+    }
 
 
 </style>
 
 <div class="divVideo">
-    <img class="gif" alt="Imagen Fondo" src="/img/paisaje.gif"/>
-    <h1 class="encima">CONTACTA'NS!</h1>
-    <h2 class="encima2">Envia el teu missatge</h2>
-    <a class="btnGif" href="./contact" accesskey="f" target="blank">Formulario de Contacto</a>
+    <div>
+        <h1 class="divVideo__titulo">CONTACTA'NS!</h1>
+        <h2 class="divVideo__titulo">Envia el teu missatge</h2>
+        <a class="divVideo__btnGif" href="./contact" accesskey="f" target="blank">Formulario de Contacto</a>
+    </div>
 </div>
 <div class="divMAPA">
     <h1 class="divMAPA_h1">Vols visitar-nos?</h1>
@@ -188,6 +213,9 @@ a:hover{
                         <a href="https://twitter.com/ikercc44/" accesskey="t" class="fa-brands fa-3x fa-twitter"><span class="noshow">Twitter</span></a>
                         <a href="https://instagram.com/ikercc4/" accesskey="i" class="fa-brands fa-3x fa-instagram"><span class="noshow">Instagram</span></a>
                         <a href="https://www.facebook.com/iker.castellano.3154" accesskey="a" class="fa-3x fa fa-facebook"><span class="noshow">Facebook</span></a>
+                        <a href="https://www.w3.org/WAI/WCAG2AAA-Conformance" title="Explanation of WCAG 2 Level AAA Conformance">
+                            <img height="32" width="88" src="https://www.w3.org/WAI/WCAG21/wcag2.1AAA-v" alt="Level AAA conformance,W3C WAI Web Content Accessibility Guidelines 2.1">
+                        </a>
                     </td>
                 </tr>
             </table>
@@ -236,10 +264,54 @@ a:hover{
         }
     };
 
+    const recognition = new webkitSpeechRecognition();
 
+    // Configuramos la instancia
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = 'es-ES';
 
+    // Al activarse el botón, empezamos a escuchar la voz del usuario
+    document.getElementById('voice').addEventListener('click', () => {
+        recognition.start();
+    });
 
+    // Cuando se detecta una palabra clave, se sube o baja la página
+    recognition.onresult = (event) => {
+    const last = event.results.length - 1;
+    const command = event.results[last][0].transcript.toLowerCase();
+    console.log(command);
+    if (command.includes('subir página')) {
+        window.scrollBy(0, -window.innerHeight);
+    }else if (command.includes('bajar página')) {
+        window.scrollBy(0, window.innerHeight);
+    }else if (command.includes('alejar más')) {
+        document.body.style.zoom="50%"
+    }else if (command.includes('alejar')) {
+        document.body.style.zoom="100%"
+    }else if (command.includes('acercar')) {
+        document.body.style.zoom="150%"
+    }else if (command.includes('acercar más')) {
+        document.body.style.zoom="200%"
+    }
+    };
 
+    document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.altKey && e.key === "l") {
+        document.body.style.zoom="100%"
+        window.scrollBy(-50, -window.innerHeight);
+    }
+    });
+
+    let jul = document.getElementById('españa');
+
+    function parar1F(){
+        jul.pause();
+    }
+    function iniciar1F(){
+        jul.volume = 1;
+        jul.play();
+    }
 </script>
 
 @vite('resources/js/bootstrap.js')
